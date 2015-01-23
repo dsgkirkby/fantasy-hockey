@@ -26,17 +26,15 @@ CREATE TABLE players (
 	PRIMARY KEY (playerID)
 );
 
-/* CREATE TABLE nhlers (
-	playerID int,
-	
-);
-
-CREATE TABLE prospects; */
-
 CREATE TABLE nhl_teams (
 	name varchar(30),
 	city varchar(30),
 	PRIMARY KEY (name)
+);
+
+CREATE TABLE seasons (
+	season VARCHAR(30),
+	PRIMARY KEY (season)
 );
 
 CREATE TABLE f_teams (
@@ -45,19 +43,20 @@ CREATE TABLE f_teams (
 	season varchar(30),
 	leagueID int AUTO_INCREMENT,
 	PRIMARY KEY (name, leagueID),
-	FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID)
+	FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID),
+	FOREIGN KEY (username) REFERENCES users(username)
 );
 
 CREATE TABLE prospect_reports (
 	playerID int,
 	PRIMARY KEY (playerID),
-	FOREIGN KEY (playerID) REFERENCES prospects(playerID)
+	FOREIGN KEY (playerID) REFERENCES players(playerID)
 );
 
 CREATE TABLE stats_reports (
 	playerID int,
 	PRIMARY KEY (playerID),
-	FOREIGN KEY (playerID) REFERENCES nhlers(playerID)
+	FOREIGN KEY (playerID) REFERENCES players(playerID)
 );
 
 CREATE TABLE season_records (
@@ -74,16 +73,11 @@ CREATE TABLE season_records (
 	FOREIGN KEY (season) REFERENCES seasons(season)
 );
 
-CREATE TABLE seasons (
-	season VARCHAR(30),
-	PRIMARY KEY (season)
-);
-
 CREATE TABLE player_assignments (
 	playerID int,
 	teamName varchar(30),
 	leagueID int,
 	PRIMARY KEY (playerID, teamName, leagueID),
-	FOREIGN KEY (playerID) REFERENCES players,
+	FOREIGN KEY (playerID) REFERENCES players(playerID),
 	FOREIGN KEY (teamName, leagueID) REFERENCES f_teams (name, leagueID)
 );
