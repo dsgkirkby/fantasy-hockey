@@ -6,6 +6,9 @@ CREATE TABLE users (
 	email varchar(30),
 	PRIMARY KEY (username)
 );
+/*Candidate keys: username, email
+FDs: (username -> email, username -> passowrd,
+     email -> username, email -> password)*/
 
 CREATE TABLE f_leagues(
 	score_settings varchar(30),
@@ -15,6 +18,9 @@ CREATE TABLE f_leagues(
 	date_created date,
 	PRIMARY KEY (leagueID)
 );
+/*Candidate keys: leagueID
+FDs: (leagueID -> score_settings, leagueID -> max_size,
+     leagueID -> name, leagueID -> date_created)*/
 
 CREATE TABLE players (
 	playerID int AUTO_INCREMENT,
