@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>New User</title>
-        link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
@@ -43,7 +43,7 @@ and open the template in the editor.
 <div class="control-group">
   <label class="control-label" for="passwd">Password</label>
   <div class="controls">
-    <input id="passwd" name="passwd" type="password" placeholder="****************" class="input-xlarge">
+    <input id="passwd" name="passwd" type="password" placeholder="****************" class="input-xlarge" required="">
     
   </div>
 </div>
