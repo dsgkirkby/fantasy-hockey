@@ -22,21 +22,50 @@ and open the template in the editor.
         <div class="container">
             <div class="jumbotron">
                 <h1>Dobber Fantasy</h1>
-                <p>Subtitle</p>
             </div>
             <div class="row">
                 <div class="col-sm-4">
-		  <h3>Login<h3>
-		  <form action="" method="post">
-		    <label>UserName :</label>
-		    <input id="name" name="username" placeholder="username" type="text">
-		    <label>Password :</label>
-		    <input id="password" name="password" placeholder="**********" type="password">
-		    <input name="submit" type="submit" value=" Login ">
-		    <span><?php echo $error; ?></span>
-		  </form>
+		  <h3>Login</h3>
+		  <form class="form-horizontal">
+		    <fieldset>
+		      
+		      <!-- Form Name -->
+		      <legend>Login</legend>
+		      
+		      <!-- Text input-->
+		      <div class="control-group">
+			<label class="control-label" for="uname">Username</label>
+			<div class="controls">
+			  <input id="uname" name="uname" type="text" placeholder=""
+				 class="input-xlarge" required="">
+			  
+     </div>
+   </div>
+		      
+		      <!-- Password input-->
+		      <div class="control-group">
+			<label class="control-label" for="passwordinput">Password</label>
+			<div class="controls">
+			  <input id="passwordinput" name="passwordinput" type="password"
+				 placeholder="*******************" class="input-xlarge" required="">
+			  
+     </div>
+   </div>
+		      
+		      <!-- Button -->
+		      <div class="control-group">
+			<label class="control-label" for="loginBtn"></label>
+			<div class="controls">
+			  <button id="loginBtn" name="loginBtn" class="btn
+								       btn-primary">Login</button>
+	</div>
+      </div>
+		      
+      </fieldset>
+      </form>
+		  
                 </div>
-            </div>
+		  </div>
         </div>
-    </body>
-</html>
+       </body>
+   </html>
