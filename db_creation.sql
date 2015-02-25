@@ -102,7 +102,7 @@ Insert into nhl_teams(name, city) values
 ("Flyers", "Philladelphia, PA"),
 ("Rangers", "New York, NY");
 
-Insert into f_leagues(leagueID, name, max_size, date_created) values
+Insert into f_leagues(leagueID, max_size, name, date_created) values
 (1, 10, "Dobber Experts League", "2015-1-9"),
 (2, 12, "Rockey Horror Roto Show", "2015-4-9"),
 (3, 24, "Ultimate Hockey League", "2010-8-29"),
