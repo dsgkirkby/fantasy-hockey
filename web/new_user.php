@@ -23,7 +23,7 @@ and open the template in the editor.
             <!-- Include all compiled plugins (below), or include individual files as needed -->
             <script src="js/bootstrap.min.js"></script>
 
-            <form class="form-horizontal" action="new_user.php" method="post">
+            <form class="form-horizontal" method="post">
                 <fieldset>
                     <div class="jumbotron">
                     <!-- Form Name -->
@@ -70,7 +70,7 @@ and open the template in the editor.
                     <div class="control-group">
                         <label class="control-label" for="submit"></label>
                         <div class="controls">
-                            <button id="submit" name="submit" class="btn btn-primary" onclick="goFunctionYourself()">Submit</button>'
+                            <button id="submit" name="submit" class="btn btn-primary">Submit</button>'
                         </div>
                     </div>
 
@@ -78,7 +78,26 @@ and open the template in the editor.
             </form>
         </div>
         <?php
-        //
+        /*echo $_POST["uname"]." ".$_POST["passwd"];
+            $fp = fopen("text.txt", "w");
+            fputs($fp, "string");
+            fclose($fp);
+        */
+            function goFunctionYourself() {
+                echo "this did not work";
+                $file=fopen("this.txt", "w");
+                fputs()
+                exit;
+            }
+
+            if (isset($_POST["submit"])) {
+                echo $_POST["uname"]." ".$_POST["passwd"];
+            $fp = fopen("text.txt", "w");
+            fputs($fp, "string");
+            fclose($fp);
+
+                goFunctionYourself();
+            }*/
         ?>
     </body>
 </html>
