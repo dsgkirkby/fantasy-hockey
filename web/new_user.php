@@ -82,13 +82,13 @@ and open the template in the editor.
             $fp = fopen("text.txt", "w");
             fputs($fp, "string");
             fclose($fp);
-        */
+            
             function goFunctionYourself() {
                 echo "this did not work";
                 $file=fopen("this.txt", "w");
                 fputs()
                 exit;
-            }
+            }*/
 
             if (isset($_POST["submit"])) {
                 echo $_POST["uname"]." ".$_POST["passwd"];
