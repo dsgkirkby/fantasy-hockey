@@ -5,14 +5,15 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
+    <?php
+        require_once('../library/users.php');
+    ?>
     <head>
         <meta charset="UTF-8">
         <title>New User</title>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-        <script src="bootstrapp-3.3.2-dist/js/bbootstrap.min.js"></script>
+        <script src="jquery-2.1.3.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container">
@@ -69,7 +70,7 @@ and open the template in the editor.
                     <div class="control-group">
                         <label class="control-label" for="submit"></label>
                         <div class="controls">
-                            <button id="submit" name="submit" class="btn btn-primary" onclick="goFunctionYourself()">Submit</button>
+                            <button id="submit" name="submit" class="btn btn-primary" onclick="goFunctionYourself()">Submit</button>'
                         </div>
                     </div>
 
@@ -77,10 +78,7 @@ and open the template in the editor.
             </form>
         </div>
         <?php
-            echo $_POST["uname"]." ".$_POST["passwd"];
-            $fp = fopen("text.txt", "w");
-            fputs($fp, "string");
-            fclose($fp);
+        //
         ?>
     </body>
 </html>
