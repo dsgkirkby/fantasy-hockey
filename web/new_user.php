@@ -78,26 +78,19 @@ and open the template in the editor.
             </form>
         </div>
         <?php
-        /*echo $_POST["uname"]." ".$_POST["passwd"];
-            $fp = fopen("text.txt", "w");
-            fputs($fp, "string");
-            fclose($fp);
-            
-            function goFunctionYourself() {
-                echo "this did not work";
-                $file=fopen("this.txt", "w");
-                fputs()
-                exit;
-            }*/
-
             if (isset($_POST["submit"])) {
-                echo $_POST["uname"]." ".$_POST["passwd"];
-            $fp = fopen("text.txt", "w");
-            fputs($fp, "string");
-            fclose($fp);
-
-                goFunctionYourself();
-            }*/
+                //echo $_POST["uname"]." ".$_POST["passwd"];
+                if (user::username_exists($_POST["uname"])) {
+                    echo $_POST["uname"] . " exists";
+                } else {
+                    echo $_POST["uname"] . " does not exist";
+                    $new_user = new user($_POST["uname"], $_POST["passwd"], $_POST["email"]);
+                    if($new_user->add_user($_POST["uname"]))
+                        echo "Great success!";
+                    else
+                        echo "Maybe next year.";
+                }
+            }
         ?>
     </body>
 </html>

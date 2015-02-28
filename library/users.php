@@ -16,13 +16,13 @@ class user {
     private $password;
     private $email;
     
-    function __construct($username) {
+    function __construct($username, $password, $email) {
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
     }
     
-    function username_exists($new_username) {
+    public function username_exists($new_username) {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
@@ -30,7 +30,7 @@ class user {
         //set the default client character set 
         mysqli_set_charset($con, 'utf-8');
         mysqli_select_db($con, "dobber");
-        $success = mysqli_query($con, "SELECT * FROM users WHERE username = '$this->username'");
+        $success = mysqli_query($con, "SELECT * FROM users WHERE username = $new_username");
         if ($success != "") {
             return true;
         } else {
@@ -38,7 +38,7 @@ class user {
         }
     }
 
-    function add_user($new_username) {
+    public function add_user($username) {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
@@ -47,13 +47,15 @@ class user {
         mysqli_set_charset($con, 'utf-8');
         mysqli_select_db($con, "dobber");
         
-        if (username_exists($new_username)) {
+        if ($this->username_exists($this->username)) {
+            echo "exists";
             return false;
         } else if (mysqli_query($con, "INSERT INTO users (username, password, email)"
             . " VALUES ('$this->username', '$this->password', '$this->email')")) {
             //added
             return true;
         } else {
+            echo "failed";
             //not added
             return false;
         }
