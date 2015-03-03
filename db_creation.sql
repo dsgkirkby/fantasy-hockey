@@ -110,7 +110,7 @@ Insert into f_leagues(leagueID, max_size, name, date_created) values
 (5, 8, "What's a Puck?", "2015-10-10");
 
 Insert into f_teams (name, username, season, leagueID) values
-("Edler's Mind Tricks", "luongo4eva", "2014", 1),
+("Edler\'s Mind Tricks", "luongo4eva", "2014", 1),
 ("As Gudas it Gets", "bruinzzz", "2014", 1),
 ("Malkin X", "puckmaster70", "2013", 3),
 ("Texas Kane Shaw Massacre", "chair", "2010", 4),
@@ -141,7 +141,7 @@ Insert into Prospects(playerID,teamName) values
 (5, "Rangers");
 
 Insert into Player_assignments(playerID, teamName, leagueID, points) values
-(1, "Edler's Mind Tricks", 1, 10),
+(1, "Edler\'s Mind Tricks", 1, 10),
 (2, "As Gudas it Gets", 1, 20),
 (3, "Malkin X", 3, 15),
 (4, "Texas Kane Shaw Massacre", 4, 12),
