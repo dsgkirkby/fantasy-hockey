@@ -37,7 +37,7 @@ class user {
         if (mysqli_select_db($con, "dobber") == FALSE) {
             exit('DB select failed!');
         }
-        $query="SELECT l.name, l.date_created FROM"
+        $query="SELECT l.name, l.date_created, l.leagueID FROM"
                 . " f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON"
                 . " t.username=u.username and u.username=\"" . $this->username . "\"";
         $leagues = mysqli_query($con, $query);

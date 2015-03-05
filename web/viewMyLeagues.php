@@ -63,7 +63,8 @@ and open the template in the editor.
                 $myLeagues = $user->myLeagues();
                 while ($league = $myLeagues->fetch_array(MYSQLI_ASSOC)) {
                     echo "<tr>"
-                    . "<td>" . $league["name"] . "</td>"
+                    . "<td><a href=\"viewleague.php?leagueID="
+                    . $league["leagueID"] . "\">" . $league["name"] . "</a></td>"
                     . "<td>" . $league["date_created"] . "</td>"
                     . "</tr>";
                 }
