@@ -6,8 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <?php
-    require_once('../library/users.php');
-    $users = new users();
+    require_once('../library/user.php');
     ?>
     <head>
         <meta charset="UTF-8">
@@ -52,22 +51,50 @@ and open the template in the editor.
             </div><!--/.container-fluid -->
         </nav>
         <div class="container">
-            <table class="table table-bordered">
+
+            <?php
+            if (!empty($_GET["username"])) {
+                echo "<table class=\"table table-bordered\">
                 <tr>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Email Address</th>
-                </tr>
-                <?php
-                $usersData = $users->getUsers();
-                while ($user = $usersData->fetch_array(MYSQLI_ASSOC)) {
+                    <th>League Name</th>
+                    <th>Date Created</th>
+                </tr>";
+                $user = new user(filter_input(INPUT_GET, "username"));
+                $myLeagues = $user->myLeagues();
+                while ($league = $myLeagues->fetch_array(MYSQLI_ASSOC)) {
                     echo "<tr>"
-                    . "<td>" . $user["username"] . "</td>"
-                    . "<td>" . $user["password"] . "</td>"
-                    . "<td>" . $user["email"] . "</td>"
+                    . "<td>" . $league["name"] . "</td>"
+                    . "<td>" . $league["date_created"] . "</td>"
                     . "</tr>";
                 }
-                ?>
-            </table>
-    </body>
+            } else {
+                echo "<form class = \"form-horizontal\" action=\"viewleague.php\" method=\"get\">
+                    <fieldset>
+
+                    <!--Form Name -->
+                    <legend>Enter Your Username</legend>
+
+                    <!--Text input-->
+                    <div class = \"form-group\">
+                    <label class = \"col-md-4 control-label\" for = \"username\">Username</label>
+                    <div class = \"col-md-4\">
+                    <input id = \username\" name = \"username\" placeholder = \"\" class = \"form-control input-md\" required = \"\" type = \"text\">
+
+                    </div>
+                    </div>
+
+                    <!--Button -->
+                    <div class = \"form-group\">
+                    <label class = \"col-md-4 control-label\" for = \"submit\"></label>
+                    <div class = \"col-md-4\">
+                    <button id = \"submit\" name = \"submit\" class = \"btn btn-primary\" formaction=\"viewMyLeagues.php\">Submit</button>
+                    </div>
+                    </div>
+
+                    </fieldset>
+                    </form>";
+            }
+            ?>
+        </table>
+</body>
 </html>
