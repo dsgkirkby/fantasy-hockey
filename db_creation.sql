@@ -35,23 +35,24 @@ CREATE TABLE seasons (
 );
 
 CREATE TABLE f_teams (
+ teamID int AUTO_INCREMENT,
  name varchar(30),
  username varchar(30),
  season varchar(30),
  leagueID int,
- PRIMARY KEY (name, leagueID),
+ PRIMARY KEY (teamID),
  FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID),
  FOREIGN KEY (username) REFERENCES users(username)
 );
 
 CREATE TABLE player_assignments (
  playerID int,
- teamName varchar(30),
+ teamID int,
  points int,
  leagueID int,
- PRIMARY KEY (playerID, teamName, leagueID),
+ PRIMARY KEY (playerID, teamID),
  FOREIGN KEY (playerID) REFERENCES players(playerID),
- FOREIGN KEY (teamName, leagueID) REFERENCES f_teams (name, leagueID)
+ FOREIGN KEY (teamID) REFERENCES f_teams(teamID)
 );
 
 CREATE TABLE plays_for(
@@ -140,9 +141,9 @@ Insert into Prospects(playerID,teamName) values
 (4, "Flyers"),
 (5, "Rangers");
 
-Insert into Player_assignments(playerID, teamName, leagueID, points) values
-(1, "Edler\'s Mind Tricks", 1, 10),
-(2, "As Gudas it Gets", 1, 20),
-(3, "Malkin X", 3, 15),
-(4, "Texas Kane Shaw Massacre", 4, 12),
-(5, "Fleetwood Mackinnon", 1, 50);
+Insert into Player_assignments(playerID, teamID, leagueID, points) values
+(1, 1, 1, 10),
+(2, 2, 1, 20),
+(3, 3, 3, 15),
+(4, 4, 4, 12),
+(5, 5, 1, 50);
