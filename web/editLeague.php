@@ -9,6 +9,7 @@
         <title>League View</title>
         <script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="editLeague.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     </head>
     <body>
@@ -58,10 +59,10 @@
                 foreach($teams as $team) {
                     echo "<tr>"
                         . "<td>" . $place . "</td>"
-                        . "<td>" . $team["name"] . "</td>"
-                        . "<td>" . $team["username"] . "</td>"
-                        . "<td>" . $team["score"] . "</td>"
-                        . "<td><a href=\"\">Edit</a></td>"
+                        . "<td>" . $team->teamName . "</td>"
+                        . "<td>" . $team->ownerName . "</td>"
+                        . "<td>" . $team->score . "</td>"
+                        . "<td><a href='' onclick=deleteTeam(" . $team->id . ")>Delete</a></td>"
                         . "</tr>";
                     $place++;
                 }
