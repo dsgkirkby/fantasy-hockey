@@ -1,12 +1,12 @@
-DROP TABLE users;
-DROP TABLE f_leagues;
-DROP TABLE players;
-DROP TABLE nhl_teams;
-DROP TABLE seasons;
-DROP TABLE f_teams;
-DROP TABLE player_assignments;
-DROP TABLE plays_for;
 DROP TABLE prospects;
+DROP TABLE plays_for;
+DROP TABLE player_assignments;
+DROP TABLE f_teams;
+DROP TABLE seasons;
+DROP TABLE nhl_teams;
+DROP TABLE players;
+DROP TABLE f_leagues;
+DROP TABLE users;
 
 CREATE TABLE users (
  username varchar(30) NOT NULL UNIQUE,
@@ -58,8 +58,9 @@ CREATE TABLE f_teams (
 CREATE TABLE Player_assignments (
  playerID int,
  teamID int,
- points int,
- leagueID int,
+ goals int,
+ assists int,
+ isCurrent boolean,
  PRIMARY KEY (playerID, teamID),
  FOREIGN KEY (playerID) REFERENCES players(playerID),
  FOREIGN KEY (teamID) REFERENCES f_teams(teamID)
@@ -151,9 +152,9 @@ Insert into prospects(playerID,teamName) values
 (4, "Flyers"),
 (5, "Rangers");
 
-Insert into Player_assignments(playerID, teamID, leagueID, points) values
-(1, 1, 1, 10),
-(2, 2, 1, 20),
-(3, 3, 3, 15),
-(4, 4, 4, 12),
-(5, 5, 1, 50);
+Insert into Player_assignments(playerID, teamID, goals, assists, isCurrent) values
+(1, 1, 10, 10, TRUE),
+(2, 2, 12, 20, TRUE),
+(3, 3, 3, 1, FALSE),
+(4, 4, 50, 2, FALSE),
+(5, 5, 0, 100, TRUE);

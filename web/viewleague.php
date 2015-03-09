@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <?php
+	$userIsManager = true;
         require_once('../library/league.php');
 	// Redirect to main if leagueID not set
 	if (empty($_GET["leagueID"])) {
@@ -15,6 +16,7 @@
         <script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<?php if ($userIsManager) { echo "<script src='web/editLeague.js'></script>"; } ?>
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -45,11 +47,6 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <?php
-                            echo "<li><a href=\"editLeague.php?leagueID=" . $_GET["leagueID"] . "\">Manage League</a></li>"
-                        ?>
-                    </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
         </nav>
@@ -59,21 +56,25 @@
                     <th>Place</th>
                     <th>Team Name</th>
                     <th>Owner Name</th>
+		    <th>Goals</th>
+		    <th>Assists</th>
                     <th>Score</th>
 		    <th></th>
                 </tr>
             <?php
                 $teams = $league->getTeams();
-                $place = 1;
-                foreach($teams as $team) {
+		usort($teams, "team::compareTeamScore");
+                foreach($teams as $place => $team) {
                     echo "<tr>"
-                        . "<td>" . $place . "</td>"
-                        . "<td>" . $team->teamName . "</td>"
-                        . "<td>" . $team->ownerName . "</td>"
-                        . "<td>" . $team->score . "</td>"
-			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>View</a></td>"
-                        . "</tr>";
-                    $place++;
+			. "<td>" . ($place + 1) . "</td>"
+			. "<td>" . $team->teamName . "</td>"
+			. "<td>" . $team->ownerName . "</td>"
+			. "<td>" . $team->goals . "</td>"
+			. "<td>" . $team->assists . "</td>"
+			. "<td>" . $team->getScore() . "</td>"
+			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>View</a> "
+			. ($userIsManager ? "<a href='' onclick=deleteTeam(" . $team->id . ")>Delete</a>" : "")
+			. "</td></tr>";
                 }
             ?>
             </table>
