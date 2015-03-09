@@ -1,3 +1,13 @@
+DROP TABLE users;
+DROP TABLE f_leagues;
+DROP TABLE players;
+DROP TABLE nhl_teams;
+DROP TABLE seasons;
+DROP TABLE f_teams;
+DROP TABLE player_assignments;
+DROP TABLE plays_for;
+DROP TABLE prospects;
+
 CREATE TABLE users (
  username varchar(30) NOT NULL UNIQUE,
  password varchar(30) NOT NULL,
