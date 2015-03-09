@@ -2,6 +2,11 @@
 <html>
     <?php
         require_once('../library/league.php');
+	// Redirect to main if leagueID not set
+	if (empty($_GET["leagueID"])) {
+	    header('Location: main.php', true, 303);
+	    die();
+	}
         $league = new league($_GET["leagueID"]);
     ?>
     <head>
@@ -55,6 +60,7 @@
                     <th>Team Name</th>
                     <th>Owner Name</th>
                     <th>Score</th>
+		    <th></th>
                 </tr>
             <?php
                 $teams = $league->getTeams();
@@ -62,9 +68,10 @@
                 foreach($teams as $team) {
                     echo "<tr>"
                         . "<td>" . $place . "</td>"
-                        . "<td>" . $team["name"] . "</td>"
-                        . "<td>" . $team["username"] . "</td>"
-                        . "<td>" . $team["score"] . "</td>"
+                        . "<td>" . $team->teamName . "</td>"
+                        . "<td>" . $team->ownerName . "</td>"
+                        . "<td>" . $team->score . "</td>"
+			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>View</a></td>"
                         . "</tr>";
                     $place++;
                 }
