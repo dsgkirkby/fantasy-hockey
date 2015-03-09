@@ -60,6 +60,7 @@
                     <th>Team Name</th>
                     <th>Owner Name</th>
                     <th>Score</th>
+		    <th></th>
                 </tr>
             <?php
                 $teams = $league->getTeams();
@@ -70,6 +71,7 @@
                         . "<td>" . $team->teamName . "</td>"
                         . "<td>" . $team->ownerName . "</td>"
                         . "<td>" . $team->score . "</td>"
+			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>View</a></td>"
                         . "</tr>";
                     $place++;
                 }
