@@ -1,3 +1,13 @@
+DROP TABLE prospects;
+DROP TABLE plays_for;
+DROP TABLE player_assignments;
+DROP TABLE f_teams;
+DROP TABLE seasons;
+DROP TABLE nhl_teams;
+DROP TABLE players;
+DROP TABLE f_leagues;
+DROP TABLE users;
+
 CREATE TABLE users (
  username varchar(30) NOT NULL UNIQUE,
  password varchar(30) NOT NULL,
@@ -35,23 +45,25 @@ CREATE TABLE seasons (
 );
 
 CREATE TABLE f_teams (
+ teamID int AUTO_INCREMENT,
  name varchar(30),
  username varchar(30),
  season varchar(30),
  leagueID int,
- PRIMARY KEY (name, leagueID),
+ PRIMARY KEY (teamID),
  FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID),
  FOREIGN KEY (username) REFERENCES users(username)
 );
 
-CREATE TABLE Player_assignments (
+CREATE TABLE player_assignments (
  playerID int,
- teamName varchar(30),
- points int,
- leagueID int,
- PRIMARY KEY (playerID, teamName, leagueID),
+ teamID int,
+ goals int,
+ assists int,
+ isCurrent boolean,
+ PRIMARY KEY (playerID, teamID),
  FOREIGN KEY (playerID) REFERENCES players(playerID),
- FOREIGN KEY (teamName, leagueID) REFERENCES f_teams (name, leagueID)
+ FOREIGN KEY (teamID) REFERENCES f_teams(teamID)
 );
 
 CREATE TABLE plays_for(
@@ -110,7 +122,7 @@ Insert into f_leagues(leagueID, max_size, name, date_created) values
 (5, 8, "What's a Puck?", "2015-10-10");
 
 Insert into f_teams (name, username, season, leagueID) values
-("Edler's Mind Tricks", "luongo4eva", "2014", 1),
+("Edler\'s Mind Tricks", "luongo4eva", "2014", 1),
 ("As Gudas it Gets", "bruinzzz", "2014", 1),
 ("Malkin X", "puckmaster70", "2013", 3),
 ("Texas Kane Shaw Massacre", "chair", "2010", 4),
@@ -140,9 +152,9 @@ Insert into prospects(playerID,teamName) values
 (4, "Flyers"),
 (5, "Rangers");
 
-Insert into Player_assignments(playerID, teamName, leagueID, points) values
-(1, "Edler's Mind Tricks", 1, 10),
-(2, "As Gudas it Gets", 1, 20),
-(3, "Malkin X", 3, 15),
-(4, "Texas Kane Shaw Massacre", 4, 12),
-(5, "Fleetwood Mackinnon", 1, 50);
+Insert into Player_assignments(playerID, teamID, goals, assists, isCurrent) values
+(1, 1, 10, 10, TRUE),
+(2, 2, 12, 20, TRUE),
+(3, 3, 3, 1, FALSE),
+(4, 4, 50, 2, FALSE),
+(5, 5, 0, 100, TRUE);
