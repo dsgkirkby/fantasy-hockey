@@ -54,12 +54,13 @@ and open the template in the editor.
 
             <?php
             if (!empty($_GET["username"])) {
-                echo "<table class=\"table table-bordered\">
+                $uname = filter_input(INPUT_GET, "username");
+                echo "<h3>Leagues that " . $uname . " belongs to:</h3><table class=\"table table-bordered\">
                 <tr>
                     <th>League Name</th>
                     <th>Date Created</th>
                 </tr>";
-                $user = new user(filter_input(INPUT_GET, "username"));
+                $user = new user($uname);
                 $myLeagues = $user->myLeagues();
                 while ($league = $myLeagues->fetch_array(MYSQLI_ASSOC)) {
                     echo "<tr>"
