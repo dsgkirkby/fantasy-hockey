@@ -55,7 +55,7 @@ CREATE TABLE f_teams (
  FOREIGN KEY (username) REFERENCES users(username)
 );
 
-CREATE TABLE Player_assignments (
+CREATE TABLE player_assignments (
  playerID int,
  teamID int,
  goals int,

@@ -20,15 +20,20 @@ class users {
     }
     
     function getUsers() {
-        $con = mysqli_connect("localhost", "phpweb", "");
+        $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') '
                    . mysqli_connect_error());
         }
         //set the default client character set 
         mysqli_set_charset($con, 'utf-8');
-        mysqli_select_db($con, "test");
+       if( mysqli_select_db($con,"dobber") == FALSE){
+           exit('DB select failed!');
+       }
         $users = mysqli_query($con, "SELECT * from users");
+        if ($users == FALSE){
+            exit('Query Failed!');
+        }
         return $users;
     }
 }
