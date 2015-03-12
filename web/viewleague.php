@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <?php
-	$userIsManager = true;
+	$userIsManager = false;
         require_once('../library/league.php');
 	// Redirect to main if leagueID not set
 	if (empty($_GET["leagueID"])) {
@@ -16,7 +16,7 @@
         <script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	<?php if ($userIsManager) { echo "<script src='web/editLeague.js'></script>"; } ?>
+	<?php if ($userIsManager) { echo "<script src='editLeague.js'></script>"; } ?>
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -59,7 +59,8 @@
 		    <th>Goals</th>
 		    <th>Assists</th>
                     <th>Score</th>
-		    <th></th>
+		    <th>View</th>
+		    <?php if ($userIsManager) { echo "<th>Delete</th>"; } ?>
                 </tr>
             <?php
                 $teams = $league->getTeams();
@@ -72,9 +73,9 @@
 			. "<td>" . $team->goals . "</td>"
 			. "<td>" . $team->assists . "</td>"
 			. "<td>" . $team->getScore() . "</td>"
-			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>View</a> "
-			. ($userIsManager ? "<a href='' onclick=deleteTeam(" . $team->id . ")>Delete</a>" : "")
-			. "</td></tr>";
+			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>View</a></td>"
+			. ($userIsManager ? "<td><a href='' onclick=deleteTeam(" . $team->id . ")>Delete</a></td>" : "")
+			. "</tr>";
                 }
             ?>
             </table>
