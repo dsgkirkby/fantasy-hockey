@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
     <?php
+	session_start();
 	$userIsManager = false;
         require_once('../library/league.php');
+	require_once('../library/userVerification.php');
+	// Redirect to login screen if user is not logged in
+	dieIfNoUser();
 	// Redirect to main if leagueID not set
 	if (empty($_GET["leagueID"])) {
 	    header('Location: main.php', true, 303);

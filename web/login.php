@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
+    <?php
+	session_start();
+	require_once '../library/userVerification.php';
+	if (getUsername()) {
+	    header('Location: main.php', true, 303);
+	    die();
+	}
+	if (empty($_GET["error"])) {
+	    $error = false;
+	} else {
+	    $error = $_GET["error"];
+	}
+    ?>
     <head>
         <meta charset="UTF-8">
         <title>Dobber Login</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-	<?php
-	    if (empty($_GET["error"])) {
-		$error = false;
-	    } else {
-		$error = $_GET["error"];
-	    }
-	?>
     </head>
 
     <body>

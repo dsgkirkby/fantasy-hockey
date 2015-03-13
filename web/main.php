@@ -9,11 +9,9 @@ and open the template in the editor.
         <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-        <script src="bootstrapp-3.3.2-dist/js/bbootstrap.min.js"></script>
+        <script src="jquery-2.1.3.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container">
@@ -46,9 +44,7 @@ and open the template in the editor.
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-                            <li><a href="../navbar-static-top/">Static top</a></li>
-                            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+                            <li><a href="logout.php">Logout</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
