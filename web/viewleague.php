@@ -2,7 +2,6 @@
 <html>
     <?php
 	session_start();
-	$userIsManager = false;
         require_once('../library/league.php');
 	require_once('../library/userVerification.php');
 	// Redirect to login screen if user is not logged in
@@ -13,6 +12,7 @@
 	    die();
 	}
         $league = new league($_GET["leagueID"]);
+	$userIsManager = userIsManagerOfLeague($league->getLeagueId());
     ?>
     <head>
         <meta charset="UTF-8">
@@ -51,6 +51,9 @@
                             </ul>
                         </li>
                     </ul>
+		    <ul class="nav navbar-nav navbar-right">
+			<li><a href="logout.php">Logout</a></li>
+		    </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
         </nav>
