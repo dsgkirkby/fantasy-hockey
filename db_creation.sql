@@ -1,12 +1,13 @@
-DROP TABLE prospects;
-DROP TABLE plays_for;
-DROP TABLE player_assignments;
-DROP TABLE f_teams;
-DROP TABLE seasons;
-DROP TABLE nhl_teams;
-DROP TABLE players;
-DROP TABLE f_leagues;
-DROP TABLE users;
+DROP TABLE IF EXISTS prospects CASCADE;
+DROP TABLE IF EXISTS plays_for CASCADE;
+DROP TABLE IF EXISTS player_assignments CASCADE;
+DROP TABLE IF EXISTS f_teams CASCADE;
+DROP TABLE IF EXISTS seasons CASCADE;
+DROP TABLE IF EXISTS nhl_teams CASCADE;
+DROP TABLE IF EXISTS players CASCADE;
+DROP TABLE IF EXISTS manages CASCADE;
+DROP TABLE IF EXISTS f_leagues CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
  username varchar(30) NOT NULL UNIQUE,
@@ -93,6 +94,14 @@ CREATE TABLE prospects(
  PRIMARY KEY (playerID)
 );
 
+CREATE TABLE manages(
+ username varchar(30),
+ leagueID int,
+ primary key (leagueID),
+ foreign key (leagueID) references f_leagues(leagueID),
+ foreign key (username) references users(username)
+);
+
 Insert into users (username, password, email) values
 ("luongo4eva", "abcdefg", "ab4d@gmail.com"), 
 ("bruinzzz", "asdfghjkl", "b6e3@gmail.com"),
@@ -158,3 +167,10 @@ Insert into Player_assignments(playerID, teamID, goals, assists, isCurrent) valu
 (3, 3, 3, 1, FALSE),
 (4, 4, 50, 2, FALSE),
 (5, 5, 0, 100, TRUE);
+
+Insert into manages(username, leagueID) values
+("luongo4eva", 1),
+("luongo4eva", 2),
+("luongo4eva", 3),
+("luongo4eva", 4),
+("luongo4eva", 5);

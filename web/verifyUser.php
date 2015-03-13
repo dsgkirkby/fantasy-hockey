@@ -3,8 +3,6 @@
 $username = $_GET["username"];
 $password = $_GET["password"];
 
-error_log($username . " " . $password);
-
 if (empty($username) || empty($password)) {
     exit("Username or Password empty");
 }
