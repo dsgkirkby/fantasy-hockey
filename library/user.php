@@ -1,5 +1,7 @@
 <?php
 
+require_once('league.php');
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,11 +39,15 @@ class user {
         if (mysqli_select_db($con, "dobber") == FALSE) {
             exit('DB select failed!');
         }
-        $query="SELECT l.name, l.date_created, l.leagueID FROM"
+        $query="SELECT l.leagueID FROM"
                 . " f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON"
                 . " t.username=u.username and u.username=\"" . $this->username . "\"";
         $leagues = mysqli_query($con, $query);
-        return $leagues;
+	$results = array();
+	foreach ($leagues as $league) {
+	    array_push($results, new league($league["leagueID"]));
+	}
+        return $results;
     }
 
 }
