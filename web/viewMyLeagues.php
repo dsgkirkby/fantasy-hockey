@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <?php
-    require_once('../library/user.php');
+	require_once('../library/user.php');
     ?>
     <head>
         <meta charset="UTF-8">
@@ -29,7 +29,7 @@ and open the template in the editor.
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="">Home</a></li>
+                        <li><a href="main.php">Home</a></li>
                         <li><a href="">Rankings</a></li>
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Teams<span class="caret"></span></a>
@@ -61,12 +61,11 @@ and open the template in the editor.
                     <th>Date Created</th>
                 </tr>";
                 $user = new user($uname);
-                $myLeagues = $user->myLeagues();
-                while ($league = $myLeagues->fetch_array(MYSQLI_ASSOC)) {
+                foreach($user->myLeagues() as $league) {
                     echo "<tr>"
-                    . "<td><a href=\"viewleague.php?leagueID="
-                    . $league["leagueID"] . "\">" . $league["name"] . "</a></td>"
-                    . "<td>" . $league["date_created"] . "</td>"
+                    . "<td><a href=\"viewLeague.php?leagueID="
+                    . $league->getLeagueID() . "\">" . $league->name . "</a></td>"
+                    . "<td>" . $league->dateCreated . "</td>"
                     . "</tr>";
                 }
             } else {

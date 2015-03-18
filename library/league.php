@@ -10,10 +10,25 @@ require_once 'team.php';
 class league {
 
     private $leagueID;
-    private $teams;
+    public $name;
+    public $dateCreated;
+    public $teams;
 
     function __construct($leagueID) {
 	$this->leagueID = $leagueID;
+	$con = mysqli_connect("localhost", "root", "");
+	if (!$con) {
+	    exit('Connect Error (' . mysqli_connect_errno() . ') '
+		    . mysqli_connect_error());
+	}
+	//set the default client character set 
+	mysqli_set_charset($con, 'utf-8');
+	mysqli_select_db($con, "dobber");
+	$query = "SELECT * FROM f_leagues WHERE leagueID=" . $leagueID;
+	$league = mysqli_fetch_assoc(mysqli_query($con, $query));
+	$this->name = $league["name"];
+	$this->dateCreated = $league["date_created"];
+	$this->teams = array();
     }
 
     function getTeams() {
@@ -35,7 +50,9 @@ class league {
 	    $teams = mysqli_query($con, $query);
 
 	    foreach ($teams as $team) {
-		$this->teams[] = new team($team["teamID"], $team["name"], $team["username"], $team["totalgoals"], $team["totalassists"]);
+		array_push($this->teams, new team($team["teamID"],
+			$team["name"], $team["username"], $team["totalgoals"],
+			$team["totalassists"]));
 	    }
 	}
 	return $this->teams;

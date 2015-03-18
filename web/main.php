@@ -5,6 +5,14 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
+    <?php
+	session_start();
+        require_once('../library/league.php');
+	require_once('../library/userVerification.php');
+	require_once('../library/user.php');
+	// Redirect to login screen if user is not logged in
+	dieIfNoUser();
+    ?>
     <head>
         <title>Home</title>
         <meta charset="UTF-8">
@@ -14,41 +22,57 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     </head>
     <body>
-        <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Dobber Fantasy</a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Rankings</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Teams<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="logout.php">Logout</a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div><!--/.container-fluid -->
-            </nav>
-        </div>
+	<nav class="navbar navbar-default">
+	    <div class="container-fluid">
+		<div class="navbar-header">
+		    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand">Dobber Fantasy</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+		    <ul class="nav navbar-nav">
+			<li class="active"><a href="">Home</a></li>
+		    </ul>
+		    <ul class="nav navbar-nav navbar-right">
+			<li><a href="logout.php">Logout</a></li>
+		    </ul>
+		</div><!--/.nav-collapse -->
+	    </div><!--/.container-fluid -->
+	</nav>
+	<div class="col-md-6">
+	    <?php
+		$uname = $_SESSION["username"];
+		echo "<h3>Your Leagues</h3><table class=\"table table-bordered\">
+		<tr>
+		    <th>Team Name</th>
+		    <th>Score</th>
+		    <th>Place</th>
+		    <th>League Name</th>
+		</tr>";
+		$user = new user($uname);
+		foreach ($user->myLeagues() as $league) {
+		    foreach ($league->getTeams() as $place => $team) {
+			if ($team->ownerName == $_SESSION["username"]) {
+			    $userTeam = $team;
+			    $userRank = $place + 1;
+			    break;
+			}
+		    }
+		    echo "<tr>"
+		    . "<td>" . $userTeam->teamName . "</td>"
+		    . "<td>" . $userTeam->getScore() . "</td>"
+		    . "<td>" . $userRank . "</td>"
+		    . "<td><a href=\"viewleague.php?leagueID="
+		    . $league->getLeagueID() . "\">" . $league->name . "</a></td>"
+		    . "</tr>";
+		}
+	    ?>
+	</div>
+	<div class="col-md-6">
+	</div>
     </body>
 </html>
