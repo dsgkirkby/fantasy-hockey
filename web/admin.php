@@ -32,6 +32,7 @@
 		<div id="navbar" class="navbar-collapse collapse">
 		    <ul class="nav navbar-nav">
 			<li><a href="main.php">Home</a></li>
+			<li><a href="viewLeagues.php">Leagues</a></li>
 			<li class="active"><a href=\"admin.php\">Admin Tools</a></li>
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">

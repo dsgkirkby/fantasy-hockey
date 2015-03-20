@@ -37,6 +37,12 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="main.php">Home</a></li>
+			<li class="active"><a href="viewLeagues.php">Leagues</a></li>
+			<?php
+			    if (userIsAdmin()) {
+				echo "<li><a href=\"admin.php\">Admin Tools</a></li>";
+			    }
+			?>
                     </ul>
 		    <ul class="nav navbar-nav navbar-right">
 			<li><a href="logout.php">Logout</a></li>
