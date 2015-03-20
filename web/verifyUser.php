@@ -1,5 +1,7 @@
 <?php
 
+require_once('../library/userVerification.php');
+
 $username = $_GET["username"];
 $password = $_GET["password"];
 
@@ -23,6 +25,7 @@ if ($user->num_rows < 1) {
 } else {
     session_start();
     $_SESSION["username"] = mysqli_fetch_assoc($user)["username"];
+    $_SESSION["isAdmin"] = userIsAdmin();
     header('Location: main.php', true, 303);
-    dir();
+    die();
 }

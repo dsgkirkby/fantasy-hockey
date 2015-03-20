@@ -35,7 +35,12 @@ and open the template in the editor.
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 		    <ul class="nav navbar-nav">
-			<li class="active"><a href="">Home</a></li>
+			<li class="active"><a href="main.php">Home</a></li>
+			<?php
+			    if (userIsAdmin()) {
+				echo "<li><a href=\"admin.php\">Admin Tools</a></li>";
+			    }
+			?>
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
 			<li><a href="logout.php">Logout</a></li>
@@ -43,36 +48,40 @@ and open the template in the editor.
 		</div><!--/.nav-collapse -->
 	    </div><!--/.container-fluid -->
 	</nav>
-	<div class="col-md-6">
-	    <?php
-		$uname = $_SESSION["username"];
-		echo "<h3>Your Leagues</h3><table class=\"table table-bordered\">
-		<tr>
-		    <th>Team Name</th>
-		    <th>Score</th>
-		    <th>Place</th>
-		    <th>League Name</th>
-		</tr>";
-		$user = new user($uname);
-		foreach ($user->myLeagues() as $league) {
-		    foreach ($league->getTeams() as $place => $team) {
-			if ($team->ownerName == $_SESSION["username"]) {
-			    $userTeam = $team;
-			    $userRank = $place + 1;
-			    break;
+	<div class="container">
+	    <div class="col-md-6">
+		<?php
+		    $uname = $_SESSION["username"];
+		    echo "<h3>Your Leagues</h3><table class=\"table table-bordered\">
+		    <tr>
+			<th>Team Name</th>
+			<th>Score</th>
+			<th>Place</th>
+			<th>League Name</th>
+		    </tr>";
+		    $user = new user($uname);
+		    foreach ($user->myLeagues() as $league) {
+			foreach ($league->getTeams() as $place => $team) {
+			    if ($team->ownerName == $_SESSION["username"]) {
+				$userTeam = $team;
+				$userRank = $place + 1;
+				break;
+			    }
 			}
+			echo "<tr>"
+			. "<td>" . $userTeam->teamName . "</td>"
+			. "<td>" . $userTeam->getScore() . "</td>"
+			. "<td>" . $userRank . "</td>"
+			. "<td><a href=\"viewleague.php?leagueID="
+			. $league->getLeagueID() . "\">" . $league->name . "</a></td>"
+			. "</tr>";
 		    }
-		    echo "<tr>"
-		    . "<td>" . $userTeam->teamName . "</td>"
-		    . "<td>" . $userTeam->getScore() . "</td>"
-		    . "<td>" . $userRank . "</td>"
-		    . "<td><a href=\"viewleague.php?leagueID="
-		    . $league->getLeagueID() . "\">" . $league->name . "</a></td>"
-		    . "</tr>";
-		}
-	    ?>
-	</div>
-	<div class="col-md-6">
+		    echo "</table>"
+		?>
+	    </div>
+	    <div class="col-md-6">
+		
+	    </div>
 	</div>
     </body>
 </html>
