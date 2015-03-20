@@ -105,10 +105,10 @@ CREATE TABLE manages(
 
 Insert into users (username, password, email, is_admin) values
 ("luongo4eva", "abcdefg", "ab4d@gmail.com", true), 
-("bruinzzz", "asdfghjkl", "b6e3@gmail.com", false),
+("bruinzzz", "password", "b6e3@gmail.com", false),
 ("puckmaster70", "password", "lgjas@gmail.com", true),
-("steve", "asdfghjkl", "sjjskd@yahoo.ca", false),
-("chair", "qwertyuiop", "lsjf@hotmail.com", false);
+("steve", "password", "sjjskd@yahoo.ca", false),
+("chair", "password", "lsjf@hotmail.com", false);
 
 Insert into seasons (season) values
 ("2014"),
