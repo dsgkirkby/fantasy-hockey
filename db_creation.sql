@@ -13,6 +13,7 @@ CREATE TABLE users (
  username varchar(30) NOT NULL UNIQUE,
  password varchar(30) NOT NULL,
  email varchar(30) NOT NULL UNIQUE,
+ is_admin boolean,
  PRIMARY KEY (username)
 );
 
@@ -52,8 +53,8 @@ CREATE TABLE f_teams (
  season varchar(30),
  leagueID int,
  PRIMARY KEY (teamID),
- FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID),
- FOREIGN KEY (username) REFERENCES users(username)
+ FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID) ON DELETE CASCADE,
+ FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
 );
 
 CREATE TABLE player_assignments (
@@ -63,8 +64,8 @@ CREATE TABLE player_assignments (
  assists int,
  isCurrent boolean,
  PRIMARY KEY (playerID, teamID),
- FOREIGN KEY (playerID) REFERENCES players(playerID),
- FOREIGN KEY (teamID) REFERENCES f_teams(teamID)
+ FOREIGN KEY (playerID) REFERENCES players(playerID) ON DELETE CASCADE,
+ FOREIGN KEY (teamID) REFERENCES f_teams(teamID) ON DELETE CASCADE
 );
 
 CREATE TABLE plays_for(
@@ -83,9 +84,9 @@ CREATE TABLE plays_for(
  toi int,
  season varchar(30),
  PRIMARY KEY (playerID, teamName, season),
- FOREIGN KEY (playerID) REFERENCES players(playerID),
- FOREIGN KEY (teamName) REFERENCES nhl_teams(name),
- FOREIGN KEY (season) REFERENCES seasons(season)
+ FOREIGN KEY (playerID) REFERENCES players(playerID) ON DELETE CASCADE,
+ FOREIGN KEY (teamName) REFERENCES nhl_teams(name) ON DELETE CASCADE,
+ FOREIGN KEY (season) REFERENCES seasons(season) ON DELETE CASCADE
 );
 
 CREATE TABLE prospects(
@@ -98,16 +99,16 @@ CREATE TABLE manages(
  username varchar(30),
  leagueID int,
  primary key (leagueID),
- foreign key (leagueID) references f_leagues(leagueID),
- foreign key (username) references users(username)
+ foreign key (leagueID) references f_leagues(leagueID) ON DELETE CASCADE,
+ foreign key (username) references users(username) ON DELETE CASCADE
 );
 
-Insert into users (username, password, email) values
-("luongo4eva", "abcdefg", "ab4d@gmail.com"), 
-("bruinzzz", "asdfghjkl", "b6e3@gmail.com"),
-("puckmaster70", "password", "lgjas@gmail.com"),
-("steve", "asdfghjkl", "sjjskd@yahoo.ca"),
-("chair", "qwertyuiop", "lsjf@hotmail.com");
+Insert into users (username, password, email, is_admin) values
+("luongo4eva", "abcdefg", "ab4d@gmail.com", true), 
+("bruinzzz", "asdfghjkl", "b6e3@gmail.com", false),
+("puckmaster70", "password", "lgjas@gmail.com", true),
+("steve", "asdfghjkl", "sjjskd@yahoo.ca", false),
+("chair", "qwertyuiop", "lsjf@hotmail.com", false);
 
 Insert into seasons (season) values
 ("2014"),

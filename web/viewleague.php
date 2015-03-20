@@ -45,6 +45,7 @@
             </div>
         </nav>
         <div class="container">
+	    <h2><?php echo $league->name; ?></h2>
             <table class="table table-bordered">
                 <tr>
                     <th>Place</th>
