@@ -41,8 +41,8 @@ and open the template in the editor.
 			?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-
-                    </ul>
+			<li><a href="logout.php">Logout</a></li>
+		    </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
         </nav>

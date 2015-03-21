@@ -21,6 +21,42 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     </head>
     <body>
+	<div class="modal fade" id="editModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Edit User</h4>
+	      </div>
+	    <form action="editUser.php">
+	      <div class="modal-body">
+		  
+		      <div class="form-group">
+			  <label for="username">Username</label>
+			  <input id="username" type="text" name="username" class="form-control">
+			  
+			  <label for="password">Password</label>
+			  <input id="password" type="text" name="password" class="form-control">
+			  
+			  <label for="email">Email</label>
+			  <input id="email" type="email" name="email" class="form-control">
+			  
+			  <label for="admin">Administrator</label>
+			  <select id="admin" name="admin" class="form-control">
+			      <option value="true">Yes</option>
+			      <option value="false">No</option>
+			  </select>
+		      </div>
+		  
+	      </div>
+	      <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<input type="submit" value="Save Changes" class="btn btn-primary">
+	      </div>
+	    </form>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -39,8 +75,8 @@ and open the template in the editor.
 			<li class="active"><a href="admin.php">Admin Tools</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-
-                    </ul>
+			<li><a href="logout.php">Logout</a></li>
+		    </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
         </nav>
@@ -51,6 +87,7 @@ and open the template in the editor.
                     <th>Username</th>
                     <th>Password</th>
                     <th>Email Address</th>
+		    <th>Administrator</th>
 		    <th>Edit</th>
 		    <th>Delete</th>
                 </tr>
@@ -61,7 +98,9 @@ and open the template in the editor.
                     . "<td><a href=\"viewLeagues.php?username=" . $user["username"] . "\">" . $user["username"] . "</a></td>"
                     . "<td>" . $user["password"] . "</td>"
                     . "<td>" . $user["email"] . "</td>"
-                    . "<td><a href=\"\">Edit</a></td>"
+		    . "<td>" . ($user["is_admin"] ? "Yes" : "No") . "</td>"
+                    . "<td><a href=\"\" onclick=startEdit(\"" . $user["username"] . "\",\"" . $user["password"] . "\",\"" 
+		    . $user["email"] . "\"," . $user["is_admin"] . ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
 		    . "<td><a href=\"\" onclick=deleteUser(\"" . $user["username"] . "\")>Delete</a></td>"
 		    . "</tr>";
                 }
