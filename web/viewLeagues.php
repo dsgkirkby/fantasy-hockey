@@ -17,8 +17,36 @@ and open the template in the editor.
         <script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="createButton.css">
     </head>
     <body>
+	<div class="modal fade" id="createModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Create League</h4>
+	      </div>
+	    <form action="../controllers/createLeague.php">
+	      <div class="modal-body">
+		  
+		      <div class="form-group">
+			  <label for="leagueName">League Name</label>
+			  <input id="leagueName" type="text" name="leagueName" class="form-control">
+			  
+			  <label for="maxSize">Max Size</label>
+			  <input id="maxSize" type="number" name="maxSize" class="form-control">
+		      </div>
+		  
+	      </div>
+	      <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<input type="submit" value="Save Changes" class="btn btn-primary">
+	      </div>
+	    </form>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -48,6 +76,17 @@ and open the template in the editor.
         </nav>
         <div class="container">
             <?php
+		if (!empty($_GET["error"])) {
+		    $displayWarning = $_GET["error"];
+		} else {
+		    $displayWarning = false;
+		}
+		
+		if ($displayWarning) {
+		    echo "<div class=\"alert alert-danger\" role=\"alert\">"
+		    . "<b>League Creation Failed.</b>"
+		    . " Please try again or contact an administrator</div>";
+		}
 		$leagues = array();
 		if (!empty($_GET["username"])) {
 		    $uname = filter_input(INPUT_GET, "username");
@@ -71,7 +110,8 @@ and open the template in the editor.
 			array_push($leagues, new league($temp_league["leagueID"]));
 		    }
 		    
-		    echo "<h3>All Leagues</h3>";
+		    echo "<h2>All Leagues<a data-toggle=\"modal\" data-target=\"#createModal\" id=\"createButton\""
+		    . " class=\"btn btn-primary\">Create League</a></h2>";
 		}
 		
 		echo "<table class=\"table table-bordered\">
@@ -89,7 +129,7 @@ and open the template in the editor.
 		}
 		
 		echo "</table>";
-            ?>
-        </table>
-</body>
+	    ?>
+	</div>
+    </body>
 </html>
