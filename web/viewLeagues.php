@@ -54,7 +54,7 @@ and open the template in the editor.
 		    echo "<h3>" . $uname . "'s Leagues</h3>";
 		    $user = new user($uname);
 		    $leagues = $user->myLeagues();
-		} else if (userIsAdmin()) {
+		} else {
 		    $con = mysqli_connect("localhost", "root", "");
 		    if (!$con) {
 			exit('Connect Error (' . mysqli_connect_errno() . ') '
