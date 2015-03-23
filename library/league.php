@@ -13,6 +13,7 @@ class league {
     public $name;
     public $dateCreated;
     public $teams;
+    public $maxSize;
 
     function __construct($leagueID) {
 	$this->leagueID = $leagueID;
@@ -28,11 +29,12 @@ class league {
 	$league = mysqli_fetch_assoc(mysqli_query($con, $query));
 	$this->name = $league["name"];
 	$this->dateCreated = $league["date_created"];
+	$this->maxSize = $league["max_size"];
 	$this->teams = array();
     }
 
     function getTeams() {
-	if (empty($teams)) {
+	if (empty($this->teams)) {
 	    $con = mysqli_connect("localhost", "root", "");
 	    if (!$con) {
 		exit('Connect Error (' . mysqli_connect_errno() . ') '

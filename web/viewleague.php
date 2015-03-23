@@ -13,6 +13,12 @@
 	}
         $league = new league($_GET["leagueID"]);
 	$userIsManager = userIsManagerOfLeague($league->getLeagueId());
+	$userInLeague = false;
+	foreach($league->getTeams() as $team) {
+	    if ($team->ownerName == getUsername()) {
+		$userInLeague = true;
+	    }
+	}
     ?>
     <head>
         <meta charset="UTF-8">
@@ -20,6 +26,7 @@
         <script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="viewLeague.css">
 	<?php if ($userIsManager) { echo "<script src='editLeague.js'></script>"; } ?>
     </head>
     <body>
@@ -51,7 +58,14 @@
             </div>
         </nav>
         <div class="container">
-	    <h2><?php echo $league->name; ?></h2>
+	    <h2>
+	    <?php
+		echo $league->name;
+		if (sizeof($league->getTeams()) < $league->maxSize && !$userInLeague) {
+		    echo "<a id=\"join\" class=\"btn btn-primary\">Join League</a>";
+		}
+	    ?>
+	    </h2>
             <table class="table table-bordered">
                 <tr>
                     <th>Place</th>
@@ -60,7 +74,6 @@
 		    <th>Goals</th>
 		    <th>Assists</th>
                     <th>Score</th>
-		    <th>View</th>
 		    <?php if ($userIsManager) { echo "<th>Delete</th>"; } ?>
                 </tr>
             <?php
@@ -69,12 +82,11 @@
                 foreach($teams as $place => $team) {
                     echo "<tr>"
 			. "<td>" . ($place + 1) . "</td>"
-			. "<td>" . $team->teamName . "</td>"
+			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>" . $team->teamName . "</a></td>"
 			. "<td>" . $team->ownerName . "</td>"
 			. "<td>" . $team->goals . "</td>"
 			. "<td>" . $team->assists . "</td>"
 			. "<td>" . $team->getScore() . "</td>"
-			. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>View</a></td>"
 			. ($userIsManager ? "<td><a href='' onclick=deleteTeam(" . $team->id . ")>Delete</a></td>" : "")
 			. "</tr>";
                 }
