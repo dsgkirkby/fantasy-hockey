@@ -41,7 +41,7 @@ and open the template in the editor.
 	      </div>
 	      <div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<input type="submit" value="Save Changes" class="btn btn-primary">
+		<input type="submit" value="Create" class="btn btn-primary">
 	      </div>
 	    </form>
 	    </div><!-- /.modal-content -->
