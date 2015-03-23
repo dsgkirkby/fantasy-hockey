@@ -124,12 +124,12 @@ Insert into nhl_teams(name, city) values
 ("Flyers", "Philladelphia, PA"),
 ("Rangers", "New York, NY");
 
-Insert into f_leagues(leagueID, max_size, name, date_created) values
-(1, 10, "Dobber Experts League", "2015-1-9"),
-(2, 12, "Rockey Horror Roto Show", "2015-4-9"),
-(3, 24, "Ultimate Hockey League", "2010-8-29"),
-(4, 10, "Newbz and Nerdz", "2014-1-9"),
-(5, 8, "What's a Puck?", "2015-10-10");
+Insert into f_leagues(max_size, name, date_created) values
+(10, "Dobber Experts League", "2015-1-9"),
+(12, "Rockey Horror Roto Show", "2015-4-9"),
+(24, "Ultimate Hockey League", "2010-8-29"),
+(10, "Newbz and Nerdz", "2014-1-9"),
+(8, "What's a Puck?", "2015-10-10");
 
 Insert into f_teams (name, username, season, leagueID) values
 ("Edler\'s Mind Tricks", "luongo4eva", "2014", 1),
