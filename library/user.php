@@ -22,7 +22,7 @@ class user {
     }
 
     function get() {
-        $con = dbCon();
+        $con = mysqli_connect("localhost", "root", "");
         $user = mysqli_query($con, "SELECT * from users WHERE username="
                 . $this->username);
         return $user;
