@@ -138,15 +138,15 @@ Insert into f_teams (name, username, season, leagueID) values
 ("Texas Kane Shaw Massacre", "chair", "2010", 4),
 ("Fleetwood Mackinnon", "chair", "2014", 1);
 
-Insert into players(playerID, name, hometown, height, weight, dob) values
-(1, "Wayne Gretzky", "Brantford, ON", 72, 185, "1961-1-26"),
-(2, "Zdeno Chára", "Trenčín, Czechoslovakia", 81 , 255, "1977-3-18"),
-(3, "Roberto Luongo", "Montreal, QC", 75, 217, "1979-4-4"),
-(4, "Bo Horvat", "London, ON", 72, 206, "1995-4-5"),
-(5, "Ryan Miller", "East Lansing, MI", 74, 168, "1980-7-17"),
-(6, "Jonathan Drouin", "Vancouver, BC", 72, 185, "1961-1-26"),
-(7, "Connor McDavid", "Winnipeg, MB", 81, 255, "1977-3-18"),
-(8, "Jakob Markstrom", "Stockholm, SW", 75, 217, "1979-4-4");
+Insert into players(name, hometown, height, weight, dob) values
+("Wayne Gretzky", "Brantford, ON", 72, 185, "1961-1-26"),
+("Zdeno Chára", "Trenčín, Czechoslovakia", 81 , 255, "1977-3-18"),
+("Roberto Luongo", "Montreal, QC", 75, 217, "1979-4-4"),
+("Bo Horvat", "London, ON", 72, 206, "1995-4-5"),
+("Ryan Miller", "East Lansing, MI", 74, 168, "1980-7-17"),
+("Jonathan Drouin", "Vancouver, BC", 72, 185, "1961-1-26"),
+("Connor McDavid", "Winnipeg, MB", 81, 255, "1977-3-18"),
+("Jakob Markstrom", "Stockholm, SW", 75, 217, "1979-4-4");
 
 insert into plays_for (playerID, teamName, gamesPlayed, goals, hits, giveaways, takeaways, penalties_drawn, SAcorsi, qot, qoc, ozs, toi, season) values
 (1, "Canucks", 80, 60, 300, 100, 1600, 1, 99.9, 303, 1.6, 1.3, 70.9, "2010"),
