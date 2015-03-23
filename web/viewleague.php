@@ -26,7 +26,7 @@
         <script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="viewLeague.css">
+	<link rel="stylesheet" type="text/css" href="createButton.css">
 	<?php if ($userIsManager) { echo "<script src='editLeague.js'></script>"; } ?>
     </head>
     <body>
@@ -62,7 +62,7 @@
 	    <?php
 		echo $league->name;
 		if (sizeof($league->getTeams()) < $league->maxSize && !$userInLeague) {
-		    echo "<a id=\"join\" class=\"btn btn-primary\">Join League</a>";
+		    echo "<a id=\"createButton\" class=\"btn btn-primary\">Join League</a>";
 		}
 	    ?>
 	    </h2>
