@@ -81,7 +81,7 @@ and open the template in the editor.
             </div><!--/.container-fluid -->
         </nav>
         <div class="container">
-	    <h3>All Users</h3>
+	    <h2>All Users</h2>
             <table class="table table-bordered">
                 <tr>
                     <th>Username</th>
