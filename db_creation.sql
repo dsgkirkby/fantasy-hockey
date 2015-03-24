@@ -97,7 +97,7 @@ CREATE TABLE prospects(
 CREATE TABLE manages(
  username varchar(30),
  leagueID int,
- primary key (leagueID),
+ primary key (leagueID, username),
  foreign key (leagueID) references f_leagues(leagueID) ON DELETE CASCADE,
  foreign key (username) references users(username) ON DELETE CASCADE
 );
