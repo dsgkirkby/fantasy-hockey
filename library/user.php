@@ -27,7 +27,26 @@ class user {
                 . $this->username);
         return $user;
     }
-
+    function manages(){
+        $con = mysqli_connect("localhost", "root", "");
+        if (!$con) {
+            exit('Connect Error (' . mysqli_connect_errno() . ') '
+                    . mysqli_connect_error());
+        }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+        if (mysqli_select_db($con, "dobber") == FALSE) {
+            exit('DB select failed!');
+        }
+        $query="SELECT leagueID FROM manages"
+                . " where username=\"" . $this->username . "\"";
+        $leagues = mysqli_query($con, $query);
+	$results = array();
+	foreach ($leagues as $league) {
+	    array_push($results, new league($league["leagueID"]));
+	}
+        return $results;
+    }
     function myLeagues() {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {

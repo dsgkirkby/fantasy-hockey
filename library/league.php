@@ -32,7 +32,26 @@ class league {
 	$this->maxSize = $league["max_size"];
 	$this->teams = array();
     }
-
+    function getManagers(){
+        $con = mysqli_connect("localhost", "root", "");
+        if (!$con) {
+            exit('Connect Error (' . mysqli_connect_errno() . ') '
+                    . mysqli_connect_error());
+        }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+        if (mysqli_select_db($con, "dobber") == FALSE) {
+            exit('DB select failed!');
+        }
+        $query="SELECT username FROM manages"
+                . " where leagueID=\"" . $this->leagueID . "\"";
+        $users = mysqli_query($con, $query);
+	$results = array();
+	foreach ($users as $user) {
+	    array_push($results, new league($user["username"]));
+	}
+        return $results;
+    }
     function getTeams() {
 	if (empty($this->teams)) {
 	    $con = mysqli_connect("localhost", "root", "");
