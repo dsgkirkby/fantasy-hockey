@@ -90,8 +90,9 @@
                     <th>Place</th>
                     <th>Team Name</th>
                     <th>Owner Name</th>
+                    <th>Games</th>
                     <th>Goals</th>
-                    <th>Assists</th>
+                    <th>Hits</th>
                     <th>Score</th>
                     <?php
                     if ($userIsManager) {
@@ -107,8 +108,9 @@
                     . "<td>" . ($place + 1) . "</td>"
                     . "<td><a href='viewTeam.php?teamID=" . $team->id . "'>" . $team->teamName . "</a></td>"
                     . "<td>" . $team->ownerName . "</td>"
+                    . "<td>" . $team->games . "</td>"
                     . "<td>" . $team->goals . "</td>"
-                    . "<td>" . $team->assists . "</td>"
+                    . "<td>" . $team->hits . "</td>"
                     . "<td>" . $team->getScore() . "</td>"
                     . ($userIsManager ? "<td><a href='' onclick=deleteTeam(" . $team->id . ")>Delete</a></td>" : "")
                     . "</tr>";
