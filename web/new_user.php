@@ -38,7 +38,7 @@ and open the template in the editor.
                         }
                         if ($displayWarning) {
                             switch ($displayWarning) {
-                                case "unameTaken": 
+                                case "unameTaken":
                                     $detail="Username already exists.";
                                     break;
                                 case "errun":
