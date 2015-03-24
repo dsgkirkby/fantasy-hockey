@@ -32,7 +32,7 @@ error_log($managerInsert);
 mysqli_query($con, $managerInsert);
 
 if ($result) {
-    header("location: ../web/viewLeague.php?leagueID=" . $leagueID, true, 303);
+    header("location: ../web/viewleague.php?leagueID=" . $leagueID, true, 303);
 } else {
     header("location: viewLeagues.php?error=true", true, 303);
 }
