@@ -8,8 +8,7 @@
 class playerRecord {
     public $player;
     public $team;
-    public $season;
-    
+    public $season; 
     public $gamesPlayed;
     public $goals;
     public $hits;
