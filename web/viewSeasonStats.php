@@ -11,14 +11,84 @@
 	}
     ?>
     <head>
-        <title>Dobber Admin Tools</title>
+        <title>Dobber Player Statistics</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="jquery-2.1.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="createButton.css">
     </head>
     <body>
+	<div class="modal fade" id="createModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Create Player Record</h4>
+                    </div>
+                    <form action="../controllers/createLeague.php">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="playerName">Player</label>
+                                <input id="playerName" type="text" name="playerName" class="form-control">
+
+                                <label for="teamName">Team</label>
+                                <select id="teamName" type="text" name="teamName" class="form-control">
+				    <?php
+					foreach (playerRecord::getNHLTeams() as $team) {
+					    echo "<option>" . $team["name"] . "</option>";
+					}
+				    ?>
+				</select>
+				
+				<label for="season">Season</label>
+				<select id="season" name="season" class="form-control">
+				    <?php
+					foreach (playerRecord::getSeasons() as $season) {
+					    echo "<option>" . $season["season"] . "</option>";
+					}
+				    ?>
+				</select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="submit" value="Create" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+	<div class="modal fade" id="editModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Edit Player</h4>
+                    </div>
+                    <form action="../controllers/createLeague.php">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="leagueName">League Name</label>
+                                <input id="leagueName" type="text" name="leagueName" class="form-control">
+
+                                <label for="maxSize">Max Size</label>
+                                <input id="maxSize" type="number" name="maxSize" class="form-control">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="submit" value="Save Changes" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 	<nav class="navbar navbar-default">
 	    <div class="container-fluid">
 		<div class="navbar-header">
@@ -43,7 +113,7 @@
 	    </div><!--/.container-fluid -->
 	</nav>
 	<div class="container">
-	    <h2>Season Stats</h2>
+	    <h2>Player Statistics<a data-toggle="modal" data-target="#createModal" id="createButton" class="btn btn-primary">Create Record</a></h2>
 	    <table class="table table-bordered">
 		<thead>
 		    <th>Player</th>

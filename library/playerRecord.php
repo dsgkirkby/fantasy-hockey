@@ -59,4 +59,34 @@ class playerRecord {
 	
 	return $toReturn;
     }
+    
+    static function getNHLTeams() {
+	$con = mysqli_connect("localhost", "root", "");
+	if (!$con) {
+	    exit('Connect Error (' . mysqli_connect_errno() . ') '
+		    . mysqli_connect_error());
+	}
+	//set the default client character set 
+	mysqli_set_charset($con, 'utf-8');
+	mysqli_select_db($con, "dobber");
+	
+	$query = "SELECT * FROM nhl_teams";
+	
+	return mysqli_query($con, $query);
+    }
+    
+    static function getSeasons() {
+	$con = mysqli_connect("localhost", "root", "");
+	if (!$con) {
+	    exit('Connect Error (' . mysqli_connect_errno() . ') '
+		    . mysqli_connect_error());
+	}
+	//set the default client character set 
+	mysqli_set_charset($con, 'utf-8');
+	mysqli_select_db($con, "dobber");
+	
+	$query = "SELECT * FROM seasons";
+	
+	return mysqli_query($con, $query);
+    }
 }
