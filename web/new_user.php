@@ -107,7 +107,7 @@ and open the template in the editor.
                 } else {
                     $new_user = new user($_POST["uname"], $_POST["passwd"], $_POST["email"]);
                     if($new_user->add_user($_POST["uname"]))
-                        header("Location: index.html?newUser=" . $_POST["uname"]);
+                        header("Location: login.php?newUser=" . $_POST["uname"]);
                     else
                         header("Location: $page?error=unameTaken");
                         //header("Location: $page?error=errun");
