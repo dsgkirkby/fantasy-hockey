@@ -30,12 +30,34 @@ and open the template in the editor.
                     <h2>Register</h2>
                 </div>
 
+                    <!-- Bad username reporting -->
+                    <div class="container">
+                        <?php
+                        if (!empty($_GET["error"])) {
+                            $displayWarning = $_GET["error"];
+                        } else {
+                            $displayWarning = false;
+                        }
+                        if ($displayWarning) {
+                            switch ($displayWarning) {
+                                case "unameTaken": 
+                                    $detail="Username already exists.";
+                                    break;
+                                case "errun":
+                                    $detail="Please try again or contact an administrator";
+                                    break;
+                            }
+                            echo "<div class=\"alert alert-danger\" role=\"alert\">"
+                            . "<b>Unable to create username.</b> "
+                            . $detail;
+                        }
+                        ?>
+                    </div>
                     <!-- Text input-->
                     <div class="control-group">
                         <label class="control-label" for="uname">Username</label>
                         <div class="controls">
                             <input id="uname" name="uname" type="text" placeholder="" class="input-xlarge" required="">
-                            <!--<span><img    src="err_unameExists.png" /></span>-->
                         </div>
                     </div>
 
@@ -79,16 +101,16 @@ and open the template in the editor.
         </div>
         <?php
             if (isset($_POST["submit"])) {
-                //echo $_POST["uname"]." ".$_POST["passwd"];
+                $page = $_SERVER['PHP_SELF'];
                 if (user::username_exists($_POST["uname"])) {
-                    echo $_POST["uname"] . " exists";
+                    header("Location: $page?error=unameTaken");
                 } else {
-                    echo $_POST["uname"] . " does not exist";
                     $new_user = new user($_POST["uname"], $_POST["passwd"], $_POST["email"]);
                     if($new_user->add_user($_POST["uname"]))
-                        echo "Great success!";
+                        header("Location: index.html?newUser=" . $_POST["uname"]);
                     else
-                        echo "Maybe next year.";
+                        header("Location: $page?error=unameTaken");
+                        //header("Location: $page?error=errun");
                 }
             }
         ?>
