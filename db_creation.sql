@@ -170,7 +170,7 @@ Insert into prospects(playerID,teamName) values
 (4, "Flyers"),
 (5, "Rangers");
 
-Insert into Player_assignments(playerID, teamID) values
+Insert into player_assignments(playerID, teamID) values
 (1, 1),
 (2, 2),
 (3, 3),

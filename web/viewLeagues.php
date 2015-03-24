@@ -122,7 +122,7 @@ and open the template in the editor.
 		
 		foreach($leagues as $league) {
 		    echo "<tr>"
-		    . "<td><a href=\"viewLeague.php?leagueID="
+		    . "<td><a href=\"viewleague.php?leagueID="
 		    . $league->getLeagueID() . "\">" . $league->name . "</a></td>"
 		    . "<td>" . $league->dateCreated . "</td>"
 		    . "</tr>";
