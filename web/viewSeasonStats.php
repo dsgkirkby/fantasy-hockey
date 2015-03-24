@@ -3,6 +3,7 @@
     <?php
 	session_start();
 	require_once('../library/userVerification.php');
+	require_once('../library/playerRecord.php');
 	// Redirect to login screen if user is not logged in
 	if (!userIsAdmin()) {
 	    header('Location: main.php', true, 303);
@@ -42,10 +43,45 @@
 	    </div><!--/.container-fluid -->
 	</nav>
 	<div class="container">
-	    <h2>Admin Tools</h2>
-	    <h3><a href="viewLeagues.php">View All Leagues</a></h3>
-	    <h3><a href="viewUsers.php">View All Users</a></h3>
-	    <h3><a href="viewSeasonStats.php">View Season Stats</a></h3>
+	    <h2>Season Stats</h2>
+	    <table class="table table-bordered">
+		<thead>
+		    <th>Player</th>
+		    <th>Team</th>
+		    <th>Season</th>
+		    <th>Games Played</th>
+		    <th>Goals</th>
+		    <th>Hits</th>
+		    <th>Giveaways</th>
+		    <th>Takeaways</th>
+		    <th>Penalties Drawn</th>
+		    <th>SA Corsi</th>
+		    <th>QOT</th>
+		    <th>QOC</th>
+		    <th>OZS%</th>
+		    <th>TOI</th>
+		</thead>
+	    <?php
+		foreach (playerRecord::getAllRecords() as $pr) {
+		    echo "<tr>"
+		    . "<td>" . $pr->player . "</td>"
+		    . "<td>" . $pr->team . "</td>"
+			    . "<td>" . $pr->season . "</td>"
+			    . "<td>" . $pr->gamesPlayed . "</td>"
+			    . "<td>" . $pr->goals . "</td>"
+			    . "<td>" . $pr->hits . "</td>"
+			    . "<td>" . $pr->giveaways . "</td>"
+			    . "<td>" . $pr->takeaways . "</td>"
+			    . "<td>" . $pr->penalties_drawn . "</td>"
+			    . "<td>" . $pr->sacorsi . "</td>"
+			    . "<td>" . $pr->qot . "</td>"
+			    . "<td>" . $pr->qoc . "</td>"
+			    . "<td>" . $pr->ozs . "</td>"
+			    . "<td>" . $pr->toi . "</td>"
+		    . "</tr>";
+		}
+	    ?>
+	    </table>
 	</div>
     </body>
 </html>

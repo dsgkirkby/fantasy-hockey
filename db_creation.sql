@@ -148,7 +148,7 @@ Insert into f_teams (name, username, season, leagueID) values
 
 Insert into players(name, hometown, height, weight, dob) values
 ("Wayne Gretzky", "Brantford, ON", 72, 185, "1961-1-26"),
-("Zdeno Chára", "Trenčín, Czechoslovakia", 81 , 255, "1977-3-18"),
+("Zdeno Chara", "Trenčín, Czechoslovakia", 81 , 255, "1977-3-18"),
 ("Roberto Luongo", "Montreal, QC", 75, 217, "1979-4-4"),
 ("Bo Horvat", "London, ON", 72, 206, "1995-4-5"),
 ("Ryan Miller", "East Lansing, MI", 74, 168, "1980-7-17"),
