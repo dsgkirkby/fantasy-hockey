@@ -108,7 +108,6 @@ and open the template in the editor.
                         header("Location: login.php?newUser=" . $_POST["uname"]);
                     else
                         header("Location: $page?error=unameTaken");
-                        //header("Location: $page?error=errun");
                 }
             }
         ?>
