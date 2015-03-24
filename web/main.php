@@ -80,16 +80,19 @@ and open the template in the editor.
                 echo "</table>";
                 $manages = $user->manages();
                 if (!empty($manages)) {
+                    echo "<script src='editLeague.js'></script>";
                     echo "<h3>Leagues You Manage</h3><table class=\"table table-bordered\">
                         <tr>
                             <th>League Name</th>
                             <th>Date Created</th>
+                            <th>Actions</th>
                         </tr>";
                     foreach ($manages as $m_league) {
                         echo "<tr>"
                         . "<td><a href=\"viewleague.php?leagueID="
                         . $m_league->getLeagueID() . "\">" . $m_league->name . "</a></td>"
                         . "<td>" . $m_league->dateCreated . "</td>"
+                        . "<td><a href='' onclick=deleteLeague(" . $m_league->getLeagueID() . ")>Delete</a></td>"
                         . "</tr>";
                     }
                 }
