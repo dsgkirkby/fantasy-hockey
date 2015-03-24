@@ -26,6 +26,21 @@
             <div class="jumbotron">
                 <h1>Dobber Fantasy</h1>
             </div>
+            <!-- New user message -->
+            <div class="container">
+                <?php
+                if (!empty($_GET["newUser"])) {
+                    $nuser = $_GET["newUser"];
+                } else {
+                    $nuser = false;
+                }
+                if ($nuser) {
+                    echo "<div class=\"alert alert-success\" role=\"alert\">"
+                    . "<b>Welcome $nuser.</b> "
+                    . "Enjoy your new digs!";
+                }
+                ?>
+            </div>
             <div class="container">
                 <div class="col-sm-4">
 		    <form action="verifyUser.php" class="form-horizontal <?php if ($error) { echo "has-error"; } ?>">
