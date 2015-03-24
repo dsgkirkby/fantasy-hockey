@@ -64,6 +64,9 @@
 		if (sizeof($league->getTeams()) < $league->maxSize && !$userInLeague) {
 		    echo "<a id=\"createButton\" class=\"btn btn-primary\">Join League</a>";
 		}
+		if (userIsManagerOfLeague($league->getLeagueId())) {
+		    echo " <h4><span class=\"label label-default\">You manage this league</span></h4>";
+		}
 	    ?>
 	    </h2>
             <table class="table table-bordered">
