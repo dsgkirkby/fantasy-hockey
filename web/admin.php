@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <?php
 	session_start();
-        require_once('../library/league.php');
 	require_once('../library/userVerification.php');
-	require_once('../library/user.php');
 	// Redirect to login screen if user is not logged in
-	dieIfNoUser();
+	if (!userIsAdmin()) {
+	    header('Location: main.php', true, 303);
+	    die();
+	}
     ?>
     <head>
-        <title>Home</title>
+        <title>Dobber Admin Tools</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="jquery-2.1.3.min.js"></script>
@@ -35,13 +31,9 @@ and open the template in the editor.
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 		    <ul class="nav navbar-nav">
-			<li class="active"><a href="main.php">Home</a></li>
+			<li><a href="main.php">Home</a></li>
 			<li><a href="viewLeagues.php">Leagues</a></li>
-			<?php
-			    if (userIsAdmin()) {
-				echo "<li><a href=\"admin.php\">Admin Tools</a></li>";
-			    }
-			?>
+			<li class="active"><a href=\"admin.php\">Admin Tools</a></li>
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
 			<li><a href="logout.php">Logout</a></li>
@@ -50,39 +42,8 @@ and open the template in the editor.
 	    </div><!--/.container-fluid -->
 	</nav>
 	<div class="container">
-	    <div class="col-md-6">
-		<?php
-		    $uname = $_SESSION["username"];
-		    echo "<h3>Your Leagues</h3><table class=\"table table-bordered\">
-		    <tr>
-			<th>Team Name</th>
-			<th>Score</th>
-			<th>Place</th>
-			<th>League Name</th>
-		    </tr>";
-		    $user = new user($uname);
-		    foreach ($user->myLeagues() as $league) {
-			foreach ($league->getTeams() as $place => $team) {
-			    if ($team->ownerName == $_SESSION["username"]) {
-				$userTeam = $team;
-				$userRank = $place + 1;
-				break;
-			    }
-			}
-			echo "<tr>"
-			. "<td>" . $userTeam->teamName . "</td>"
-			. "<td>" . $userTeam->getScore() . "</td>"
-			. "<td>" . $userRank . "</td>"
-			. "<td><a href=\"viewleague.php?leagueID="
-			. $league->getLeagueID() . "\">" . $league->name . "</a></td>"
-			. "</tr>";
-		    }
-		    echo "</table>"
-		?>
-	    </div>
-	    <div class="col-md-6">
-		
-	    </div>
-	</div>
+	    <h3>Admin Tools</h3>
+	    <h3><a href="viewLeagues.php">View All Leagues</a></h3>
+	    <h3><a href="viewUsers.php">View All Users</a></h3>
     </body>
 </html>
