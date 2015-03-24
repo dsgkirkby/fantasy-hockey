@@ -9,7 +9,7 @@ and open the template in the editor.
 	session_start();
         require_once('../library/league.php');
 	require_once('../library/userVerification.php');
-	require_once('../library/user.php');
+	require_once('../library/users.php');
 	// Redirect to login screen if user is not logged in
 	dieIfNoUser();
     ?>
