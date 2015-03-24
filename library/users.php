@@ -1,39 +1,68 @@
 <?php
 
 
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of league
+ * User manipulations DB
  *
- * @author Eric
+ * @author Pat
  */
-class users {
-     
-    function __construct() {
-       
+class user {
+    private $username;
+    private $password;
+    private $email;
+    
+    function __construct($username, $password, $email) {
+        $this->username = $username;
+        $this->password = $password;
+        $this->email = $email;
     }
     
-    function getUsers() {
+    public function username_exists($new_username) {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
-            exit('Connect Error (' . mysqli_connect_errno() . ') '
-                   . mysqli_connect_error());
+            exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
         }
         //set the default client character set 
         mysqli_set_charset($con, 'utf-8');
-       if( mysqli_select_db($con,"dobber") == FALSE){
-           exit('DB select failed!');
-       }
-        $users = mysqli_query($con, "SELECT * from users");
-        if ($users == FALSE){
-            exit('Query Failed!');
+        mysqli_select_db($con, "dobber");
+        $success = mysqli_query($con, "SELECT * FROM users WHERE username = $new_username");
+        if ($success != "") {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    public function add_user($username) {
+        $con = mysqli_connect("localhost", "root", "");
+        if (!$con) {
+            exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+        }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+        mysqli_select_db($con, "dobber");
+        
+        if ($this->username_exists($this->username)) {
+            return false;
+        } else if (mysqli_query($con, "INSERT INTO users (username, password, email)"
+            . " VALUES ('$this->username', '$this->password', '$this->email')")) {
+            //added
+            return true;
+        } else {
+            //not added
+            return false;
+        }
+    }
+
+    function getUsers() {
+        $con = mysqli_connect("localhost", "phpweb", "");
+        if (!$con) {
+            exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+        }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+        mysqli_select_db($con, "test");
+        $users = mysqli_query($con, "SELECT * FROM users");
         return $users;
     }
 }
