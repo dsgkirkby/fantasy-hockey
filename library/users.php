@@ -43,14 +43,12 @@ class user {
         mysqli_select_db($con, "dobber");
         
         if ($this->username_exists($this->username)) {
-            echo "exists";
             return false;
         } else if (mysqli_query($con, "INSERT INTO users (username, password, email)"
             . " VALUES ('$this->username', '$this->password', '$this->email')")) {
             //added
             return true;
         } else {
-            echo "failed";
             //not added
             return false;
         }
