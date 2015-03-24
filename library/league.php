@@ -62,18 +62,13 @@ class league {
 	    //set the default client character set 
 	    mysqli_set_charset($con, 'utf-8');
 	    mysqli_select_db($con, "dobber");
-            $query = "SELECT f_teams.teamID, f_teams.name, f_teams.username,"
-		    . " player_assignments.totalgoals, player_assignments.totalassists FROM f_teams"
-		    . " INNER JOIN (SELECT teamID, SUM(goals) as totalgoals,"
-		    . " SUM(assists) as totalassists from player_assignments group by teamID)"
-		    . " player_assignments on f_teams.teamID = player_assignments.teamID"
-		    . " WHERE f_teams.leagueID = " . $this->leagueID;
+            $query = "SELECT * FROM team_stats WHERE leagueID = " . $this->leagueID;
 	    $teams = mysqli_query($con, $query);
 
 	    foreach ($teams as $team) {
 		array_push($this->teams, new team($team["teamID"],
-			$team["name"], $team["username"], $team["totalgoals"],
-			$team["totalassists"]));
+			$team["name"], $team["username"], $team["totalGames"], $team["totalGoals"],
+			$team["totalHits"]));
 	    }
 	}
 	return $this->teams;
