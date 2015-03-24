@@ -78,6 +78,10 @@ and open the template in the editor.
                     . "</tr>";
                 }
                 echo "</table>";
+		?>
+	    </div>
+	    <div class="col-md-6">
+		<?php
                 $manages = $user->manages();
                 if (!empty($manages)) {
                     echo "<script src='editLeague.js'></script>";
