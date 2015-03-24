@@ -16,16 +16,21 @@ require_once('league.php');
 class user {
 
     private $username;
-
+    private $email;
+    
     function __construct($username) {
         $this->username = $username;
+        $con = mysqli_connect("localhost", "root", "");
+        $email = mysqli_query($con, "SELECT email from users WHERE username="
+                . $this->username);
+        $this->email = $email;  
     }
 
-    function get() {
-        $con = mysqli_connect("localhost", "root", "");
-        $user = mysqli_query($con, "SELECT * from users WHERE username="
-                . $this->username);
-        return $user;
+    function getUsername() {
+        return $this->username;
+    }
+    function getEmail() {
+        return $this->email;
     }
     function manages(){
         $con = mysqli_connect("localhost", "root", "");
@@ -38,7 +43,7 @@ class user {
         if (mysqli_select_db($con, "dobber") == FALSE) {
             exit('DB select failed!');
         }
-        $query="SELECT leagueID FROM manages"
+        $query="SELECT * FROM manages"
                 . " where username=\"" . $this->username . "\"";
         $leagues = mysqli_query($con, $query);
 	$results = array();
