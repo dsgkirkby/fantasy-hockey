@@ -10,8 +10,9 @@ class team {
     public $id;
     public $teamName;
     public $ownerName;
+    public $games;
     public $goals;
-    public $assists;
+    public $hits;
     
     static function compareTeamScore($team1, $team2) {
 	if (!($team1 instanceof team && $team2 instanceof team)) {
@@ -22,14 +23,15 @@ class team {
     }
     
     function getScore() {
-	return $this->goals + $this->assists;
+	return $this->goals * 2 + $this->games * 0.1 + $this->hits;
     }
     
-    function __construct($id, $teamName, $ownerName, $goals, $assists) {
+    function __construct($id, $teamName, $ownerName, $games, $goals, $hits) {
 	$this->teamName = $teamName;
 	$this->ownerName = $ownerName;
+	$this->games = $games;
 	$this->goals = $goals;
-	$this->assists = $assists;
+	$this->hits = $hits;
 	$this->id = $id;
     }
 }

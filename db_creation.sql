@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS manages CASCADE;
 DROP TABLE IF EXISTS f_leagues CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
+DROP VIEW IF EXISTS team_stats;
+
 CREATE TABLE users (
  username varchar(30) NOT NULL UNIQUE,
  password varchar(30) NOT NULL,
@@ -60,9 +62,6 @@ CREATE TABLE f_teams (
 CREATE TABLE player_assignments (
  playerID int,
  teamID int,
- goals int,
- assists int,
- isCurrent boolean,
  PRIMARY KEY (playerID, teamID),
  FOREIGN KEY (playerID) REFERENCES players(playerID) ON DELETE CASCADE,
  FOREIGN KEY (teamID) REFERENCES f_teams(teamID) ON DELETE CASCADE
@@ -102,6 +101,15 @@ CREATE TABLE manages(
  foreign key (leagueID) references f_leagues(leagueID) ON DELETE CASCADE,
  foreign key (username) references users(username) ON DELETE CASCADE
 );
+
+CREATE VIEW team_stats AS
+SELECT f_teams.teamID, f_teams.name, f_teams.username, f_teams.season, f_teams.leagueID,
+SUM(plays_for.goals) AS totalGoals,
+SUM(plays_for.gamesPlayed) AS totalGames,
+SUM(plays_for.hits) AS totalHits
+FROM f_teams JOIN (player_assignments NATURAL JOIN plays_for)
+ON f_teams.teamID=player_assignments.teamID
+GROUP BY f_teams.teamID;
 
 Insert into users (username, password, email, is_admin) values
 ("luongo4eva", "abcdefg", "ab4d@gmail.com", true), 
@@ -162,12 +170,12 @@ Insert into prospects(playerID,teamName) values
 (4, "Flyers"),
 (5, "Rangers");
 
-Insert into Player_assignments(playerID, teamID, goals, assists, isCurrent) values
-(1, 1, 10, 10, TRUE),
-(2, 2, 12, 20, TRUE),
-(3, 3, 3, 1, FALSE),
-(4, 4, 50, 2, FALSE),
-(5, 5, 0, 100, TRUE);
+Insert into Player_assignments(playerID, teamID) values
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
 
 Insert into manages(username, leagueID) values
 ("luongo4eva", 1),
