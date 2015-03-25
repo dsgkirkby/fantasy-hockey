@@ -12,10 +12,11 @@ class user {
     private $password;
     private $email;
     
-    function __construct($username, $password, $email) {
+    function __construct($username) {
+    //function __construct($username, $password, $email) {
         $this->username = $username;
-        $this->password = $password;
-        $this->email = $email;
+        //$this->password = $password;
+        //$this->email = $email;
     }
     
     public function username_exists($new_username) {
