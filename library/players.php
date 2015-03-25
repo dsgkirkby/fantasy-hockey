@@ -5,7 +5,6 @@
  *
  * @author Pat -> stolen from Dylan
  */
-require_once 'team.php';
 
 class players {
 
