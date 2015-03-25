@@ -100,11 +100,13 @@ and open the template in the editor.
         <?php
             if (isset($_POST["submit"])) {
                 $page = $_SERVER['PHP_SELF'];
-                if (user::username_exists($_POST["uname"])) {
+                if (user::usernameExists($_POST["uname"])) {
                     header("Location: $page?error=unameTaken");
                 } else {
-                    $new_user = new user($_POST["uname"], $_POST["passwd"], $_POST["email"]);
-                    if($new_user->add_user($_POST["uname"]))
+                    $new_user = new user($_POST["uname"]);
+                    $new_user->setPassword($_POST["passwd"]);
+                    $new_user->setEmail($_POST["email"]);
+                    if($new_user->addUser($_POST["uname"]))
                         header("Location: login.php?newUser=" . $_POST["uname"]);
                     else
                         header("Location: $page?error=unameTaken");

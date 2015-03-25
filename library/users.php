@@ -18,8 +18,16 @@ class user {
         //$this->password = $password;
         //$this->email = $email;
     }
+
+    function setPassword($password) {
+        $this->password = $password;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
     
-    public function username_exists($new_username) {
+    public static function usernameExists($new_username) {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
@@ -35,7 +43,7 @@ class user {
         }
     }
 
-    public function add_user($username) {
+    function addUser($username) {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
@@ -44,7 +52,7 @@ class user {
         mysqli_set_charset($con, 'utf-8');
         mysqli_select_db($con, "dobber");
         
-        if ($this->username_exists($this->username)) {
+        if ($this->usernameExists($this->username)) {
             return false;
         } else if (mysqli_query($con, "INSERT INTO users (username, password, email)"
             . " VALUES ('$this->username', '$this->password', '$this->email')")) {
