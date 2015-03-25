@@ -27,12 +27,18 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Create Player Record</h4>
                     </div>
-                    <form action="../controllers/createLeague.php">
+                    <form action="../controllers/createPlaysFor.php">
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="playerName">Player</label>
-                                <input id="playerName" type="text" name="playerName" class="form-control">
+                                <label for="playerID">Player</label>
+                                <select id="playerID" type="text" name="playerID" class="form-control">
+				     <?php
+					foreach (playerRecord::getAllPlayers() as $player) {
+					    echo "<option value=" . $player["playerID"] . ">" . $player["name"] . "</option>";
+					}
+				    ?>
+				</select>
 
                                 <label for="teamName">Team</label>
                                 <select id="teamName" type="text" name="teamName" class="form-control">
