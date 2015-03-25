@@ -29,9 +29,11 @@ class user {
     function getUsername() {
         return $this->username;
     }
+
     function getEmail() {
         return $this->email;
     }
+
     function manages(){
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
@@ -46,12 +48,13 @@ class user {
         $query="SELECT * FROM manages"
                 . " where username=\"" . $this->username . "\"";
         $leagues = mysqli_query($con, $query);
-	$results = array();
-	foreach ($leagues as $league) {
-	    array_push($results, new league($league["leagueID"]));
-	}
+        $results = array();
+        foreach ($leagues as $league) {
+            array_push($results, new league($league["leagueID"]));
+        }
         return $results;
     }
+
     function myLeagues() {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
@@ -67,11 +70,10 @@ class user {
                 . " f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON"
                 . " t.username=u.username and u.username=\"" . $this->username . "\"";
         $leagues = mysqli_query($con, $query);
-	$results = array();
-	foreach ($leagues as $league) {
-	    array_push($results, new league($league["leagueID"]));
-	}
+        $results = array();
+        foreach ($leagues as $league) {
+            array_push($results, new league($league["leagueID"]));
+        }
         return $results;
     }
-
 }
