@@ -19,6 +19,6 @@ $query = "INSERT INTO plays_for (playerID, teamName, season) values"
 $result = mysqli_query($con, $query);
 
 header("location: ../web/viewSeasonStats.php"
-	. ($result ? "?err=true" : ""), true, 303);
+	. ($result ? "" : "?error=true"), true, 303);
 
 

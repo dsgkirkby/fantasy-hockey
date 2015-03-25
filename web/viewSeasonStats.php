@@ -119,6 +119,20 @@
 	    </div><!--/.container-fluid -->
 	</nav>
 	<div class="container">
+	    <?php
+	    if (!empty($_GET["error"])) {
+                $displayWarning = $_GET["error"];
+            } else {
+                $displayWarning = false;
+            }
+
+            if ($displayWarning) {
+                echo "<div class=\"alert alert-danger\" role=\"alert\">"
+                . "<b>Record Creation Failed.</b>"
+                . " Please verify a record with that <b>Player</b>, <b>Team</b>,"
+		. " and <b>Season</b> does not already exist, and try again.</div>";
+            }
+	    ?>
 	    <h2>Player Statistics<a data-toggle="modal" data-target="#createModal" id="createButton" class="btn btn-primary">Create Record</a></h2>
 	    <table class="table table-bordered">
 		<thead>
