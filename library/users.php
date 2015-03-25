@@ -13,10 +13,7 @@ class user {
     private $email;
     
     function __construct($username) {
-    //function __construct($username, $password, $email) {
         $this->username = $username;
-        //$this->password = $password;
-        //$this->email = $email;
     }
 
     function setPassword($password) {
