@@ -20,41 +20,6 @@ and open the template in the editor.
     <link rel="stylesheet" type="text/css" href="createButton.css">
     </head>
     <body>
-    <!--div class="modal fade" id="createModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">A</h4>
-          </div>
-        <form action="../controllers/createLeague.php">
-          <div class="modal-body">
-          
-              <div class="form-group">
-              <label for="playerName">Player Name</label>
-              <input id="playerName" type="text" name="playerName" class="form-control">
-
-              <div class="form-group">
-              <label for="playerNumber">Player Number</label>
-              <input id="playerNumber" type="text" name="playerNumber" class="form-control">
-
-              <div class="form-group">
-              <label for="playerNumber">Hometown</label>
-              <input id="playerNumber" type="text" name="playerNumber" class="form-control">
-
-              <div class="form-group">
-              <label for="playerNumber">Player Number</label>
-              <input id="playerNumber" type="text" name="playerNumber" class="form-control">
-          
-          </div>
-          <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input type="submit" value="Create" class="btn btn-primary">
-          </div>
-        </form>
-        </div><!-- /.modal-content ->
-      </div><!-- /.modal-dialog ->
-    </div><!-- /.modal -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -135,7 +100,6 @@ and open the template in the editor.
             echo "<h2>Player Overview<a data-toggle=\"modal\" data-target=\"#createModal\" id=\"createButton\""
             . " class=\"btn btn-primary\">Filter (todo)</a></h2>";
         }
-        //echo "<a href=\"viewleague.php?order=[...]\"> . $league->name . "</a>
         echo "<table class=\"table table-bordered\">
         <tr>
         <th><a href=\"viewPlayers.php?order=name\"> Name </a></th>
@@ -146,7 +110,6 @@ and open the template in the editor.
         </tr>";
         
         foreach($players as $player) {
-            // link to a player page?
             echo "<tr>"
             . "<td>" . $player->getName() . "</td>"
             . "<td>" . $player->getHometown() . "</td>"
