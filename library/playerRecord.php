@@ -6,6 +6,7 @@
  * @author Dylan
  */
 class playerRecord {
+    public $playerID;
     public $player;
     public $team;
     public $season; 
@@ -22,6 +23,7 @@ class playerRecord {
     public $toi;
     
     function __construct($playerRecord) {
+        $this->playerID=$playerRecord["playerID"];
 	$this->player = $playerRecord["name"];
 	$this->team = $playerRecord["teamName"];
 	$this->season = $playerRecord["season"];
