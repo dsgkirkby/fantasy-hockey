@@ -118,6 +118,7 @@ and open the template in the editor.
             . "<tr>"
             . "<th>Team Name</th>"
             . "<th>Date Created</th>"
+            . "<th>Managers</th>"
             . (userIsAdmin() ? "<th>Action</th>" : "")
             . "</tr>";
 
@@ -125,6 +126,11 @@ and open the template in the editor.
                 echo "<tr>"
                 . "<td><a href = \"viewleague.php?leagueID=\"" . $league->getLeagueID() . "\">" . $league->name . "</a></td>"
                 . "<td>" . $league->dateCreated . "</td>"
+                . "<td>";
+                foreach ($league->getManagers() as $manager) {
+                    echo $manager->getUsername() . "</br>";
+                }
+                echo"</td>"
                 . (userIsAdmin() ? "<td><a href='' onclick=deleteLeague(" . $league->getLeagueID() . ")>Delete</a></td>" : "")
                 . "</tr>";
             }
