@@ -31,12 +31,20 @@ and open the template in the editor.
           <div class="modal-body">
           
               <div class="form-group">
-              <label for="leagueName">Payer Name</label>
-              <input id="leagueName" type="text" name="leagueName" class="form-control">
-              
-              <label for="maxSize">Players</label>
-              <input id="maxSize" type="number" name="maxSize" class="form-control">
-              </div>
+              <label for="playerName">Player Name</label>
+              <input id="playerName" type="text" name="playerName" class="form-control">
+
+              <div class="form-group">
+              <label for="playerNumber">Player Number</label>
+              <input id="playerNumber" type="text" name="playerNumber" class="form-control">
+
+              <div class="form-group">
+              <label for="playerNumber">Hometown</label>
+              <input id="playerNumber" type="text" name="playerNumber" class="form-control">
+
+              <div class="form-group">
+              <label for="playerNumber">Player Number</label>
+              <input id="playerNumber" type="text" name="playerNumber" class="form-control">
           
           </div>
           <div class="modal-footer">
@@ -88,13 +96,27 @@ and open the template in the editor.
             . "<b>Player View Failed.</b>"
             . " Please try again or contact an administrator</div>";
         }
-        $players = array();//players::getPlayers();//array();
+        $players = array();
         if (!empty($_GET["username"])) {
             $uname = filter_input(INPUT_GET, "username");
             echo "<h3>Players:</h3>";
             $user = new user($uname);
-            //$leagues = $user->myLeagues();
         } else {
+            $order="playerID";
+            if (!empty($_GET["order"])) {
+              switch ($_GET["order"]) {
+                case 'name':
+                case 'hometown':
+                case 'height':
+                case 'weight':
+                case 'dob':
+                  $order=$_GET["order"];
+                  break;
+                default:
+                  $order="playerID";
+                  break;
+              }
+            }
             $con = mysqli_connect("localhost", "root", "");
             if (!$con) {
                 exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
@@ -104,7 +126,7 @@ and open the template in the editor.
             if (mysqli_select_db($con, "dobber") == FALSE) {
                 exit('DB select failed!');
             }
-            $query = "SELECT * FROM players";
+            $query = "SELECT * FROM players ORDER BY " . $order;
             $temp_players = mysqli_query($con, $query);
             foreach ($temp_players as $temp_player) {
                  array_push($players, new players($temp_player["playerID"]));
@@ -113,14 +135,14 @@ and open the template in the editor.
             echo "<h2>Player Overview<a data-toggle=\"modal\" data-target=\"#createModal\" id=\"createButton\""
             . " class=\"btn btn-primary\">Filter (todo)</a></h2>";
         }
-        
+        //echo "<a href=\"viewleague.php?order=[...]\"> . $league->name . "</a>
         echo "<table class=\"table table-bordered\">
         <tr>
-        <th>Name</th>
-        <th>Hometown</th>
-        <th>Height</th>
-        <th>Weight</th>
-        <th>Dob</th>
+        <th><a href=\"viewPlayers.php?order=name\"> Name </a></th>
+        <th><a href=\"viewPlayers.php?order=hometown\"> Hometown </a></th>
+        <th><a href=\"viewPlayers.php?order=height\"> Height </a></th>
+        <th><a href=\"viewPlayers.php?order=weight\"> Weight </a></th>
+        <th><a href=\"viewPlayers.php?order=dob\"> D.O.B </a></th>
         </tr>";
         
         foreach($players as $player) {
