@@ -16,7 +16,7 @@ and open the template in the editor.
 		<title>Users View</title>
 		<script src="jquery-2.1.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="editUser.js"></script>
+		<script src="editUser.js"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
@@ -27,7 +27,7 @@ and open the template in the editor.
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h4 class="modal-title">Edit User</h4>
 		  </div>
-		<form action="editUser.php">
+		<form action="editUser.js">
 		  <div class="modal-body">
 		  
 			  <div class="form-group">
