@@ -39,10 +39,10 @@ and open the template in the editor.
                         if ($displayWarning) {
                             switch ($displayWarning) {
                                 case "unameTaken":
-                                    $detail="Username already exists.";
+                                    $detail = "Username already exists.";
                                     break;
                                 case "errun":
-                                    $detail="Please try again or contact an administrator";
+                                    $detail = "Please try again or contact an administrator";
                                     break;
                             }
                             echo "<div class=\"alert alert-danger\" role=\"alert\">"

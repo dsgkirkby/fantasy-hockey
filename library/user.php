@@ -3,35 +3,82 @@
 require_once('league.php');
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of user
+ * User manipulations DB
  *
- * @author Eric
+ * @author Eric & Pat
  */
 class user {
-
     private $username;
+    private $password;
     private $email;
     
     function __construct($username) {
         $this->username = $username;
+    }
+
+    function setPassword($password) {
+        $this->password = $password;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+    
+    public static function usernameExists($new_username) {
         $con = mysqli_connect("localhost", "root", "");
-        $email = mysqli_query($con, "SELECT email from users WHERE username="
+        if (!$con) {
+            exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+        }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+        mysqli_select_db($con, "dobber");
+        $success = mysqli_query($con, "SELECT * FROM users WHERE username = $new_username");
+        if ($success != "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function addUser($username) {
+        $con = mysqli_connect("localhost", "root", "");
+        if (!$con) {
+            exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+        }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+        mysqli_select_db($con, "dobber");
+        
+        if ($this->usernameExists($this->username)) {
+            return false;
+        } else if (mysqli_query($con, "INSERT INTO users (username, password, email)"
+            . " VALUES ('$this->username', '$this->password', '$this->email')")) {
+            //added
+            return true;
+        } else {
+            //not added
+            return false;
+        }
+    }
+
+    //Eric's less than perfect section
+    function getUsers() {
+        $con = mysqli_connect("localhost", "phpweb", "");
+        if (!$con) {
+            exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+        }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+        mysqli_select_db($con, "test");
+        $users = mysqli_query($con, "SELECT * FROM users");
+        return $users;
+    }
+
+    function get() {
+        $con = mysqli_connect("localhost", "root", "");
+        $user = mysqli_query($con, "SELECT * from users WHERE username="
                 . $this->username);
-        $this->email = $email;  
-    }
-
-    function getUsername() {
-        return $this->username;
-    }
-
-    function getEmail() {
-        return $this->email;
+        return $user;
     }
 
     function manages(){
@@ -45,7 +92,7 @@ class user {
         if (mysqli_select_db($con, "dobber") == FALSE) {
             exit('DB select failed!');
         }
-        $query="SELECT * FROM manages"
+        $query="SELECT leagueID FROM manages"
                 . " where username=\"" . $this->username . "\"";
         $leagues = mysqli_query($con, $query);
         $results = array();
@@ -75,5 +122,9 @@ class user {
             array_push($results, new league($league["leagueID"]));
         }
         return $results;
+    }
+
+    function getUsername() {
+        return $this->username;
     }
 }

@@ -53,6 +53,7 @@ class league {
         }
         return $results;
     }
+
     function getTeams() {
         if (empty($this->teams)) {
             $con = mysqli_connect("localhost", "root", "");

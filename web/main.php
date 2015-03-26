@@ -37,6 +37,7 @@ and open the template in the editor.
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="main.php">Home</a></li>
                         <li><a href="viewLeagues.php">Leagues</a></li>
+                        <li><a href="viewPlayers.php">Players</a></li>
                         <?php
                         if (userIsAdmin()) {
                             echo "<li><a href=\"admin.php\">Admin Tools</a></li>";
