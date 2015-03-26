@@ -10,6 +10,7 @@ and open the template in the editor.
 	require_once('../library/players.php');
 	require_once('../library/userVerification.php');
 	require_once('../library/user.php');
+	require_once('../library/conn.php');
 	?>
 	<head>
 		<meta charset="UTF-8">
@@ -123,23 +124,14 @@ and open the template in the editor.
 				  break;
 			  }
 			}
-			$con = mysqli_connect("localhost", "root", "");
-			if (!$con) {
-				exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
-			}
-			//set the default client character set 
-			mysqli_set_charset($con, 'utf-8');
-			if (mysqli_select_db($con, "dobber") == FALSE) {
-				exit('DB select failed!');
-			}
+			$con = conn::getDB();
 			$query = "SELECT * FROM players ORDER BY " . $order;
 			$temp_players = mysqli_query($con, $query);
 			foreach ($temp_players as $temp_player) {
 				 array_push($players, new players($temp_player["playerID"]));
 			}
 			
-			echo "<h2>Player Overview<a data-toggle=\"modal\" data-target=\"#createModal\" id=\"createButton\""
-			. " class=\"btn btn-primary\">Filter (todo)</a></h2>";
+			echo "<h2>Player Overview<a data-toggle=\"modal\" data-target=\"#createModal\" </a></h2>";
 		}
 		echo "<table class=\"table table-bordered\">
 		<tr>
@@ -159,6 +151,7 @@ and open the template in the editor.
 			. "<td>" . $player->getWeight() . " kg</td>"
 			. "<td>" . $player->getDob() . "</td>"
 			. (userIsAdmin() ? "<td><a href=\"\" onclick='startEdit(\"" 
+				. $player->getPlayerId() . "\",\"" 
 				. $player->getName() . "\",\"" 
 				. $player->getHometown() . "\"," 
 				. $player->getHeight() . "," 
