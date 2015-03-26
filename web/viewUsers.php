@@ -27,25 +27,24 @@ and open the template in the editor.
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h4 class="modal-title">Edit User</h4>
 		  </div>
-		<form action="editUser.js">
-		  <div class="modal-body">
-		  
-			  <div class="form-group">
-			  <label for="username">Username</label>
-			  <input id="username" type="text" name="username" class="form-control">
-			  
-			  <label for="password">Password</label>
-			  <input id="password" type="text" name="password" class="form-control">
-			  
-			  <label for="email">Email</label>
-			  <input id="email" type="email" name="email" class="form-control">
-			  
-			  <label for="admin">Administrator</label>
-			  <select id="admin" name="admin" class="form-control">
-				  <option value="true">Yes</option>
-				  <option value="false">No</option>
-			  </select>
-			  </div>
+		<form action="../controllers/editUser.php">
+		<div class="modal-body">
+			<div class="form-group">
+
+			<input id="username" type="hidden" name="username" class="form-control">			
+
+			<label for="password">Password</label>
+			<input id="password" type="text" name="password" class="form-control">
+
+			<label for="email">Email</label>
+			<input id="email" type="email" name="email" class="form-control">
+
+			<label for="is_admin">Administrator</label>
+			<select id="is_admin" name="is_admin" class="form-control">
+				<option value="true">Yes</option>
+				<option value="false">No</option>
+			</select>
+  			</div>
 		  
 		  </div>
 		  <div class="modal-footer">
@@ -72,7 +71,7 @@ and open the template in the editor.
 						<li><a href="main.php">Home</a></li>
 						<li><a href="viewLeagues.php">Leagues</a></li>
 						<li><a href="viewPlayers.php">Players</a></li>
-			<li class="active"><a href="admin.php">Admin Tools</a></li>
+						<li class="active"><a href="admin.php">Admin Tools</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 			<li><a href="logout.php">Logout</a></li>
@@ -84,14 +83,25 @@ and open the template in the editor.
 		<h2>All Users</h2>
 			<table class="table table-bordered">
 				<tr>
-					<th>Username</th>
-					<th>Password</th>
-					<th>Email Address</th>
-			<th>Administrator</th>
-			<th>Edit</th>
-			<th>Delete</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Email Address</th>
+				<th>Administrator</th>
+				<th>Edit</th>
+				<th>Delete</th>
 				</tr>
 				<?php
+				if (!empty($_GET["error"])) {
+					$displayWarning = $_GET["error"];
+				} else {
+					$displayWarning = false;
+				}
+				
+				if ($displayWarning) {
+					echo "<div class=\"alert alert-danger\" role=\"alert\">"
+					. "<b>User View Failed.</b>"
+					. " Please try again or contact an administrator</div>";
+				}
 				$users = user::getUsers();
 				foreach($users as $user) {
 					echo "<tr>"
@@ -99,11 +109,11 @@ and open the template in the editor.
 					. "<td>" . $user["password"] . "</td>"
 					. "<td>" . $user["email"] . "</td>"
 					. "<td>" . ($user["is_admin"] ? "Yes" : "No") . "</td>"
-					. "<td><a href=\"\" onclick=startEdit(\"" 
-						. $user["username"] . "\",\"" 
+					. "<td><a href=\"\" onclick=startEdit(\""
+						. $user["username"] . "\",\""
 						. $user["password"] . "\",\"" 
 						. $user["email"] . "\"," 
-						. $user["is_admin"] 
+						. $user["is_admin"]
 						. ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
 					. "<td><a href=\"\" onclick=deleteUser(\"" . $user["username"] . "\")>Delete</a></td>"
 					. "</tr>";
