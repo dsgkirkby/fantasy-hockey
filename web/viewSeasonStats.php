@@ -206,7 +206,7 @@
                     . "<td>" . $pr->qoc . "</td>"
                     . "<td>" . $pr->ozs . "</td>"
                     . "<td>" . $pr->toi . "</td>"
-                    . "<td><a data-toggle=\"modal\" data-target=\"#editModal\""
+                    . "<td><table padding=3px><tr><td><a data-toggle=\"modal\" data-target=\"#editModal\""
                     . " data-pid=\"" . $pr->playerID . "\""
                     . " data-gp=\"" . $pr->gamesPlayed . "\""
                     . " data-goals=\"" . $pr->goals . "\""
@@ -223,7 +223,13 @@
                     . " data-team=\"" . $pr->team . "\""
                     . " data-season=\"" . $pr->season . "\""
                     . " id=\"editPFButton\" class=\"editPlaysFor btn "
-                    . "btn-primary\">Edit</a></td>"
+                    . "btn-primary btn-xs\">Edit</a></td>"
+                    . "<td><a href=\"../controllers/deletePlaysFor.php?"
+                    . "playerID=" . $pr->playerID 
+                    . "&team=" . $pr->team 
+                    . "&season=" . $pr->season
+                    . "\" id=\"removePFButton\" class=\"btn "
+                    . "btn-primary btn-xs btn-warning\">Remove</a></td></tr></table></td>"
                     . "</tr>";
                 }
                 ?>
