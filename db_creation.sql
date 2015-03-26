@@ -107,7 +107,7 @@ SELECT f_teams.teamID, f_teams.name, f_teams.username, f_teams.season, f_teams.l
 SUM(plays_for.goals) AS totalGoals,
 SUM(plays_for.gamesPlayed) AS totalGames,
 SUM(plays_for.hits) AS totalHits
-FROM f_teams JOIN (player_assignments NATURAL JOIN plays_for)
+FROM f_teams LEFT JOIN (player_assignments NATURAL JOIN plays_for)
 ON f_teams.teamID=player_assignments.teamID
 GROUP BY f_teams.teamID;
 

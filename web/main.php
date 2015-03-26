@@ -53,7 +53,7 @@ and open the template in the editor.
 		<div class="container">
 			<div class="col-md-6">
 				<?php
-				$uname = $_SESSION["username"];
+				$uname = getUsername();
 				echo "<h3>Your Teams</h3><table class=\"table table-bordered\">
 				<tr>
 				<th>Team Name</th>
@@ -64,11 +64,14 @@ and open the template in the editor.
 				$user = new user($uname);
 				foreach ($user->myLeagues() as $league) {
 					foreach ($league->getTeams() as $place => $team) {
-						if ($team->ownerName == $_SESSION["username"]) {
+						if ($team->ownerName == $uname) {
 							$userTeam = $team;
 							$userRank = $place + 1;
 							break;
 						}
+					}
+					if (empty($userTeam)) {
+					    continue;
 					}
 					echo "<tr>"
 					. "<td>" . $userTeam->teamName . "</td>"

@@ -8,8 +8,6 @@ if (empty($playerID) or empty($teamName) or empty($season)) {
     exit("Bad arguments");
 }
 
-error_log("Deleting Plays For");
-
 $con = mysqli_connect("localhost", "root", "");
 if (!$con) {
     exit('Connect Error (' . mysqli_connect_errno() . ') '
