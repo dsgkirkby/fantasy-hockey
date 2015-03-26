@@ -91,11 +91,8 @@ and open the template in the editor.
 			<th>Delete</th>
 				</tr>
 				<?php
-				//$users = new user();
-				//$usersData = $users->getUsers();
-				$usersData = user::getUsers();
-				//foreach ($usersData as $user) {
-				while ($user = $usersData->fetch_array(MYSQLI_ASSOC)) {
+				$users = user::getUsers();
+				foreach($users as $user) {
 					echo "<tr>"
 					. "<td><a href=\"viewLeagues.php?username=" . $user["username"] . "\">" . $user["username"] . "</a></td>"
 					. "<td>" . $user["password"] . "</td>"

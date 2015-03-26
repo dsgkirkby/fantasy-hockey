@@ -63,7 +63,7 @@ class user {
 
 	//Eric's less than perfect section
 	static function getUsers() {
-		$con = mysqli_connect("localhost", "phpweb", "");
+		$con = mysqli_connect("localhost", "root", "");
 		if (!$con) {
 			exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
 		}
