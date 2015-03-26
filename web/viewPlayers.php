@@ -9,7 +9,7 @@ and open the template in the editor.
     session_start();
     require_once('../library/players.php');
     require_once('../library/userVerification.php');
-    require_once('../library/users.php');
+    require_once('../library/user.php');
     ?>
     <head>
         <meta charset="UTF-8">

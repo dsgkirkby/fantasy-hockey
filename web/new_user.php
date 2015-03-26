@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <?php
-        require_once('../library/users.php');
+        require_once('../library/user.php');
     ?>
     <head>
         <meta charset="UTF-8">
