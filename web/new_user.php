@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <?php
-        require_once('../library/users.php');
+        require_once('../library/user.php');
     ?>
     <head>
         <meta charset="UTF-8">
@@ -38,11 +38,11 @@ and open the template in the editor.
                         }
                         if ($displayWarning) {
                             switch ($displayWarning) {
-                                case "unameTaken": 
-                                    $detail="Username already exists.";
+                                case "unameTaken":
+                                    $detail = "Username already exists.";
                                     break;
                                 case "errun":
-                                    $detail="Please try again or contact an administrator";
+                                    $detail = "Please try again or contact an administrator";
                                     break;
                             }
                             echo "<div class=\"alert alert-danger\" role=\"alert\">"
@@ -90,7 +90,7 @@ and open the template in the editor.
                     <div class="control-group">
                         <label class="control-label" for="submit"></label>
                         <div class="controls">
-                            <button id="submit" name="submit" class="btn btn-primary">Submit</button>'
+                            <button id="submit" name="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
 
@@ -100,12 +100,11 @@ and open the template in the editor.
         <?php
             if (isset($_POST["submit"])) {
                 $page = $_SERVER['PHP_SELF'];
-                if (user::username_exists($_POST["uname"])) {
+                if (user::usernameExists($_POST["uname"])) {
                     header("Location: $page?error=unameTaken");
                 } else {
-                    $new_user = new user($_POST["uname"], $_POST["passwd"], $_POST["email"]);
-                    if($new_user->add_user($_POST["uname"]))
-                        header("Location: login.php?newUser=" . $_POST["uname"]);
+                    if (user::addUser($_POST["uname"], $_POST["passwd"], $_POST["email"]))
+                      header("Location: login.php?newUser=" . $_POST["uname"]);
                     else
                         header("Location: $page?error=unameTaken");
                 }
