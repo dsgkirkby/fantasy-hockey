@@ -4,6 +4,7 @@ $playerID = $_GET["playerID"];
 $teamName = $_GET["teamName"];
 $season = $_GET["season"];
 $gp = $_GET["gp"];
+$goals = $_GET["goals"];
 $hits = $_GET["hits"];
 $ga = $_GET["ga"];
 $ta = $_GET["ta"];
@@ -24,6 +25,7 @@ mysqli_select_db($con, "dobber");
 
 $query = "UPDATE plays_for SET "
         . "gamesPlayed=" . $gp . ","
+        . "goals=" . $goals . ","
         . "hits=" . $hits . ","
         . "giveaways=" . $ga . ","
         . "takeaways=" . $ta . ","
