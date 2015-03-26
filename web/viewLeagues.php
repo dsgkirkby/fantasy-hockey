@@ -132,7 +132,7 @@ and open the template in the editor.
 					echo $manager->getUsername() . "</br>";
 				}
 				echo"</td>"
-				. (userIsAdmin() ? "<td><a href='' onclick=deleteLeague(" . $league->getLeagueID() . ")>Delete</a></td>" : "")
+				. (userIsAdmin() ? "<td><a class=\"btn btn-warning btn-xs\" href='' onclick=deleteLeague(" . $league->getLeagueID() . ")>Delete</a></td>" : "")
 				. "</tr>";
 			}
 

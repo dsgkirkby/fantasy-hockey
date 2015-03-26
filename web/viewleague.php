@@ -113,7 +113,7 @@
 					. "<td>" . $team->goals . "</td>"
 					. "<td>" . $team->hits . "</td>"
 					. "<td>" . $team->getScore() . "</td>"
-					. ($userIsManager ? "<td><a href='' onclick=deleteTeam(" . $team->id . ")>Delete</a></td>" : "")
+					. ($userIsManager ? "<td><a class=\"btn btn-warning btn-xs\" href='' onclick=deleteTeam(" . $team->id . ")>Delete</a></td>" : "")
 					. "</tr>";
 				}
 				?>

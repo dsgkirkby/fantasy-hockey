@@ -158,7 +158,7 @@ and open the template in the editor.
 				. $player->getWeight() . ",\"" 
 				. $player->getDob() 
 			.  "\")' data-toggle=\"modal\" data-target=\"#editModal\">Edit</a>"
-			. "<a href='' class=\"btn btn-warning btn-xs\" onclick=deletePlayer(\"" . $player->getPlayerId() . "\")>Delete</a></td>" : "")
+			. " <a href='' class=\"btn btn-warning btn-xs\" onclick=deletePlayer(\"" . $player->getPlayerId() . "\")>Delete</a></td>" : "")
 			. "</tr>";
 		}
 		

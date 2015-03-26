@@ -88,8 +88,7 @@ and open the template in the editor.
 					<th>Password</th>
 					<th>Email Address</th>
 			<th>Administrator</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th>Actions</th>
 				</tr>
 				<?php
 				$users = user::getUsers();
@@ -99,13 +98,13 @@ and open the template in the editor.
 					. "<td>" . $user["password"] . "</td>"
 					. "<td>" . $user["email"] . "</td>"
 					. "<td>" . ($user["is_admin"] ? "Yes" : "No") . "</td>"
-					. "<td><a href=\"\" onclick=startEdit(\"" 
+					. "<td><a class=\"btn btn-xs btn-primary\" href=\"\" onclick=startEdit(\"" 
 						. $user["username"] . "\",\"" 
 						. $user["password"] . "\",\"" 
 						. $user["email"] . "\"," 
 						. $user["is_admin"] 
-						. ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
-					. "<td><a href=\"\" onclick=deleteUser(\"" . $user["username"] . "\")>Delete</a></td>"
+						. ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a>"
+					. " <a class=\"btn btn-xs btn-warning\" href=\"\" onclick=deleteUser(\"" . $user["username"] . "\")>Delete</a></td>"
 					. "</tr>";
 				}
 				?>
