@@ -5,8 +5,8 @@ function deletePlayer(playerID) {
     });
 }
 
-function startEdit(playerID, hometown, height, weight, dob) {
-    $("#playerID").val(playerID);
+function startEdit(playerName, hometown, height, weight, dob) {
+    $("#name").val(playerName);
     $("#hometown").val(hometown);
     $("#height").val(height);
     $("#weight").val(weight);

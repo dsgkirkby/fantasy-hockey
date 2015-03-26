@@ -16,6 +16,7 @@ and open the template in the editor.
 		<title>Dobber Players</title>
 		<script src="jquery-2.1.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="editPlayers.js"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="createButton.css">
 	</head>
@@ -32,8 +33,7 @@ and open the template in the editor.
 		  
 			  <div class="form-group">
 
-			  <label for="playerID">Player ID</label>
-			  <input id="playerID" type="text" name="playerID" class="form-control">
+			  <input id="playerID" type="hidden" name="playerID" class="form-control">
 			  
 			  <label for="name">Name</label>
 			  <input id="name" type="text" name="name" class="form-control">
@@ -158,14 +158,14 @@ and open the template in the editor.
 			. "<td>" . $player->getHeight() . "</td>"
 			. "<td>" . $player->getWeight() . "</td>"
 			. "<td>" . $player->getDob() . "</td>"
-			. "<td><a href=\"\" onclick=startEdit(\"" 
+			. (userIsAdmin() ? "<td><a href=\"\" onclick='startEdit(\"" 
 				. $player->getName() . "\",\"" 
-				. $player->getHometown() . "\",\"" 
-				. $player->getHeight() . "\"," 
-				. $player->getWeight() . "\",\"" 
+				. $player->getHometown() . "\"," 
+				. $player->getHeight() . "," 
+				. $player->getWeight() . ",\"" 
 				. $player->getDob() 
-			. ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
-			. (userIsAdmin() ? "<td><a href='' onclick=deletePlayer(\"" . $player->getPlayerId() . "\")>Delete</a></td>" : "")
+			.  "\")' data-toggle=\"modal\" data-target=\"#editModal\">Edit</a>"
+			. " <a href='' onclick=deletePlayer(\"" . $player->getPlayerId() . "\")>Delete</a></td>" : "")
 			. "</tr>";
 		}
 		
