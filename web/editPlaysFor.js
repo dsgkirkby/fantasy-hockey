@@ -21,7 +21,7 @@ $(document).on("click", ".editPlaysFor", function () {
      var player = $(this).data('player'); 
      var team = $(this).data('team'); 
      var season = $(this).data('season'); 
-     $(".modal-title").get(1).innerHtml = "".concat(player," on ",team," in ",season);
+     $("#edit-modal-title").text(player + "'s " + season + " season with the " + team);
      $(".modal-body #gp").val( gp );
      $(".modal-body #goals").val( goals );
      $(".modal-body #hits").val( hits );
