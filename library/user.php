@@ -69,7 +69,7 @@ class user {
 		}
 		//set the default client character set 
 		mysqli_set_charset($con, 'utf-8');
-		mysqli_select_db($con, "test");
+		mysqli_select_db($con, "dobber");
 		$users = mysqli_query($con, "SELECT * FROM users");
 		return $users;
 	}
