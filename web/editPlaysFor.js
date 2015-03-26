@@ -6,7 +6,7 @@
 
 
 $(document).on("click", ".editPlaysFor", function () {
-     var pid = $(this).data('pid');   
+     var pid = $(this).data('pid');
      var gp = $(this).data('gp');
      var goals = $(this).data('goals');
      var hits = $(this).data('hits');
@@ -22,6 +22,9 @@ $(document).on("click", ".editPlaysFor", function () {
      var team = $(this).data('team'); 
      var season = $(this).data('season'); 
      $("#edit-modal-title").text(player + "'s " + season + " season with the " + team);
+     $(".modal-body #playerID").val( pid );
+     $(".modal-body #teamName").val( team );
+     $(".modal-body #season").val( season );
      $(".modal-body #gp").val( gp );
      $(".modal-body #goals").val( goals );
      $(".modal-body #hits").val( hits );

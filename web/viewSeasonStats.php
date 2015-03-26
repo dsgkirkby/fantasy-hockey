@@ -84,7 +84,9 @@
                                     <tr>
                                         <td>
                                             <div id="contentBox" style="margin:0px auto; width:100%">
-
+                                                <input type="hidden" id="playerID" name="playerID">
+                                                <input type="hidden" id="teamName" name="teamName">
+                                                <input type="hidden" id="season" name="season">
                                                 <div id="column1" style="float:left; margin:2px; width:49%;">
                                                     <label for="gp">Games Played</label>
                                                     <input id="gp" type="number" name="gp" class="form-control">
