@@ -93,14 +93,12 @@ and open the template in the editor.
 						<tr>
 							<th>League Name</th>
 							<th>Date Created</th>
-							<th>Actions</th>
 						</tr>";
 					foreach ($manages as $m_league) {
 						echo "<tr>"
 						. "<td><a href=\"viewleague.php?leagueID="
 						. $m_league->getLeagueID() . "\">" . $m_league->name . "</a></td>"
 						. "<td>" . $m_league->dateCreated . "</td>"
-						. "<td><a href='' onclick=deleteLeague(" . $m_league->getLeagueID() . ")>Delete</a></td>"
 						. "</tr>";
 					}
 				}

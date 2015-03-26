@@ -150,7 +150,7 @@ and open the template in the editor.
 			. "<td>" . $player->getHeight() . " cm</td>"
 			. "<td>" . $player->getWeight() . " kg</td>"
 			. "<td>" . $player->getDob() . "</td>"
-			. (userIsAdmin() ? "<td><a href=\"\" onclick='startEdit(\"" 
+			. (userIsAdmin() ? "<td><a class=\"btn btn-primary btn-xs\" href=\"\" onclick='startEdit(\"" 
 				. $player->getPlayerId() . "\",\"" 
 				. $player->getName() . "\",\"" 
 				. $player->getHometown() . "\"," 
@@ -158,7 +158,7 @@ and open the template in the editor.
 				. $player->getWeight() . ",\"" 
 				. $player->getDob() 
 			.  "\")' data-toggle=\"modal\" data-target=\"#editModal\">Edit</a>"
-			. " <a href='' onclick=deletePlayer(\"" . $player->getPlayerId() . "\")>Delete</a></td>" : "")
+			. " <a href='' class=\"btn btn-warning btn-xs\" onclick=deletePlayer(\"" . $player->getPlayerId() . "\")>Delete</a></td>" : "")
 			. "</tr>";
 		}
 		
