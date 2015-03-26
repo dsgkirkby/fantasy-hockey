@@ -97,7 +97,7 @@
 					<th>Score</th>
 					<?php
 					if ($userIsManager) {
-						echo "<th>Delete</th>";
+						echo "<th>Actions</th>";
 					}
 					?>
 				</tr>
