@@ -49,7 +49,7 @@ class league {
         $users = mysqli_query($con, $query);
         $results = array();
         foreach ($users as $user) {
-            array_push($results, new league($user["username"]));
+            array_push($results, new user($user["username"]));
         }
         return $results;
     }

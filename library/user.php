@@ -24,7 +24,7 @@ class user {
         $this->email = $email;
     }
     
-    public static function usernameExists($new_username) {
+    static function usernameExists($new_username) {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
@@ -40,7 +40,7 @@ class user {
         }
     }
 
-    function addUser($username) {
+    static function addUser($username, $password, $email) {
         $con = mysqli_connect("localhost", "root", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
@@ -49,10 +49,10 @@ class user {
         mysqli_set_charset($con, 'utf-8');
         mysqli_select_db($con, "dobber");
         
-        if ($this->usernameExists($this->username)) {
+        if (user::usernameExists($username)) {
             return false;
         } else if (mysqli_query($con, "INSERT INTO users (username, password, email)"
-            . " VALUES ('$this->username', '$this->password', '$this->email')")) {
+            . " VALUES ('$username', '$password', '$email')")) {
             //added
             return true;
         } else {
@@ -62,7 +62,7 @@ class user {
     }
 
     //Eric's less than perfect section
-    function getUsers() {
+    static function getUsers() {
         $con = mysqli_connect("localhost", "phpweb", "");
         if (!$con) {
             exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());

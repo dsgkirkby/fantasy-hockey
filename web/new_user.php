@@ -103,11 +103,8 @@ and open the template in the editor.
                 if (user::usernameExists($_POST["uname"])) {
                     header("Location: $page?error=unameTaken");
                 } else {
-                    $new_user = new user($_POST["uname"]);
-                    $new_user->setPassword($_POST["passwd"]);
-                    $new_user->setEmail($_POST["email"]);
-                    if($new_user->addUser($_POST["uname"]))
-                        header("Location: login.php?newUser=" . $_POST["uname"]);
+                    if (user::addUser($_POST["uname"], $_POST["passwd"], $_POST["email"]))
+                      header("Location: login.php?newUser=" . $_POST["uname"]);
                     else
                         header("Location: $page?error=unameTaken");
                 }
