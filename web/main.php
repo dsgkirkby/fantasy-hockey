@@ -37,6 +37,7 @@ and open the template in the editor.
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="main.php">Home</a></li>
                         <li><a href="viewLeagues.php">Leagues</a></li>
+                        <li><a href="viewPlayers.php">Players</a></li>
                         <?php
                         if (userIsAdmin()) {
                             echo "<li><a href=\"admin.php\">Admin Tools</a></li>";
@@ -54,12 +55,12 @@ and open the template in the editor.
                 <?php
                 $uname = $_SESSION["username"];
                 echo "<h3>Your Teams</h3><table class=\"table table-bordered\">
-		    <tr>
-			<th>Team Name</th>
-			<th>Score</th>
-			<th>Place</th>
-			<th>League Name</th>
-		    </tr>";
+                <tr>
+                <th>Team Name</th>
+                <th>Score</th>
+                <th>Place</th>
+                <th>League Name</th>
+                </tr>";
                 $user = new user($uname);
                 foreach ($user->myLeagues() as $league) {
                     foreach ($league->getTeams() as $place => $team) {
@@ -78,10 +79,10 @@ and open the template in the editor.
                     . "</tr>";
                 }
                 echo "</table>";
-		?>
-	    </div>
-	    <div class="col-md-6">
-		<?php
+                ?>
+                </div>
+                <div class="col-md-6">
+                <?php
                 $manages = $user->manages();
                 if (!empty($manages)) {
                     echo "<script src='editLeague.js'></script>";
@@ -103,7 +104,6 @@ and open the template in the editor.
                 ?>
             </div>
             <div class="col-md-6">
-
             </div>
         </div>
     </body>

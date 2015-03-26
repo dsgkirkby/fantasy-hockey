@@ -146,9 +146,9 @@ Insert into f_teams (name, username, season, leagueID) values
 ("Texas Kane Shaw Massacre", "chair", "2010", 4),
 ("Fleetwood Mackinnon", "chair", "2014", 1);
 
-Insert into players(name, hometown, height, weight, dob) values
+Insert into players(name, hometown, weight, height, dob) values
 ("Wayne Gretzky", "Brantford, ON", 72, 185, "1961-1-26"),
-("Zdeno Chara", "Trenčín, Czechoslovakia", 81 , 255, "1977-3-18"),
+("Zdeno Chara", "Trencin, CZ", 81 , 255, "1977-3-18"),
 ("Roberto Luongo", "Montreal, QC", 75, 217, "1979-4-4"),
 ("Bo Horvat", "London, ON", 72, 206, "1995-4-5"),
 ("Ryan Miller", "East Lansing, MI", 74, 168, "1980-7-17"),
