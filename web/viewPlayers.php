@@ -28,7 +28,7 @@ and open the template in the editor.
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h4 class="modal-title">Edit PLayer</h4>
 		  </div>
-		<form action="editPlayer.php">
+		<form action="../controllers/editPlayer.php">
 		  <div class="modal-body">
 		  
 			  <div class="form-group">
