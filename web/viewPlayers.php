@@ -20,6 +20,47 @@ and open the template in the editor.
 	<link rel="stylesheet" type="text/css" href="createButton.css">
 	</head>
 	<body>
+	<div class="modal fade" id="editModal">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Edit PLayer</h4>
+		  </div>
+		<form action="editPlayer.php">
+		  <div class="modal-body">
+		  
+			  <div class="form-group">
+
+			  <label for="playerID">Player ID</label>
+			  <input id="playerID" type="text" name="playerID" class="form-control">
+			  
+			  <label for="name">Name</label>
+			  <input id="name" type="text" name="name" class="form-control">
+			  
+			  <label for="hometown">Hometown</label>
+			  <input id="hometown" type="hometown" name="hometown" class="form-control">
+
+			  <label for="height">Height</label>
+			  <input id="height" type="height" name="height" class="form-control">
+
+			  <label for="weight">Weight</label>
+			  <input id="weight" type="weight" name="weight" class="form-control">
+
+			  <label for="dob">D.O.B.</label>
+			  <input id="dob" type="dob" name="dob" class="form-control">
+			  
+			  </div>
+		  
+		  </div>
+		  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<input type="submit" value="Save Changes" class="btn btn-primary">
+		  </div>
+		</form>
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -106,8 +147,9 @@ and open the template in the editor.
 		<th><a href=\"viewPlayers.php?order=hometown\"> Hometown </a></th>
 		<th><a href=\"viewPlayers.php?order=height\"> Height </a></th>
 		<th><a href=\"viewPlayers.php?order=weight\"> Weight </a></th>
-		<th><a href=\"viewPlayers.php?order=dob\"> D.O.B </a></th>
-		</tr>";
+		<th><a href=\"viewPlayers.php?order=dob\"> D.O.B </a></th>"
+		. (userIsAdmin() ? "<th>Admin</th>" : "")
+		. "</tr>";
 		
 		foreach($players as $player) {
 			echo "<tr>"
@@ -116,6 +158,10 @@ and open the template in the editor.
 			. "<td>" . $player->getHeight() . "</td>"
 			. "<td>" . $player->getWeight() . "</td>"
 			. "<td>" . $player->getDob() . "</td>"
+			. "<td><a href=\"\" onclick=startEdit(\"" . $player->getName() . "\",\"" . $player->getHometown() . "\",\"" 
+					. $player->getHeight() . "\"," . $player->getWeight() . "\",\"" . $player->getDob()") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
+//			. (userIsAdmin() ? "<td><a href='' onclick=editPlayer(" . $player->getPlayerId() . ")>Edit</a></td>" : "")
+			. (userIsAdmin() ? "<td><a href='' onclick=deletePlayer(" . $player->getPlayerId() . ")>Delete</a></td>" : "")
 			. "</tr>";
 		}
 		
