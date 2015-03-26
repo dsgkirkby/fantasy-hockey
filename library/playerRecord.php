@@ -6,6 +6,7 @@
  * @author Dylan
  */
 class playerRecord {
+    public $playerID;
     public $player;
     public $team;
     public $season; 
@@ -22,6 +23,7 @@ class playerRecord {
     public $toi;
     
     function __construct($playerRecord) {
+        $this->playerID=$playerRecord["playerID"];
 	$this->player = $playerRecord["name"];
 	$this->team = $playerRecord["teamName"];
 	$this->season = $playerRecord["season"];
@@ -58,5 +60,50 @@ class playerRecord {
 	}
 	
 	return $toReturn;
+    }
+    
+    static function getNHLTeams() {
+	$con = mysqli_connect("localhost", "root", "");
+	if (!$con) {
+	    exit('Connect Error (' . mysqli_connect_errno() . ') '
+		    . mysqli_connect_error());
+	}
+	//set the default client character set 
+	mysqli_set_charset($con, 'utf-8');
+	mysqli_select_db($con, "dobber");
+	
+	$query = "SELECT * FROM nhl_teams";
+	
+	return mysqli_query($con, $query);
+    }
+    
+    static function getSeasons() {
+	$con = mysqli_connect("localhost", "root", "");
+	if (!$con) {
+	    exit('Connect Error (' . mysqli_connect_errno() . ') '
+		    . mysqli_connect_error());
+	}
+	//set the default client character set 
+	mysqli_set_charset($con, 'utf-8');
+	mysqli_select_db($con, "dobber");
+	
+	$query = "SELECT * FROM seasons";
+	
+	return mysqli_query($con, $query);
+    }
+    
+    static function getAllPlayers() {
+	$con = mysqli_connect("localhost", "root", "");
+	if (!$con) {
+	    exit('Connect Error (' . mysqli_connect_errno() . ') '
+		    . mysqli_connect_error());
+	}
+	//set the default client character set 
+	mysqli_set_charset($con, 'utf-8');
+	mysqli_select_db($con, "dobber");
+	
+	$query = "SELECT * FROM players";
+	
+	return mysqli_query($con, $query);
     }
 }
