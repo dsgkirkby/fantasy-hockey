@@ -99,8 +99,12 @@ and open the template in the editor.
 					. "<td>" . $user["password"] . "</td>"
 					. "<td>" . $user["email"] . "</td>"
 					. "<td>" . ($user["is_admin"] ? "Yes" : "No") . "</td>"
-					. "<td><a href=\"\" onclick=startEdit(\"" . $user["username"] . "\",\"" . $user["password"] . "\",\"" 
-					. $user["email"] . "\"," . $user["is_admin"] . ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
+					. "<td><a href=\"\" onclick=startEdit(\"" 
+						. $user["username"] . "\",\"" 
+						. $user["password"] . "\",\"" 
+						. $user["email"] . "\"," 
+						. $user["is_admin"] 
+						. ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
 					. "<td><a href=\"\" onclick=deleteUser(\"" . $user["username"] . "\")>Delete</a></td>"
 					. "</tr>";
 				}

@@ -158,10 +158,14 @@ and open the template in the editor.
 			. "<td>" . $player->getHeight() . "</td>"
 			. "<td>" . $player->getWeight() . "</td>"
 			. "<td>" . $player->getDob() . "</td>"
-			. "<td><a href=\"\" onclick=startEdit(\"" . $player->getName() . "\",\"" . $player->getHometown() . "\",\"" 
-					. $player->getHeight() . "\"," . $player->getWeight() . "\",\"" . $player->getDob()") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
-//			. (userIsAdmin() ? "<td><a href='' onclick=editPlayer(" . $player->getPlayerId() . ")>Edit</a></td>" : "")
-			. (userIsAdmin() ? "<td><a href='' onclick=deletePlayer(" . $player->getPlayerId() . ")>Delete</a></td>" : "")
+			. "<td><a href=\"\" onclick=startEdit(\"" 
+				. $player->getName() . "\",\"" 
+				. $player->getHometown() . "\",\"" 
+				. $player->getHeight() . "\"," 
+				. $player->getWeight() . "\",\"" 
+				. $player->getDob() 
+			. ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
+			. (userIsAdmin() ? "<td><a href='' onclick=deletePlayer(\"" . $player->getPlayerId() . "\")>Delete</a></td>" : "")
 			. "</tr>";
 		}
 		
