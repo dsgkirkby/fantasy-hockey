@@ -91,6 +91,7 @@ and open the template in the editor.
 												<label class="control-label" for="submit"></label>
 												<div class="controls">
 														<button id="submit" name="submit" class="btn btn-primary">Submit</button>
+														<a href="login.php">Back</a>
 												</div>
 										</div>
 
@@ -100,13 +101,11 @@ and open the template in the editor.
 				<?php
 						if (isset($_POST["submit"])) {
 								$page = $_SERVER['PHP_SELF'];
-								if (user::usernameExists($_POST["uname"])) {
-										header("Location: $page?error=unameTaken");
-								} else {
-										if (user::addUser($_POST["uname"], $_POST["passwd"], $_POST["email"]))
-											header("Location: login.php?newUser=" . $_POST["uname"]);
-										else
-												header("Location: $page?error=unameTaken");
+								if (user::addUser($_POST["uname"], $_POST["passwd"], $_POST["email"])) {
+									header("Location: login.php?newUser=" . $_POST["uname"]);
+								}
+								else {
+									header("Location: $page?error=unameTaken");
 								}
 						}
 				?>
