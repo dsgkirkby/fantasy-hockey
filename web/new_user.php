@@ -90,7 +90,7 @@ and open the template in the editor.
                     <div class="control-group">
                         <label class="control-label" for="submit"></label>
                         <div class="controls">
-                            <button id="submit" name="submit" class="btn btn-primary">Submit</button>'
+                            <button id="submit" name="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
 
