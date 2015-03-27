@@ -1,5 +1,6 @@
 Queries are not exactly as they are in code (for formatting and readability), PHP variables are preceded by '$'.
 
+
 controllers/deleteLeague.php:
   "DELETE FROM f_leagues WHERE leagueID=$leagueID"
   "DELETE FROM players WHERE playerID=$playerID"
@@ -77,3 +78,47 @@ web/viewPlayers.php:
 
 web/viewLeagues.php:
   "SELECT leagueID FROM f_leagues"
+
+
+
+Functional Dependancies:
+
+
+users
+username -> password, email, is_admin
+
+f_leagues
+leagueID -> max_size, name, date_created
+
+players
+playerID -> name, hometown, height, weight, dob
+
+nhl_teams
+name -> city
+
+seasons:
+
+f_teams
+teamID -> name, username, season, leagueID
+FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID)
+FOREIGN KEY (username) REFERENCES users(username)
+
+player_assignments
+FOREIGN KEY (playerID) REFERENCES players(playerID)
+FOREIGN KEY (teamID) REFERENCES f_teams(teamID)
+
+plays_for
+(playerID, teamName, season) -> playerID teamName gamesPlayed goals hits giveaways takeaways penalties_drawn sacorsi qot qoc ozs toi season
+FOREIGN KEY (playerID) REFERENCES players(playerID)
+FOREIGN KEY (teamName) REFERENCES nhl_teams(name)
+FOREIGN KEY (season) REFERENCES seasons(season)
+
+// Dont have
+prospects
+playerID -> teamName
+
+manages
+username leagueID
+leagueID, username -> 
+FOREIGN KEY (leagueID) REFERENCES f_leagues(leagueID)
+FOREIGN KEY (username) REFERENCES users(username)
