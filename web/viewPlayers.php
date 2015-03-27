@@ -29,28 +29,25 @@ and open the template in the editor.
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title">Add Player</h4>
 					</div>
-					<form action="../controllers/createLeague.php">
+					<form action="../controllers/createPlayer.php">
 						<div class="modal-body">
 
 							<div class="form-group">
-							name
-							hometown
-							height
-							weight
-							dob
+
 								<label for="name">Name</label>
 								<input id="name" type="text" name="name" class="form-control">
+								
 								<label for="hometown">Hometown</label>
 								<input id="hometown" type="text" name="hometown" class="form-control">
+								
 								<label for="height">Height</label>
 								<input id="height" type="text" name="height" class="form-control">
-								<label for="weight">Wight</label>
+								
+								<label for="weight">Weight</label>
 								<input id="weight" type="text" name="weight" class="form-control">
-								<label for="dob">dob</label>
+								
+								<label for="dob">Date of Birth</label>
 								<input id="dob" type="text" name="dob" class="form-control">
-
-								<label for="maxSize">Max Size</label>
-								<input id="maxSize" type="number" name="maxSize" class="form-control">
 							</div>
 
 						</div>
