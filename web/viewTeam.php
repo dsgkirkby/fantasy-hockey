@@ -10,7 +10,7 @@
 	// Redirect to login screen if user is not logged in
 	dieIfNoUser();
 
-		// Redirect to main if leagueID or not set
+	// Redirect to main if leagueID or teamID not set
 	if (empty($_GET["leagueID"]) || empty($_GET["teamID"])) {
 		header('Location: main.php', true, 303);
 		die();

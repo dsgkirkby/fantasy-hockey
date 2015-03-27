@@ -34,6 +34,30 @@
 		?>
 	</head>
 	<body>
+		<div class="modal fade" id="createModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Join League</h4>
+					</div>
+					<form action="../controllers/createTeam.php">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="hidden" name="leagueID" value="<?php echo $league->getLeagueId(); ?>">
+								
+								<label for="teamName">Team Name</label>
+								<input class="form-control" type="text" name="teamName">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<input type="submit" value="Create" class="btn btn-primary">
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -67,7 +91,7 @@
 				<?php
 				echo $league->name;
 				if (sizeof($league->getTeams()) < $league->maxSize && !$userInLeague) {
-					echo "<a id=\"createButton\" class=\"btn btn-primary\">Join League</a>";
+					echo "<a data-toggle=\"modal\" data-target=\"#createModal\" id=\"createButton\" class=\"btn btn-primary\">Join League</a>";
 				}
 				if (userIsManagerOfLeague($league->getLeagueId())) {
 					echo " <h4>Managers: <span class=\"label label-default\">You</span>";
