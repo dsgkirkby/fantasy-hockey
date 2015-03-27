@@ -18,7 +18,7 @@
 
 	
 	$con = conn::getDB();
-	$rosterConstruct = "SELECT * from players NATURAL JOIN player_assignments NATURAL JOIN plays_for WHERE plays_for.teamID = ". $_GET["teamID"];
+	$rosterConstruct = "SELECT * from players NATURAL JOIN player_assignments NATURAL JOIN plays_for WHERE player_assignments.teamID = ". $_GET["teamID"];
 	// $rosterConstruct = "SELECT pa.*, pf.playerName FROM player_assignments pa, f_teams t, plays_for pf 
 	// WHERE t.teamID= ". $_GET["teamID"] . " AND t.leagueID= " . $_GET["leagueID"] . 
 	//  " AND pa.teamID = t.teamID AND pf.playerID = pa.playerID"; //Gets all player id's and naems on the current team.. not working
