@@ -31,19 +31,18 @@ and open the template in the editor.
 					</div>
 					<form action="../controllers/createUser.php">
 						<div class="modal-body">
-
 							<div class="form-group">
 								<label for="username">Username</label>
-								<input id="username" type="text" name="username" class="form-control">
+								<input type="text" name="username" class="form-control">
 
 								<label for="password">Password</label>
-								<input id="password" type="text" name="password" class="form-control">
+								<input type="text" name="password" class="form-control">
 
 								<label for="email">Email</label>
-								<input id="email" type="text" name="email" class="form-control">
+								<input type="text" name="email" class="form-control">
 
 								<label for="is_admin">Admin</label>
-								<select id="is_admin" name="is_admin" class="form-control">
+								<select name="is_admin" class="form-control">
 									<option value="true">Yes</option>
 									<option value="false">No</option>
 								</select>
@@ -86,8 +85,8 @@ and open the template in the editor.
 		  
 		  </div>
 		  <div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<input type="submit" value="Save Changes" class="btn btn-primary">
+		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		    <input type="submit" value="Save Changes" class="btn btn-primary">
 		  </div>
 		</form>
 		</div><!-- /.modal-content -->
