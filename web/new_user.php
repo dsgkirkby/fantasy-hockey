@@ -47,7 +47,6 @@ and open the template in the editor.
 														}
 														echo "<div class=\"alert alert-danger\" role=\"alert\">"
 														. "<b>Unable to create username.</b> "
-														. $detail;
 												}
 												?>
 										</div>
@@ -100,9 +99,8 @@ and open the template in the editor.
 				</div>
 				<?php
 						if (isset($_POST["submit"])) {
-								$page = $_SERVER['PHP_SELF'];
 								if (user::addUser($_POST["uname"], $_POST["passwd"], $_POST["email"])) {
-									header("Location: login.php?newUser=" . $_POST["uname"]);
+									header("Location: main.php?newUser=" . $_POST["uname"]);
 								}
 								else {
 									header("Location: $page?error=unameTaken");

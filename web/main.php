@@ -53,6 +53,11 @@ and open the template in the editor.
 		<div class="container">
 			<div class="col-md-6">
 				<?php
+				if (!empty($_GET["newUser"])) {
+					echo "<div class=\"alert alert-success\" role=\"alert\">"
+					. "<b>Welcome " . $_GET["newUser"] . "! </b> "
+					. "Enjoy your new digs!";
+				}
 				$uname = getUsername();
 				echo "<h3>Your Teams</h3><table class=\"table table-bordered\">
 				<tr>

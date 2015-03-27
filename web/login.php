@@ -31,16 +31,10 @@
 				<?php
 				$nuser = false;
 				$error = false;
-				if (!empty($_GET["newUser"])) {
-					$nuser = $_GET["newUser"];
-				} else if (!empty($_GET["error"])) {
+				if (!empty($_GET["error"])) {
 					$error = $_GET["error"];
 				}
-				if ($nuser) {
-					echo "<div class=\"alert alert-success\" role=\"alert\">"
-					. "<b>Welcome $nuser.</b> "
-					. "Enjoy your new digs!";
-				} else if ($error) {
+				if ($error) {
 					echo "<div class=\"alert alert-danger\" role=\"alert\">"
 					. "<b>Credentials do not match.</b> "
 					. "Check that you have entered in the correct data.";
