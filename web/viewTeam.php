@@ -15,22 +15,16 @@
 		header('Location: main.php', true, 303);
 		die();
 	}
-
 	
 	$con = conn::getDB();
-	$rosterConstruct = "SELECT * from players NATURAL JOIN player_assignments NATURAL JOIN plays_for WHERE player_assignments.teamID = ". $_GET["teamID"];
-	// $rosterConstruct = "SELECT pa.*, pf.playerName FROM player_assignments pa, f_teams t, plays_for pf 
-	// WHERE t.teamID= ". $_GET["teamID"] . " AND t.leagueID= " . $_GET["leagueID"] . 
-	//  " AND pa.teamID = t.teamID AND pf.playerID = pa.playerID"; //Gets all player id's and naems on the current team.. not working
+	$rosterConstruct = "SELECT * from players NATURAL JOIN player_assignments "
+	. "NATURAL JOIN plays_for WHERE player_assignments.teamID = ". $_GET["teamID"];
 	
 	$roster = mysqli_fetch_assoc(mysqli_query($con, $rosterConstruct));
 
-	$teamsInfo =  "SELECT t.* FROM f_teams t where t.teamID=". $_GET["teamID"] . " AND t.leagueID=" . $_GET["leagueID"];
+	$teamsQuery =  "SELECT * FROM f_teams where teamID=". $_GET["teamID"];
 
-	$team = mysqli_fetch_assoc(mysqli_query($con, $teamsInfo));
- 
-
-
+	$team = mysqli_fetch_assoc(mysqli_query($con, $teamsQuery));
 
 	?>
 	<head>
@@ -58,16 +52,19 @@
 								<select id="playerID" type="text" name="playerID" class="form-control">
 									<?php
 									$con2 = conn::getDB();
-									$ownedInLeagueQ = 
-									"SELECT pa.* FROM player_assignments pa, f_teams t 
-									WHERE t.leagueID=" . $_GET["leagueID"] . 
-									"AND pa.teamID=t.teamID";
-									$ownedInLeague=mysqli_query($con,$ownedInLeagueQ );
-									foreach (playerRecord::getAllPlayers() as $player) {
-										if (!in_array($player["playerID"],$ownedInLeague)){
-										echo "<option value=" . $player["playerID"] . ">" . $player["name"] . "</option>";
+									$ownedInLeagueQuery = 
+									"SELECT name, playerID FROM players p "
+									. "WHERE NOT EXISTS (Select * from
+										player_assignments pa2 natural join f_teams
+										where pa2.playerID=p.playerID AND f_Teams.leagueID=" . $team["leagueID"] . ")";
+									$ownedInLeague = mysqli_query($con, $ownedInLeagueQuery);
+									if (!$ownedInLeague) {
+										echo "<option>No players available in your league</option>";
+									} else {
+										foreach ($ownedInLeague as $player) {
+											echo "<option value=" . $player["playerID"] . ">" . $player["name"] . "</option>";
+										}
 									}
-								}
 									?>
 								</select>
 
@@ -162,7 +159,6 @@
 						. "<td><a href=\"../controllers/dropPlayer.php?"
 						. "playerID=" . $pr->playerID 
 						. "&teamID=" . $team["teamID"]
-											. "&leagueID=" . $_GET["leagueID"]
 						. "\" id=\"removePFButton\" class=\"btn "
 						. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
 						. "</tr>";
