@@ -2,6 +2,7 @@
 
 require_once('../library/userVerification.php');
 require_once('../library/conn.php');
+
 session_start();
 
 $maxSize = $_GET["maxSize"];
@@ -24,8 +25,8 @@ error_log($managerInsert);
 mysqli_query($con, $managerInsert);
 
 if ($result) {
-    header("location: ../web/viewleague.php?leagueID=" . $leagueID, true, 303);
+	header("location: ../web/viewleague.php?leagueID=" . $leagueID, true, 303);
 } else {
-    header("location: viewLeagues.php?error=true", true, 303);
+	header("location: viewLeagues.php?error=true", true, 303);
 }
 

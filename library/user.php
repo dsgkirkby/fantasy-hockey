@@ -1,22 +1,23 @@
 <?php
 
-require_once('league.php');
-require_once('conn.php');
+require_once 'league.php';
+require_once 'conn.php';
 
 /*
  * User manipulations DB
  *
  * @author Eric & Pat
  */
+
 class user {
 	private $username;
 	private $password;
 	private $email;
-	
+
 	function __construct($username) {
 		$this->username = $username;
 	}
-	
+
 	static function usernameExists($new_username) {
 		$con = conn::getDB();
 		$success = mysqli_query($con, "SELECT * FROM users WHERE username = $new_username");
@@ -35,7 +36,6 @@ class user {
 		}
 	}
 
-	//Eric's less than perfect section
 	static function getUsers() {
 		$con = conn::getDB();
 		$users = mysqli_query($con, "SELECT * FROM users");
@@ -51,7 +51,7 @@ class user {
 
 	function manages(){
 		$con = conn::getDB();
-		$query="SELECT leagueID FROM manages"
+		$query = "SELECT leagueID FROM manages"
 				. " where username=\"" . $this->username . "\"";
 		$leagues = mysqli_query($con, $query);
 		$results = array();
@@ -63,7 +63,7 @@ class user {
 
 	function myLeagues() {
 		$con = conn::getDB();
-		$query="SELECT l.leagueID FROM"
+		$query = "SELECT l.leagueID FROM"
 				. " f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON"
 				. " t.username=u.username and u.username=\"" . $this->username . "\"";
 		$leagues = mysqli_query($con, $query);

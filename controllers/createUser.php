@@ -2,6 +2,7 @@
 
 require_once('../library/userVerification.php');
 require_once('../library/conn.php');
+
 session_start();
 
 $username = $_GET["username"];
