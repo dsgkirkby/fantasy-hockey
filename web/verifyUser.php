@@ -5,7 +5,7 @@ require_once('../library/conn.php');
 
 $username = $_GET["username"];
 $password = $_GET["password"];
-$newUser = (empty($_GET["new"])) ? "" : $_GET["new"];
+$newUser = $_GET["new"];
 
 if (empty($username) || empty($password)) {
     exit("Username or Password empty");
