@@ -58,7 +58,7 @@
 									"SELECT name, playerID FROM players p "
 									. "WHERE NOT EXISTS (Select * from
 										player_assignments pa2 natural join f_teams
-										where pa2.playerID=p.playerID AND f_Teams.leagueID=" . $team["leagueID"] . ")";
+										where pa2.playerID=p.playerID AND f_teams.leagueID=" . $team["leagueID"] . ")";
 									$ownedInLeague = mysqli_query($con, $ownedInLeagueQuery);
 									if (!$ownedInLeague) {
 										echo "<option>No players available in your league</option>";
