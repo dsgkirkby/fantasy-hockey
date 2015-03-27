@@ -57,10 +57,11 @@
 								<select id="playerID" type="text" name="playerID" class="form-control">
 									<?php
 									$con2 = conn::getDB();
-									$ownedInLeague = 
+									$ownedInLeagueQ = 
 									"SELECT pa.* FROM player_assignments pa, f_teams t 
 									WHERE t.leagueID=" . $_GET["leagueID"] . 
 									"AND pa.teamID=t.teamID";
+									$ownedInLeague=mysqli_query($con,$ownedInLeagueQ );
 									foreach (playerRecord::getAllPlayers() as $player) {
 										if (in_array($roster["playerID"],$ownedInLeague)){
 										echo "<option value=" . $player["playerID"] . ">" . $player["name"] . "</option>";
@@ -175,8 +176,7 @@
 					
 					. " <a href=\"../controllers/dropPlayer.php?"
 					. "playerID=" . $pr->playerID 
-					. "&team=" . $pr->team 
-					. "&season=" . $pr->season
+					. "&teamID=" . $team["teamID"] 
 					. "\" id=\"removePFButton\" class=\"btn "
 					. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
 					. "</tr>";
