@@ -51,19 +51,21 @@ and open the template in the editor.
 			</div><!--/.container-fluid -->
 		</nav>
 		<div class="container">
+			<?php
+			$uname = getUsername();
+			if (isset($_GET["new"])) {
+				if (!$_GET["new"]) {
+					echo "<div class=\"alert alert-success\" role=\"alert\">"
+					. "<b>Welcome back " . $uname . "! </b> </div>";
+				} else {
+					echo "<div class=\"alert alert-success\" role=\"alert\">"
+					. "<b>Welcome " . $uname . "! </b> "
+					. "Enjoy your new digs! </div>";
+				}
+			}
+			?>
 			<div class="col-md-6">
 				<?php
-				$uname = getUsername();
-				if (isset($_GET["new"])) {
-					if (!$_GET["new"]) {
-						echo "<div class=\"alert alert-success\" role=\"alert\">"
-						. "<b>Welcome back " . $uname . "! </b> </div>";
-					} else {
-						echo "<div class=\"alert alert-success\" role=\"alert\">"
-						. "<b>Welcome " . $uname . "! </b> "
-						. "Enjoy your new digs! </div>";
-					}
-				}
 				echo "<h3>Your Teams</h3><table class=\"table table-bordered\">
 				<tr>
 				<th>Team Name</th>
