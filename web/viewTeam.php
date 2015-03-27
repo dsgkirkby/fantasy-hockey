@@ -18,16 +18,17 @@
 
 	
 	$con = conn::getDB();
-	$rosterConstruct = "SELECT pa.*, pf.playerName FROM player_assignments pa, f_teams t, plays_for pf 
-	WHERE t.teamID= ". $_GET["teamID"] . " AND t.leagueID= " . $_GET["leagueID"] . 
-	 " AND pa.teamID = t.teamID AND pf.playerID = pa.playerID"; //Gets all player id's and naems on the current team.. not working
+	$rosterConstruct = "SELECT * from players NATURAL JOIN player_assignments NATURAL JOIN plays_for WHERE plays_for.teamID = ". $_GET["teamID"];
+	// $rosterConstruct = "SELECT pa.*, pf.playerName FROM player_assignments pa, f_teams t, plays_for pf 
+	// WHERE t.teamID= ". $_GET["teamID"] . " AND t.leagueID= " . $_GET["leagueID"] . 
+	//  " AND pa.teamID = t.teamID AND pf.playerID = pa.playerID"; //Gets all player id's and naems on the current team.. not working
 	
 	$roster = mysqli_fetch_assoc(mysqli_query($con, $rosterConstruct));
 
 	$teamsInfo =  "SELECT t.* FROM f_teams t where t.teamID=". $_GET["teamID"] . " AND t.leagueID=" . $_GET["leagueID"];
 
 	$team = mysqli_fetch_assoc(mysqli_query($con, $teamsInfo));
-
+ 
 
 
 
