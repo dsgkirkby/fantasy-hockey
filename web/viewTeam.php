@@ -11,10 +11,25 @@
 	dieIfNoUser();
 
 		// Redirect to main if leagueID or not set
-	if (empty($_GET["leagueID"]) || empty($_GET["teamName"])) {
+	if (empty($_GET["leagueID"]) || empty($_GET["teamID"])) {
 		header('Location: main.php', true, 303);
 		die();
 	}
+
+	
+	$con = conn::getDB();
+	$rosterConstruct = "SELECT pa.*, pf.playerName FROM player_assignments pa, f_teams t, plays_for pf
+	WHERE t.teamID=". $_GET["teamID"] . " AND t.leagueID=" . $_GET["leagueID"] . 
+	 "AND pa.teamID = t.teamID AND pf.playerID = pa.playerID";
+
+	$roster = mysqli_fetch_assoc(mysqli_query($con, $rosterConstruct));
+
+	$teamsInfo =  "SELECT t.* FROM f_teams t where t.teamID=". $_GET["teamID"] . " AND t.leagueID=" . $_GET["leagueID"];
+
+	$team = mysqli_fetch_assoc(mysqli_query($con, $teamsInfo));
+
+
+
 
 	?>
 	<head>
@@ -41,9 +56,16 @@
 								<label for="playerID">Player</label>
 								<select id="playerID" type="text" name="playerID" class="form-control">
 									<?php
+									$con2 = conn::getDB();
+									$ownedInLeague = 
+									"SELECT pa.* FROM player_assignments pa, f_teams t 
+									WHERE t.leagueID=" . $_GET["leagueID"] . 
+									"AND pa.teamID=t.teamID";
 									foreach (playerRecord::getAllPlayers() as $player) {
+										if (in_array($roster["playerID"],$ownedInLeague)){
 										echo "<option value=" . $player["playerID"] . ">" . $player["name"] . "</option>";
 									}
+								}
 									?>
 								</select>
 
@@ -58,67 +80,7 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-		<div class="modal fade" id="editModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="edit-modal-title"></h4><!--This gets filled in JS-->
-					</div>
-					<form action="../controllers/editPlaysFor.php">
-						<div class="modal-body">
 
-							<div class="form-group">
-								<table>
-									<tr>
-										<td>
-											<div id="contentBox" style="margin:0px auto; width:100%">
-												<input type="hidden" id="playerID" name="playerID">
-												<input type="hidden" id="teamName" name="teamName">
-												<input type="hidden" id="season" name="season">
-												<div id="column1" style="float:left; margin:2px; width:49%;">
-													<label for="gp">Games Played</label>
-													<input id="gp" type="number" name="gp" class="form-control">
-													<label for="hits">Hits</label>
-													<input id="hits" type="number" name="hits" class="form-control">
-													<label for="ta">Takeaways</label>
-													<input id="ta" type="number" name="ta" class="form-control">
-													<label for="sac">SA Corsi</label>
-													<input id="sac" type="number" name="sac" class="form-control" step="any">
-													<label for="qoc">QOC</label>
-													<input id="qoc" type="number" name="qoc" class="form-control" step="any">
-													<label for="toi">TOI</label>
-													<input id="toi" type="number" name="toi" class="form-control">
-												</div>
-
-												<div id="column2" style="float:right; margin:2px;width:45%;">
-													<label for="goals">Goals</label>
-													<input id="goals" type="number" name="goals" class="form-control">
-													<label for="ga">Giveaways</label>
-													<input id="ga" type="number" name="ga" class="form-control">
-													<label for="pd">Penalties Drawn</label>
-													<input id="pd" type="number" name="pd" class="form-control">
-													<label for="qot">QOT</label>
-													<input id="qot" type="number" name="qot" class="form-control" step="any">
-													<label for="ozs">OZS</label>
-													<input id="ozs" type="number" name="ozs" class="form-control" step="any">
-												</div>
-
-											</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<input type="submit" value="Save Changes" class="btn btn-primary">
-						</div>
-					</form>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -133,9 +95,9 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><a href="main.php">Home</a></li>
-						<li><a href="viewLeagues.php">Leagues</a></li>
+						<li class="active"><a href="viewLeagues.php">Leagues</a></li>
 			<li><a href="viewPlayers.php">Players</a></li>
-						<li class="active"><a href="admin.php">Admin Tools</a></li>
+						<li><a href="admin.php">Admin Tools</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="logout.php">Logout</a></li>
@@ -158,12 +120,11 @@
 				. " and <b>Season</b> does not already exist, and try again.</div>";
 			}
 			?>
-			<h2>Player Statistics<a data-toggle="modal" data-target="#createModal" id="createButton" class="btn btn-primary">Create Record</a></h2>
+			<h2><?php echo $team["name"]; ?><a data-toggle="modal" data-target="#createModal" id="createButton" class="btn btn-primary">Add Player</a></h2>
 			<table class="table table-bordered">
 				<thead>
 				<th>Player</th>
 				<th>Team</th>
-				<th>Season</th>
 				<th>Games</th>
 				<th>Goals</th>
 				<th>Hits</th>
@@ -184,7 +145,6 @@
 					echo "<tr>"
 					. "<td>" . $pr->player . "</td>"
 					. "<td>" . $pr->team . "</td>"
-					. "<td>" . $pr->season . "</td>"
 					. "<td>" . $pr->gamesPlayed . "</td>"
 					. "<td>" . $pr->goals . "</td>"
 					. "<td>" . $pr->hits . "</td>"
@@ -212,14 +172,13 @@
 					. " data-player=\"" . $pr->player . "\""
 					. " data-team=\"" . $pr->team . "\""
 					. " data-season=\"" . $pr->season . "\""
-					. " id=\"editPFButton\" class=\"editPlaysFor btn "
-					. "btn-primary btn-xs\">Edit</a>"
-					. " <a href=\"../controllers/deletePlaysFor.php?"
+					
+					. " <a href=\"../controllers/dropPlayer.php?"
 					. "playerID=" . $pr->playerID 
 					. "&team=" . $pr->team 
 					. "&season=" . $pr->season
 					. "\" id=\"removePFButton\" class=\"btn "
-					. "btn-primary btn-xs btn-warning\">Remove</a></td></td>"
+					. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
 					. "</tr>";
 				}
 				?>
