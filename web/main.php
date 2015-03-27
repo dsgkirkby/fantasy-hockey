@@ -54,13 +54,15 @@ and open the template in the editor.
 			<div class="col-md-6">
 				<?php
 				$uname = getUsername();
-				if (!empty($_GET["new"])) {
-					echo "<div class=\"alert alert-success\" role=\"alert\">"
-					. "<b>Welcome " . $uname . "! </b> "
-					. "Enjoy your new digs! </div>";
-				} else {
-					echo "<div class=\"alert alert-success\" role=\"alert\">"
-					. "<b>Welcome back " . $uname . "! </b> </div>";
+				if (isset($_GET["new"])) {
+					if (!$_GET["new"]) {
+						echo "<div class=\"alert alert-success\" role=\"alert\">"
+						. "<b>Welcome back " . $uname . "! </b> </div>";
+					} else {
+						echo "<div class=\"alert alert-success\" role=\"alert\">"
+						. "<b>Welcome " . $uname . "! </b> "
+						. "Enjoy your new digs! </div>";
+					}
 				}
 				echo "<h3>Your Teams</h3><table class=\"table table-bordered\">
 				<tr>
