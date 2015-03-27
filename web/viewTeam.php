@@ -18,10 +18,10 @@
 
 	
 	$con = conn::getDB();
-	$rosterConstruct = "SELECT pa.*, pf.playerName FROM player_assignments pa, f_teams t, plays_for pf
+	$rosterConstruct = "SELECT pa.*, pf.playerID FROM player_assignments pa, f_teams t, plays_for pf
 	WHERE t.teamID=". $_GET["teamID"] . " AND t.leagueID=" . $_GET["leagueID"] . 
-	 "AND pa.teamID = t.teamID AND pf.playerID = pa.playerID";
-
+	 " AND pa.teamID = t.teamID AND pf.playerID = pa.playerID";
+	
 	$roster = mysqli_fetch_assoc(mysqli_query($con, $rosterConstruct));
 
 	$teamsInfo =  "SELECT t.* FROM f_teams t where t.teamID=". $_GET["teamID"] . " AND t.leagueID=" . $_GET["leagueID"];
