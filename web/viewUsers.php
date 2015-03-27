@@ -19,6 +19,7 @@ and open the template in the editor.
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="editUser.js"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="createButton.css">
 	</head>
 	<body>
 	<div class="modal fade" id="createModal">
