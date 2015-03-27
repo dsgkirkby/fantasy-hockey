@@ -9,6 +9,7 @@ and open the template in the editor.
 	session_start();
 	require_once('../library/user.php');
 	require_once('../library/userVerification.php');
+	require_once('../library/conn.php');
 	dieIfNotAdmin();
 	?>
 	<head>
@@ -20,6 +21,42 @@ and open the template in the editor.
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
+	<div class="modal fade" id="createModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Create User</h4>
+					</div>
+					<form action="../controllers/createUser.php">
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="username">Username</label>
+								<input id="username" type="text" name="username" class="form-control">
+
+								<label for="password">Password</label>
+								<input id="password" type="text" name="password" class="form-control">
+
+								<label for="email">Email</label>
+								<input id="email" type="text" name="email" class="form-control">
+
+								<label for="is_admin">Admin</label>
+								<select id="is_admin" name="is_admin" class="form-control">
+									<option value="true">Yes</option>
+									<option value="false">No</option>
+								</select>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<input type="submit" value="Create" class="btn btn-primary">
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	<div class="modal fade" id="editModal">
 	  <div class="modal-dialog">
 		<div class="modal-content">
@@ -80,15 +117,14 @@ and open the template in the editor.
 			</div><!--/.container-fluid -->
 		</nav>
 		<div class="container">
-		<h2>All Users</h2>
+		<h2>All Users<a data-toggle="modal" data-target="#createModal" id="createButton" class="btn btn-primary">Create User</a></h2>
 			<table class="table table-bordered">
 				<tr>
 				<th>Username</th>
 				<th>Password</th>
 				<th>Email Address</th>
 				<th>Administrator</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<th>Action</th>
 				</tr>
 				<?php
 				if (!empty($_GET["error"])) {
@@ -109,13 +145,14 @@ and open the template in the editor.
 					. "<td>" . $user["password"] . "</td>"
 					. "<td>" . $user["email"] . "</td>"
 					. "<td>" . ($user["is_admin"] ? "Yes" : "No") . "</td>"
-					. "<td><a href=\"\" onclick=startEdit(\""
+					. "<td><a class=\"btn btn-primary btn-xs\" href=\"\" onclick='startEdit(\"" 
 						. $user["username"] . "\",\""
 						. $user["password"] . "\",\"" 
 						. $user["email"] . "\"," 
 						. $user["is_admin"]
-						. ") data-toggle=\"modal\" data-target=\"#editModal\">Edit</a></td>"
-					. "<td><a href=\"\" onclick=deleteUser(\"" . $user["username"] . "\")>Delete</a></td>"
+					.  ")' data-toggle=\"modal\" data-target=\"#editModal\">Edit</a>"
+					. " <a href='' class=\"btn btn-warning btn-xs\" onclick=deleteUser(\"" 
+						. $user["username"] . "\")>Delete</a></td>"
 					. "</tr>";
 				}
 				?>
