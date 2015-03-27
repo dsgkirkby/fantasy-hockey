@@ -157,26 +157,10 @@
 					. "<td>" . $pr->qoc . "</td>"
 					. "<td>" . $pr->ozs . "</td>"
 					. "<td>" . $pr->toi . "</td>"
-					. "<td><a data-toggle=\"modal\" data-target=\"#editModal\""
-					. " data-pid=\"" . $pr->playerID . "\""
-					. " data-gp=\"" . $pr->gamesPlayed . "\""
-					. " data-goals=\"" . $pr->goals . "\""
-					. " data-hits=\"" . $pr->hits . "\""
-					. " data-ga=\"" . $pr->giveaways . "\""
-					. " data-ta=\"" . $pr->takeaways . "\""
-					. " data-pd=\"" . $pr->penalties_drawn . "\""
-					. " data-sac=\"" . $pr->sacorsi . "\""
-					. " data-qot=\"" . $pr->qot . "\""
-					. " data-qoc=\"" . $pr->qoc . "\""
-					. " data-ozs=\"" . $pr->ozs . "\""
-					. " data-toi=\"" . $pr->toi . "\""
-					. " data-player=\"" . $pr->player . "\""
-					. " data-team=\"" . $pr->team . "\""
-					. " data-season=\"" . $pr->season . "\""
-					
-					. " <a href=\"../controllers/dropPlayer.php?"
+					. "<td><a href=\"../controllers/dropPlayer.php?"
 					. "playerID=" . $pr->playerID 
-					. "&teamID=" . $team["teamID"] 
+					. "&teamID=" . $team["teamID"]
+                                        . "&leagueID=" . $_GET["leagueID"]
 					. "\" id=\"removePFButton\" class=\"btn "
 					. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
 					. "</tr>";
