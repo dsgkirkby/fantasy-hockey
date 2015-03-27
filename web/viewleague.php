@@ -107,7 +107,7 @@
 				foreach ($teams as $place => $team) {
 					echo "<tr>"
 					. "<td>" . ($place + 1) . "</td>"
-					. "<td><a href='viewTeam.php?teamID=" . $team->id . "'>" . $team->teamName . "</a></td>"
+					. "<td><a href='viewTeam.php?teamName=\"" . $team->teamName . "\"&leagueID=" . $league->getLeagueId() . "'>" . $team->teamName . "</a></td>"
 					. "<td>" . $team->ownerName . "</td>"
 					. "<td>" . $team->games . "</td>"
 					. "<td>" . $team->goals . "</td>"
