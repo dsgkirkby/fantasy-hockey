@@ -1,48 +1,205 @@
-One person from each project team must turn the following into
-the handin directory "project-final" by 11:59 pm March 27 - the full command is
-"handin cs304 project-final", which assumes that the files that you are
-submitting are in a directory called ~/cs304/project-final. To do so, you'll
+One person FROM each project team must turn the following into
+the handin directory project-final by 11:59 pm March 27 :
+the full command is
+"handin cs304 project-f
+inal, which assumes that the files that you are
+submitting are in a directory called ~/cs304/project-f
+inalTo do so, you'll
 need to_get_an_account_on_the_CS_ugrad_machines.
 
-    * A cover_page (TODO)
-    * All the code used in the application (done)
-    * A script that could be used to create all tables and data in the database
-      such as the one here (done)
-    * A short description of what the project accomplished (TODO)
-    * A description of how your final schema differed from the schema you
-      turned in. If the final schema differed, why? Note that turning in a
-      final schema that's different from what you planned is fine, we just want
-      to know what changed and why. (TODO)
-    * A list of the SQL queries used (TODO)
-    * List all functional dependencies that are applicable to the table
-      (including the ones involving the primary key). For each functional
-      dependency, briefly describe its meaning in English. (TODO)
+* A cover_page (TODO)
+* All the code used in the application (done)
+* A script that could be used to create all tables and data in the database
+such as the one here (done)
+* A short description of what the project accomplished (TODO)
+* A description of how your final schema differed FROM the schema you
+turned inIf the final schema differed, why? Note that turning in a
+final schema that's different FROM what you planned is fine, we just want
+to know what changed and why(TODO)
+* A list of the SQL queries used (TODO)
+* List all functional dependencies that are applicable to the table
+(including the ones involving the primary key)For each functional
+dependency, briefly describe its meaning in English(TODO)
 
-library/league.php:             "SELECT * FROM f_leagues WHERE leagueID=" . $leagueID;
-library/league.php:             "SELECT * FROM team_stats WHERE leagueID = " . $this->leagueID;
-library/playerRecord.php:       "SELECT * FROM players NATURAL JOIN plays_for";
-library/playerRecord.php:       "SELECT * FROM nhl_teams";
-library/playerRecord.php:       "SELECT * FROM seasons";
-library/playerRecord.php:       "SELECT * FROM players";
-library/user.php:               "SELECT leagueID FROM manages"
-library/user.php:               "SELECT l.leagueID FROM"
-library/players.php:            "SELECT * FROM players WHERE playerID=" . $playerID;
-library/user.php:               "SELECT * FROM users WHERE username = $new_username");
-library/user.php:               "INSERT INTO users (username, password, email)"
-library/user.php:               "SELECT * FROM users");
-library/user.php:               "SELECT * from users WHERE username="
-library/userVerification.php:   "SELECT * FROM users where username=\"" . getUsername() . "\"");
-library/userVerification.php:   "SELECT * FROM manages WHERE leagueID=" . $leagueID);
-web/verifyUser.php:             "select * from users where username=\"" . $username . "\" and password=\"" . $password . "\"");
-web/viewPlayers.php:            "SELECT * FROM players ORDER BY " . $order;
-web/viewLeagues.php:            "SELECT leagueID FROM f_leagues";
-controllers/deleteLeague.php:   "DELETE FROM f_leagues WHERE leagueID=\"" . $leagueID . "\"");
-controllers/deletePlayer.php:   "DELETE FROM players WHERE playerID=\"" . $playerID . "\"");
-controllers/deleteUser.php:     "DELETE FROM users WHERE username=\"" . $username . "\"");
-controllers/deleteTeam.php:     "DELETE FROM player_assignments WHERE teamID=" . $teamID);
-controllers/deleteTeam.php:     "DELETE FROM f_teams WHERE teamID=" . $teamID);
-controllers/deletePlaysFor.php: "DELETE FROM plays_for WHERE "
-controllers/createPlaysFor.php: "INSERT INTO plays_for (playerID, teamName, season) values"
-controllers/editPlaysFor.php:   "UPDATE plays_for SET "
-controllers/editUser.php:       "UPDATE users SET "
-controllers/editPlayer.php:     "UPDATE players SET "
+Queries are not exactly as they are in code (for formatting and readability), variables are preceded by '$' (PHP):
+
+
+controllers/deleteLeague.php:
+
+"DELETE FROM f_leagues WHERE leagueID=$leagueID
+"DELETE FROM players WHERE playerID=$playerID
+"INSERT INTO manages (username, leagueID) values $username, $leagueID
+
+controllers/deleteUser.php:
+
+"DELETE FROM users WHERE username=$username"
+"DELETE FROM player_assignments WHERE teamID=$teamID"
+"DELETE FROM f_teams WHERE teamID=$teamID"
+docs/tmp:controllers/deleteLeague.php:
+DELETE FROM f_leagues WHERE leagueID=$leagueID
+docs/tmp:controllers/deletePlayer.php:
+DELETE FROM players WHERE playerID=$playerID
+docs/tmp:controllers/deleteUser.php
+DELETE FROM users WHERE username=$username
+docs/tmp:controllers/deleteTeam.php
+DELETE FROM player_assignments WHERE teamID=$teamID
+DELETE FROM f_teams WHERE teamID=$teamID
+docs/tmp:library/user.php:
+SELECT * FROM users WHERE username = $new_username
+INSERT INTO users (username, password, email)
+SELECT * FROM users
+SELECT * FROM users WHERE username=
+docs/tmp:library/userVerification.php:
+SELECT * FROM users WHERE username=getUsername()
+SELECT * FROM manages WHERE leagueID=$leagueID
+docs/tmp:web/verifyUser.php:
+SELECT * FROM users WHERE username=$username and password=$password
+library/league.php:
+SELECT username FROM manages WHERE leagueID=$this->leagueID
+SELECT * FROM team_stats WHERE leagueID = $this->leagueID
+library/playerRecord.php:
+SELECT * FROM nhl_teams
+SELECT * FROM seasons
+SELECT * FROM players
+library/user.php:
+SELECT * FROM users WHERE username = $new_username
+INSERT INTO users (username, password, email)
+VALUES ('$username', '$password', '$email'))) {
+SELECT * FROM users
+SELECT * FROM users WHERE username=
+library/user.php:
+$this->username
+library/user.php:
+SELECT leagueID FROM manages
+library/user.php:
+WHERE username=$this->username
+library/user.php:
+SELECT l.leagueID FROM
+library/user.php:
+f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON
+library/user.php:
+t.username=u.username and u.username=$this->username
+library/userVerification.php:
+SELECT * FROM users WHERE username=getUsername()
+
+library/userVerification.php:
+SELECT * FROM manages WHERE leagueID=$leagueID
+web/verifyUser.php:s
+elect * FROM users WHERE username=$username and password=$password
+controllers/createPlaysFor.php:I
+NSERT INTO plays_for (playerID, teamName, season) values
+controllers/createPlaysFor.php:
+($playerID, $teamName, $season\
+controllers/editPlaysFor.php:U
+PDATE plays_for SET
+controllers/editPlaysFor.php:
+gamesPlayed=$gp,"
+controllers/editPlaysFor.php:
+goals=$goals,"
+controllers/editPlaysFor.php:
+hits=$hits,"
+controllers/editPlaysFor.php:
+giveaways=$ga,"
+controllers/editPlaysFor.php:
+takeaways=$ta,"
+controllers/editPlaysFor.php:
+penalties_drawn=$pd,"
+controllers/editPlaysFor.php:
+sacorsi=$sac,"
+controllers/editPlaysFor.php:
+qot=$qot,"
+controllers/editPlaysFor.php:
+qoc=$qoc,"
+controllers/editPlaysFor.php:
+ozs=$ozs,"
+controllers/editPlaysFor.php:
+toi=$toi "
+controllers/editPlaysFor.php:
+WHERE playerID=$playerID "
+controllers/editPlaysFor.php:
+and teamName=$teamName
+controllers/editPlaysFor.php   and season=$season
+controllers/deletePlaysFor.php:D
+ELETE FROM plays_for WHERE
+controllers/deletePlaysFor.php:
+playerID=$playerID "
+controllers/deletePlaysFor.php:
+and teamName=$teamName
+controllers/deletePlaysFor.php:
+and season=$season
+controllers/editUser.php:U
+PDATE users SET
+controllers/editUser.php:
+password=$password,
+controllers/editUser.php:
+email=$email,
+controllers/editUser.php:
+is_admin=$is_admin
+controllers/editUser.php:
+WHERE username=$username
+controllers/editPlayer.php:U
+PDATE players SET
+controllers/editPlayer.php:
+playerID=$playerID,"
+controllers/editPlayer.php:
+name=$name,
+controllers/editPlayer.php:
+hometown=$hometown,
+controllers/editPlayer.php:
+height=$height,"
+controllers/editPlayer.php:
+weight=$weight,"
+controllers/editPlayer.php:
+dob=$dob
+controllers/editPlayer.php:
+WHERE playerID=$playerID
+library/league.php:
+SELECT * FROM f_leagues WHERE leagueID=$leagueID
+library/league.php:
+$query=SELECT username FROM manages
+library/league.php:
+WHERE leagueID=$this->leagueID
+library/league.php:
+SELECT * FROM team_stats WHERE leagueID = $this->leagueID
+library/playerRecord.php:
+SELECT * FROM players NATURAL JOIN plays_for
+library/playerRecord.php:
+SELECT * FROM nhl_teams
+library/playerRecord.php:
+SELECT * FROM seasons
+library/playerRecord.php:
+SELECT * FROM players
+library/user.php:
+SELECT leagueID FROM manages
+library/user.php:
+WHERE username=$this->username
+library/user.php:
+array(
+library/user.php:
+foreach ($leagues as $league) {
+library/user.php:
+array_push($results, new league($league[leagueID])
+library/user.php:
+}
+library/user.php:
+return $results
+library/user.php:
+}
+library/user.php:
+
+library/user.php:
+function myLeagues() {
+library/user.php-		conn::g
+etDB(
+library/user.php:
+SELECT l.leagueID FROM
+library/user.php:
+f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON
+library/user.php:
+t.username=u.username and u.username=$this->username
+library/players.php:
+SELECT * FROM players WHERE playerID=$playerID
+web/viewPlayers.php:
+SELECT * FROM players ORDER BY $order
+web/viewLeagues.php:
+SELECT leagueID FROM f_leagues"
