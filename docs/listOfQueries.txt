@@ -66,8 +66,8 @@ library/playerRecord.php:
 
 library/user.php:
   "SELECT leagueID FROM manages WHERE username=$this->username"
-  "SELECT l.leagueID FROM f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID
-  INNER JOIN users u ON t.username=u.username AND u.username=$this->username"
+  "SELECT l.leagueID FROM f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID"
+  "INNER JOIN users u ON t.username=u.username AND u.username=$this->username"
 
 library/players.php:
   "SELECT * FROM players WHERE playerID=$playerID"
@@ -77,3 +77,8 @@ web/viewPlayers.php:
 
 web/viewLeagues.php:
   "SELECT leagueID FROM f_leagues"
+
+web/viewTeam.php
+  "SELECT *, (pf.goals*2+pf.hits+pf.gamesPlayed*0.1)"
+  " as score from players NATURAL JOIN player_assignments pa"
+  "NATURAL JOIN plays_for pf WHERE pa.teamID = $teamID" 
