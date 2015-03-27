@@ -9,5 +9,5 @@ function startEdit(username, password, email, is_admin) {
     $("#username").val(username);
     $("#password").val(password);
     $("#email").val(email);
-    $("#admin").val(is_admin ? "true" : "false");
+    $("#is_admin").val(is_admin ? "true" : "false");
 }

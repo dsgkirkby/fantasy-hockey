@@ -10,6 +10,7 @@ and open the template in the editor.
 	require_once('../library/league.php');
 	require_once('../library/userVerification.php');
 	require_once('../library/user.php');
+	require_once('../library/conn.php');
 	?>
 	<head>
 		<meta charset="UTF-8">
@@ -95,16 +96,7 @@ and open the template in the editor.
 				$user = new user($uname);
 				$leagues = $user->myLeagues();
 			} else {
-				$con = mysqli_connect("localhost", "root", "");
-				if (!$con) {
-					exit('Connect Error (' . mysqli_connect_errno() . ') '
-							. mysqli_connect_error());
-				}
-				//set the default client character set 
-				mysqli_set_charset($con, 'utf-8');
-				if (mysqli_select_db($con, "dobber") == FALSE) {
-					exit('DB select failed!');
-				}
+				$con = conn::getDB();
 				$query = "SELECT leagueID FROM f_leagues";
 				$temp_leagues = mysqli_query($con, $query);
 				foreach ($temp_leagues as $temp_league) {

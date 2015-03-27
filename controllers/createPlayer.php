@@ -1,13 +1,21 @@
 <?php
 
 require_once('../library/userVerification.php');
-require_once('../library/conn.php');
 session_start();
 
 $maxSize = $_GET["maxSize"];
 $name = $_GET["leagueName"];
 
-$con = conn::getDB();
+$con = mysqli_connect("localhost", "root", "");
+if (!$con) {
+    exit('Connect Error (' . mysqli_connect_errno() . ') '
+	    . mysqli_connect_error());
+}
+//set the default client character set 
+mysqli_set_charset($con, 'utf-8');
+if (mysqli_select_db($con, "dobber") == FALSE) {
+    exit('DB select failed!');
+}
 
 $leagueInsert = "INSERT INTO f_leagues (name, max_size, date_created) values "
 	. "(\"" . $name . "\"," . $maxSize . ",\"" . date("Y-m-d") . "\")";

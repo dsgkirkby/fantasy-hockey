@@ -1,7 +1,7 @@
 
 function deletePlayer(playerID) {
     jQuery.ajax({
-        url: "../controllers/deleteUser.php?playerID=" + playerID
+        url: "../controllers/deletePlayer.php?playerID=" + playerID
     });
 }
 

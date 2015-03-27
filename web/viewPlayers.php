@@ -17,7 +17,7 @@ and open the template in the editor.
 		<title>Dobber Players</title>
 		<script src="jquery-2.1.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="editPlayers.js"></script>
+		<script src="editPlayer.js"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="createButton.css">
 	</head>
@@ -140,7 +140,7 @@ and open the template in the editor.
 		<th><a href=\"viewPlayers.php?order=height\"> Height </a></th>
 		<th><a href=\"viewPlayers.php?order=weight\"> Weight </a></th>
 		<th><a href=\"viewPlayers.php?order=dob\"> D.O.B </a></th>"
-		. (userIsAdmin() ? "<th>Admin</th>" : "")
+		. (userIsAdmin() ? "<th>Action</th>" : "")
 		. "</tr>";
 		
 		foreach($players as $player) {
@@ -162,8 +162,8 @@ and open the template in the editor.
 			. "</tr>";
 		}
 		
-		echo "</table>";
 		?>
+		</table>
 	</div>
 	</body>
 </html>
