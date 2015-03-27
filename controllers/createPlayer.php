@@ -4,7 +4,6 @@ require_once('../library/userVerification.php');
 require_once('../library/conn.php');
 session_start();
 
-$playerID = $_GET["playerID"];
 $name = $_GET["name"];
 $hometown = $_GET["hometown"];
 $height = $_GET["height"];
@@ -12,8 +11,8 @@ $weight = $_GET["weight"];
 $dob = $_GET["dob"];
 
 $con = conn::getDB();
-$userInsert = "INSERT INTO players (playerID, name, hometown, height, weight, dob) values "
-	. "(" . $playerID . ",\"" . $name . "\",\"" . $hometown . "\"," . $height . "," . $weight . ",\"" . $dob . "\")";
+$userInsert = "INSERT INTO players (name, hometown, height, weight, dob) values "
+	. "(\"" . $name . "\",\"" . $hometown . "\"," . $height . "," . $weight . ",\"" . $dob . "\")";
 
 $result = mysqli_query($con, $userInsert);
 

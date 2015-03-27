@@ -31,25 +31,21 @@ and open the template in the editor.
 					</div>
 					<form action="../controllers/createPlayer.php">
 						<div class="modal-body">
-
 							<div class="form-group">
-								<label for="playerID">playerID</label>
-								<input id="playerID" type="number" name="playerID" class="form-control">
-
 								<label for="name">Name</label>
-								<input id="name" type="text" name="name" class="form-control">
+								<input type="text" name="name" class="form-control">
 								
 								<label for="hometown">Hometown</label>
-								<input id="hometown" type="text" name="hometown" class="form-control">
+								<input type="text" name="hometown" class="form-control">
 								
 								<label for="height">Height</label>
-								<input id="height" type="number" name="height" class="form-control">
+								<input type="number" name="height" class="form-control">
 								
 								<label for="weight">Weight</label>
-								<input id="weight" type="number" name="weight" class="form-control">
+								<input type="number" name="weight" class="form-control">
 								
 								<label for="dob">Date of Birth</label>
-								<input id="dob" type="text" name="dob" class="form-control">
+								<input type="date" name="dob" class="form-control">
 							</div>
 
 						</div>
@@ -88,7 +84,7 @@ and open the template in the editor.
 			  <input id="weight" type="number" name="weight" class="form-control">
 
 			  <label for="dob">D.O.B.</label>
-			  <input id="dob" type="text" name="dob" class="form-control">
+			  <input id="dob" type="date" name="dob" class="form-control">
 			  
 			  </div>
 		  
@@ -139,7 +135,7 @@ and open the template in the editor.
 		
 		if ($displayWarning) {
 			echo "<div class=\"alert alert-danger\" role=\"alert\">"
-			. "<b>Player View Failed.</b>"
+			. "<b>Action Failed.</b>"
 			. " Please try again or contact an administrator</div>";
 		}
 		$players = array();

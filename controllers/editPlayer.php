@@ -11,11 +11,11 @@ $dob = $_GET["dob"];
 $con = conn::getDB();
 
 $query = "UPDATE players SET "
-	. "playerID=" . $playerID ","
-	. "name=\"" . $name ."\","
-	. "hometown=\"" . $hometown ."\","
-	. "height=" . $height .","
-	. "weight=" . $weight .","
+	. "playerID=" . $playerID . ","
+	. "name=\"" . $name . "\","
+	. "hometown=\"" . $hometown . "\","
+	. "height=" . $height . ","
+	. "weight=" . $weight . ","
 	. "dob=\"" . $dob . "\""
 	. " WHERE playerID=" . $playerID;
 
