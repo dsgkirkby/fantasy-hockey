@@ -92,7 +92,7 @@ and open the template in the editor.
 			$leagues = array();
 			if (!empty($_GET["username"])) {
 				$uname = filter_input(INPUT_GET, "username");
-				echo "<h3>" . $uname . "'s Leagues</h3>";
+				echo "<h3>Leagues That <b>" . $uname . "</b> Participates In</h3>";
 				$user = new user($uname);
 				$leagues = $user->myLeagues();
 			} else {

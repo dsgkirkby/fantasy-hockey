@@ -24,7 +24,7 @@ error_log($query);
 $result = mysqli_query($con, $query);
 
 if ($result) {
-	header("location: ../web/viewPlayers.php", true, 303);
+    header("location: ../web/viewPlayers.php", true, 303);
 } else {
-	header("location: ../web/viewPlayers.php?error=true", true, 303);
+    header("location: ../web/viewPlayers.php?error=true", true, 303);
 }
