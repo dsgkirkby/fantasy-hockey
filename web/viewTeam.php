@@ -145,11 +145,18 @@
 				<th>Score</th>
 				<th>Action</th>
 				</thead>
-
 				
 				<?php
-				if($roster != NULL){ 
-				foreach ($roster as $r) {
+				if($roster != NULL){
+					$totals = array();
+					foreach ($roster as $index => $r) {
+						if ($index == 0) {
+							$totals = $r;
+						} else {
+							foreach($r as $key => $field) {
+								$totals[$key] += $field;
+							}
+						}
 						echo "<tr>"
 						. "<td>" . $r["name"] . "</td>"
 						. "<td>" . $r["teamName"] . "</td>"
@@ -164,16 +171,30 @@
 						. "<td>" . $r["qoc"] . "</td>"
 						. "<td>" . $r["ozs"] . "</td>"
 						. "<td>" . $r["toi"] . "</td>"
-				                . "<td>" . $r["score"] . "</td>"
+						. "<td><b>" . $r["score"] . "</b></td>"
 						. "<td><a href=\"../controllers/dropPlayer.php?"
 						. "playerID=" . $r["playerID"] 
 						. "&teamID=" . $team["teamID"]
 						. "\" id=\"removePFButton\" class=\"btn "
 						. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
 						. "</tr>";
-					
+					}
+					echo "<tr class=\"active\">"
+					. "<td colspan=\"2\"><b>Totals</b></td>"
+					. "<td>" . $totals["gamesPlayed"] . "</td>"
+					. "<td>" . $totals["goals"] . "</td>"
+					. "<td>" . $totals["hits"] . "</td>"
+					. "<td>" . $totals["giveaways"] . "</td>"
+					. "<td>" . $totals["takeaways"] . "</td>"
+					. "<td>" . $totals["penalties_drawn"] . "</td>"
+					. "<td>N/A</td>"
+					. "<td>N/A</td>"
+					. "<td>N/A</td>"
+					. "<td>N/A</td>"
+					. "<td>" . $totals["toi"] . "</td>"
+					. "<td><b>" . $totals["score"] . "</b></td>"
+					. "<td></td></tr>";
 				}
-}
 				?>
 			</table>
 		</div>
