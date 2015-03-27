@@ -4,7 +4,7 @@ require_once("../library/conn.php");
 $leagueID = $_GET["leagueID"];
 
 if (empty($leagueID)) {
-    exit("Bad arguments");
+	exit("Bad arguments");
 }
 
 error_log("Deleting league");

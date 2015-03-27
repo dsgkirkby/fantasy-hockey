@@ -1,4 +1,5 @@
 <?php
+
 require_once("../library/conn.php");
 
 $playerID = $_GET["playerID"];

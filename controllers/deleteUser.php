@@ -1,10 +1,11 @@
 <?php
 
 require_once("../library/conn.php");
+
 $username = $_GET["username"];
 
 if (empty($username)) {
-    exit("Bad arguments");
+	exit("Bad arguments");
 }
 
 error_log("Deleting user");

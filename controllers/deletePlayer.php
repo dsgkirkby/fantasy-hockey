@@ -1,10 +1,11 @@
 <?php
 
 require_once("../library/conn.php");
+
 $playerID = $_GET["playerID"];
 
 if (empty($playerID)) {
-    exit("Bad arguments");
+	exit("Bad arguments");
 }
 
 error_log("Deleting player");

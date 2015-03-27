@@ -7,6 +7,7 @@
  */
 require_once 'team.php';
 require_once 'user.php';
+require_once 'conn.php';
 
 class league {
 
@@ -18,13 +19,7 @@ class league {
 
 	function __construct($leagueID) {
 		$this->leagueID = $leagueID;
-		$con = mysqli_connect("localhost", "root", "");
-		if (!$con) {
-			exit('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
-		}
-		//set the default client character set 
-		mysqli_set_charset($con, 'utf-8');
-		mysqli_select_db($con, "dobber");
+		$con = conn::getDB();
 		$query = "SELECT * FROM f_leagues WHERE leagueID=" . $leagueID;
 		$league = mysqli_fetch_assoc(mysqli_query($con, $query));
 		$this->name = $league["name"];
@@ -34,16 +29,7 @@ class league {
 	}
 
 	function getManagers(){
-		$con = mysqli_connect("localhost", "root", "");
-		if (!$con) {
-			exit('Connect Error (' . mysqli_connect_errno() . ') '
-					. mysqli_connect_error());
-		}
-		//set the default client character set 
-		mysqli_set_charset($con, 'utf-8');
-		if (mysqli_select_db($con, "dobber") == FALSE) {
-			exit('DB select failed!');
-		}
+		$con = conn::getDB();
 		$query="SELECT username FROM manages"
 				. " where leagueID=\"" . $this->leagueID . "\"";
 		$users = mysqli_query($con, $query);
@@ -56,15 +42,8 @@ class league {
 
 	function getTeams() {
 		if (empty($this->teams)) {
-			$con = mysqli_connect("localhost", "root", "");
-			if (!$con) {
-			exit('Connect Error (' . mysqli_connect_errno() . ') '
-				. mysqli_connect_error());
-			}
-			//set the default client character set 
-			mysqli_set_charset($con, 'utf-8');
-			mysqli_select_db($con, "dobber");
-				$query = "SELECT * FROM team_stats WHERE leagueID = " . $this->leagueID;
+			$con = conn::getDB();
+			$query = "SELECT * FROM team_stats WHERE leagueID = " . $this->leagueID;
 			$teams = mysqli_query($con, $query);
 
 			foreach ($teams as $team) {
