@@ -145,28 +145,28 @@
 				<?php
 				foreach (playerRecord::getAllRecords() as $pr) {
 					if (in_array($pr->player,$roster)){
-					echo "<tr>"
-					. "<td>" . $pr->player . "</td>"
-					. "<td>" . $pr->team . "</td>"
-					. "<td>" . $pr->gamesPlayed . "</td>"
-					. "<td>" . $pr->goals . "</td>"
-					. "<td>" . $pr->hits . "</td>"
-					. "<td>" . $pr->giveaways . "</td>"
-					. "<td>" . $pr->takeaways . "</td>"
-					. "<td>" . $pr->penalties_drawn . "</td>"
-					. "<td>" . $pr->sacorsi . "</td>"
-					. "<td>" . $pr->qot . "</td>"
-					. "<td>" . $pr->qoc . "</td>"
-					. "<td>" . $pr->ozs . "</td>"
-					. "<td>" . $pr->toi . "</td>"
-					. "<td><a href=\"../controllers/dropPlayer.php?"
-					. "playerID=" . $pr->playerID 
-					. "&teamID=" . $team["teamID"]
-                                        . "&leagueID=" . $_GET["leagueID"]
-					. "\" id=\"removePFButton\" class=\"btn "
-					. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
-					. "</tr>";
-				}
+						echo "<tr>"
+						. "<td>" . $pr->player . "</td>"
+						. "<td>" . $pr->team . "</td>"
+						. "<td>" . $pr->gamesPlayed . "</td>"
+						. "<td>" . $pr->goals . "</td>"
+						. "<td>" . $pr->hits . "</td>"
+						. "<td>" . $pr->giveaways . "</td>"
+						. "<td>" . $pr->takeaways . "</td>"
+						. "<td>" . $pr->penalties_drawn . "</td>"
+						. "<td>" . $pr->sacorsi . "</td>"
+						. "<td>" . $pr->qot . "</td>"
+						. "<td>" . $pr->qoc . "</td>"
+						. "<td>" . $pr->ozs . "</td>"
+						. "<td>" . $pr->toi . "</td>"
+						. "<td><a href=\"../controllers/dropPlayer.php?"
+						. "playerID=" . $pr->playerID 
+						. "&teamID=" . $team["teamID"]
+											. "&leagueID=" . $_GET["leagueID"]
+						. "\" id=\"removePFButton\" class=\"btn "
+						. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
+						. "</tr>";
+					}
 				}
 				?>
 			</table>
