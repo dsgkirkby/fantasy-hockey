@@ -46,7 +46,7 @@ and open the template in the editor.
 																		break;
 														}
 														echo "<div class=\"alert alert-danger\" role=\"alert\">"
-														. "<b>Unable to create username.</b> "
+														. "<b>Unable to create username.</b> ";
 												}
 												?>
 										</div>
