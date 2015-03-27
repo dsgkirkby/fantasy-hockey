@@ -16,7 +16,7 @@ $qot = $_GET["qot"];
 $qoc = $_GET["qoc"];
 $ozs = $_GET["ozs"];
 $toi = $_GET["toi"];
-$con =con::getDB();
+$con = conn::getDB();
 
 $query = "UPDATE plays_for SET "
 		. "gamesPlayed=" . $gp . ","
