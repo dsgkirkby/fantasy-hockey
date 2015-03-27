@@ -116,9 +116,7 @@
 
 			if ($displayWarning) {
 				echo "<div class=\"alert alert-danger\" role=\"alert\">"
-				. "<b>Record Creation Failed.</b>"
-				. " Please verify a record with that <b>Player</b>, <b>Team</b>,"
-				. " and <b>Season</b> does not already exist, and try again.</div>";
+				. "<b>Unable to complete action</b>";
 			}
 			?>
 			<h2>
