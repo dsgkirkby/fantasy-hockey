@@ -1,0 +1,79 @@
+Queries are not exactly as they are in code (for formatting and readability), PHP variables are preceded by '$'.
+
+controllers/deleteLeague.php:
+  "DELETE FROM f_leagues WHERE leagueID=$leagueID"
+  "DELETE FROM players WHERE playerID=$playerID"
+  "INSERT INTO manages (username, leagueID) VALUES $username, $leagueID"
+
+controllers/deleteUser.php:
+  "DELETE FROM users WHERE username=$username"
+  "DELETE FROM player_assignments WHERE teamID=$teamID"
+  "DELETE FROM f_teams WHERE teamID=$teamID"
+
+library/league.php:
+  "SELECT username FROM manages WHERE leagueID=$this->leagueID"
+  "SELECT * FROM team_stats WHERE leagueID = $this->leagueID"
+
+library/playerRecord.php:
+  "SELECT * FROM nhl_teams"
+  "SELECT * FROM seasons"
+  "SELECT * FROM players"
+
+library/user.php:
+  "SELECT * FROM users WHERE username = $new_username"
+  "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')"
+  "SELECT * FROM users"
+  "SELECT * FROM users WHERE username=$username"
+  "SELECT leagueID FROM manages WHERE username=$this->username"
+  "SELECT l.leagueID FROM f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON
+t.username=u.username AND u.username=$this->username"
+
+library/userVerification.php:
+  "SELECT * FROM users WHERE username=getUsername()"
+  "SELECT * FROM manages WHERE leagueID=$leagueID"
+
+web/verifyUser.php:
+  "SELECT * FROM users WHERE username=$username AND password=$password"
+
+controllers/createPlaysFor.php:
+  "INSERT INTO plays_for (playerID, teamName, season) VALUES ($playerID, $teamName, $season)"
+
+controllers/editPlaysFor.php:
+  "UPDATE plays_for SET gamesPlayed=$gp, goals=$goals, hits=$hits, giveaways=$ga,
+  takeaways=$ta, penalties_drawn=$pd, sacorsi=$sac, qot=$qot, qoc=$qoc, ozs=$ozs, toi=$toi
+  WHERE playerID=$playerID AND teamName=$teamName AND season=$season"
+
+controllers/deletePlaysFor.php:
+  "DELETE FROM plays_for WHERE playerID=$playerID AND teamName=$teamName AND season=$season"
+
+controllers/editUser.php:
+  "UPDATE users SET password=$password, email=$email, is_admin=$is_admin WHERE username=$username"
+
+controllers/editPlayer.php:
+  "UPDATE players SET playerID=$playerID," name=$name, hometown=$hometown,
+height=$height," weight=$weight," dob=$dob WHERE playerID=$playerID"
+
+library/league.php:
+  "SELECT * FROM f_leagues WHERE leagueID=$leagueID"
+  "SELECT username FROM manages WHERE leagueID=$this->leagueID"
+  "SELECT * FROM team_stats WHERE leagueID = $this->leagueID"
+
+library/playerRecord.php:
+  "SELECT * FROM players NATURAL JOIN plays_for"
+  "SELECT * FROM nhl_teams"
+  "SELECT * FROM seasons"
+  "SELECT * FROM players"
+
+library/user.php:
+  "SELECT leagueID FROM manages WHERE username=$this->username"
+  "SELECT l.leagueID FROM f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID
+  INNER JOIN users u ON t.username=u.username AND u.username=$this->username"
+
+library/players.php:
+  "SELECT * FROM players WHERE playerID=$playerID"
+
+web/viewPlayers.php:
+  "SELECT * FROM players ORDER BY $order"
+
+web/viewLeagues.php:
+  "SELECT leagueID FROM f_leagues"
