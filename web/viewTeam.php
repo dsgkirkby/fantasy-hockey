@@ -11,7 +11,7 @@
 	dieIfNoUser();
 
 	// Redirect to main if leagueID or teamID not set
-	if (empty($_GET["leagueID"]) || empty($_GET["teamID"])) {
+	if (empty($_GET["teamID"])) {
 		header('Location: main.php', true, 303);
 		die();
 	}
@@ -48,6 +48,8 @@
 					<form action="../controllers/addPlayer.php">
 						<div class="modal-body">
 							<div class="form-group">
+								<input type="hidden" name="teamID" value="<?php echo $team["teamID"]; ?>">
+								
 								<label for="playerID">Player</label>
 								<select id="playerID" type="text" name="playerID" class="form-control">
 									<?php
@@ -119,7 +121,14 @@
 				. " and <b>Season</b> does not already exist, and try again.</div>";
 			}
 			?>
-			<h2><?php echo $team["name"]; ?><a data-toggle="modal" data-target="#createModal" id="createButton" class="btn btn-primary">Add Player</a></h2>
+			<h2>
+				<?php echo $team["name"];
+				if($team["username"] == getUsername()) {
+					echo "<a data-toggle=\"modal\" data-target=\"#createModal\""
+					. " id=\"createButton\" class=\"btn btn-primary\">Add Player</a>";
+				}
+				?>
+			</h2>
 			<table class="table table-bordered">
 				<thead>
 				<th>Player</th>
