@@ -42,11 +42,12 @@ and open the template in the editor.
 																		$detail = "Username already exists.";
 																		break;
 																case "errun":
-																		$detail = "Please try again or contact an administrator";
+																		$detail = "Please try again or contact an administrator.";
 																		break;
 														}
 														echo "<div class=\"alert alert-danger\" role=\"alert\">"
-														. "<b>Unable to create username.</b> ";
+														. "<b>Unable to create username. </b> "
+                            . $detail;
 												}
 												?>
 										</div>
@@ -100,10 +101,10 @@ and open the template in the editor.
 				<?php
 						if (isset($_POST["submit"])) {
 								if (user::addUser($_POST["uname"], $_POST["passwd"], $_POST["email"])) {
-									header("Location: main.php?newUser=" . $_POST["uname"]);
+									header("Location: verifyUser.php?username=" . $_POST["uname"] . "&password=" . $_POST["passwd"] . "&new=" . $_POST["uname"]);
 								}
 								else {
-									header("Location: $page?error=unameTaken");
+									header("Location: new_user.php?error=unameTaken");
 								}
 						}
 				?>
