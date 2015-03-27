@@ -18,9 +18,9 @@
 
 	
 	$con = conn::getDB();
-	$rosterConstruct = "SELECT pa.*, pf.playerID FROM player_assignments pa, f_teams t, plays_for pf
-	WHERE t.teamID=". $_GET["teamID"] . " AND t.leagueID=" . $_GET["leagueID"] . 
-	 " AND pa.teamID = t.teamID AND pf.playerID = pa.playerID";
+	$rosterConstruct = "SELECT pa.*, pf.playerName FROM player_assignments pa, f_teams t, plays_for pf 
+	WHERE t.teamID= ". $_GET["teamID"] . " AND t.leagueID= " . $_GET["leagueID"] . 
+	 " AND pa.teamID = t.teamID AND pf.playerID = pa.playerID"; //Gets all player id's and naems on the current team.. not working
 	
 	$roster = mysqli_fetch_assoc(mysqli_query($con, $rosterConstruct));
 
@@ -63,7 +63,7 @@
 									"AND pa.teamID=t.teamID";
 									$ownedInLeague=mysqli_query($con,$ownedInLeagueQ );
 									foreach (playerRecord::getAllPlayers() as $player) {
-										if (in_array($roster["playerID"],$ownedInLeague)){
+										if (!in_array($player["playerID"],$ownedInLeague)){
 										echo "<option value=" . $player["playerID"] . ">" . $player["name"] . "</option>";
 									}
 								}
@@ -143,6 +143,7 @@
 
 				<?php
 				foreach (playerRecord::getAllRecords() as $pr) {
+					if (in_array($pr->player,$roster)){
 					echo "<tr>"
 					. "<td>" . $pr->player . "</td>"
 					. "<td>" . $pr->team . "</td>"
@@ -164,6 +165,7 @@
 					. "\" id=\"removePFButton\" class=\"btn "
 					. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
 					. "</tr>";
+				}
 				}
 				?>
 			</table>
