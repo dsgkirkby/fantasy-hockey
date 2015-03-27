@@ -4,23 +4,24 @@ require_once('../library/userVerification.php');
 require_once('../library/conn.php');
 session_start();
 
-$username = $_GET["username"];
-$password = $_GET["password"];
-$email = $_GET["email"];
-$is_admin = $_GET["is_admin"];
+$playerID = $_GET["playerID"];
+$name = $_GET["name"];
+$hometown = $_GET["hometown"];
+$height = $_GET["height"];
+$weight = $_GET["weight"];
+$dob = $_GET["dob"];
 
 $con = conn::getDB();
-$userInsert = "INSERT INTO players (playerID, password, email, is_admin) values "
-	. "(\"" . $username . "\",\"" . $password . "\",\"" . $email . "\"," . $is_admin . ")";
+$userInsert = "INSERT INTO players (playerID, name, hometown, height, weight, dob) values "
+	. "(" . $playerID . ",\"" . $name . "\",\"" . $hometown . "\"," . $height . "," . $weight . ",\"" . $dob . "\")";
 
 $result = mysqli_query($con, $userInsert);
 
 error_log($userInsert);
 
 if ($result) {
-	header("location: ../web/viewUsers.php", true, 303);
+	header("location: ../web/viewPlayers.php", true, 303);
 } else {
-	header("location: ../web/viewUsers.php?error=true", true, 303);
+	header("location: ../web/viewPlayers.php?error=true", true, 303);
 }
-
 

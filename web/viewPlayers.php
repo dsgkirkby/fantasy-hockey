@@ -33,6 +33,8 @@ and open the template in the editor.
 						<div class="modal-body">
 
 							<div class="form-group">
+								<label for="playerID">playerID</label>
+								<input id="playerID" type="number" name="playerID" class="form-control">
 
 								<label for="name">Name</label>
 								<input id="name" type="text" name="name" class="form-control">
@@ -41,10 +43,10 @@ and open the template in the editor.
 								<input id="hometown" type="text" name="hometown" class="form-control">
 								
 								<label for="height">Height</label>
-								<input id="height" type="text" name="height" class="form-control">
+								<input id="height" type="number" name="height" class="form-control">
 								
 								<label for="weight">Weight</label>
-								<input id="weight" type="text" name="weight" class="form-control">
+								<input id="weight" type="number" name="weight" class="form-control">
 								
 								<label for="dob">Date of Birth</label>
 								<input id="dob" type="text" name="dob" class="form-control">
@@ -77,16 +79,16 @@ and open the template in the editor.
 			  <input id="name" type="text" name="name" class="form-control">
 			  
 			  <label for="hometown">Hometown</label>
-			  <input id="hometown" type="hometown" name="hometown" class="form-control">
+			  <input id="hometown" type="text" name="hometown" class="form-control">
 
 			  <label for="height">Height</label>
-			  <input id="height" type="height" name="height" class="form-control">
+			  <input id="height" type="number" name="height" class="form-control">
 
 			  <label for="weight">Weight</label>
-			  <input id="weight" type="weight" name="weight" class="form-control">
+			  <input id="weight" type="number" name="weight" class="form-control">
 
 			  <label for="dob">D.O.B.</label>
-			  <input id="dob" type="dob" name="dob" class="form-control">
+			  <input id="dob" type="text" name="dob" class="form-control">
 			  
 			  </div>
 		  
@@ -147,7 +149,8 @@ and open the template in the editor.
 			$user = new user($uname);
 		} else {
 			if (userIsAdmin()){
-				echo "<a id=\"createButton\" class=\"btn btn-primary\">Add Player</a>";
+				echo "<a id=\"createButton\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#createModal\">
+				Add Player</a>";
 			}
 			$order="playerID";
 			if (!empty($_GET["order"])) {
@@ -171,7 +174,7 @@ and open the template in the editor.
 				 array_push($players, new players($temp_player["playerID"]));
 			}
 			
-			echo "<h2>Player Overview<a data-toggle=\"modal\" data-target=\"#createModal\" </a></h2>";
+			echo "<h2>Player Overview</h2>";
 		}
 		echo "<table class=\"table table-bordered\">
 		<tr>

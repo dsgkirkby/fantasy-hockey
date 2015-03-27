@@ -1,5 +1,6 @@
 <?php
 require_once("../library/conn.php");
+
 $playerID = $_GET["playerID"];
 $name = $_GET["name"];
 $hometown = $_GET["hometown"];
@@ -10,7 +11,7 @@ $dob = $_GET["dob"];
 $con = conn::getDB();
 
 $query = "UPDATE players SET "
-	. "playerID=" . $playerID .","
+	. "playerID=" . $playerID ","
 	. "name=\"" . $name ."\","
 	. "hometown=\"" . $hometown ."\","
 	. "height=" . $height .","
@@ -21,5 +22,8 @@ $query = "UPDATE players SET "
 error_log($query);
 $result = mysqli_query($con, $query);
 
-header("location: ../web/viewPlayers.php"
-	. ($result ? "" : "?error=true"), true, 303);
+if ($result) {
+	header("location: ../web/viewPlayers.php", true, 303);
+} else {
+	header("location: ../web/viewPlayers.php?error=true", true, 303);
+}
