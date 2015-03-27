@@ -147,32 +147,33 @@
 				<th>Action</th>
 				</thead>
 
-
+				
 				<?php
-				foreach (playerRecord::getAllRecords() as $pr) {
-					if (in_array($pr->player,$roster)){
+				if($roster != NULL){ 
+				foreach ($roster as $r) {
 						echo "<tr>"
-						. "<td>" . $pr->player . "</td>"
-						. "<td>" . $pr->team . "</td>"
-						. "<td>" . $pr->gamesPlayed . "</td>"
-						. "<td>" . $pr->goals . "</td>"
-						. "<td>" . $pr->hits . "</td>"
-						. "<td>" . $pr->giveaways . "</td>"
-						. "<td>" . $pr->takeaways . "</td>"
-						. "<td>" . $pr->penalties_drawn . "</td>"
-						. "<td>" . $pr->sacorsi . "</td>"
-						. "<td>" . $pr->qot . "</td>"
-						. "<td>" . $pr->qoc . "</td>"
-						. "<td>" . $pr->ozs . "</td>"
-						. "<td>" . $pr->toi . "</td>"
+						. "<td>" . $r["name"] . "</td>"
+						. "<td>" . $r["teamName"] . "</td>"
+						. "<td>" . $r["gamesPlayed"] . "</td>"
+						. "<td>" . $r["goals"] . "</td>"
+						. "<td>" . $r["hits"] . "</td>"
+						. "<td>" . $r["giveaways"] . "</td>"
+						. "<td>" . $r["takeaways"] . "</td>"
+						. "<td>" . $r["penalties_drawn"] . "</td>"
+						. "<td>" . $r["sacorsi"] . "</td>"
+						. "<td>" . $r["qot"] . "</td>"
+						. "<td>" . $r["qoc"] . "</td>"
+						. "<td>" . $r["ozs"] . "</td>"
+						. "<td>" . $r["toi"] . "</td>"
 						. "<td><a href=\"../controllers/dropPlayer.php?"
-						. "playerID=" . $pr->playerID 
+						. "playerID=" . $r["playerID"] 
 						. "&teamID=" . $team["teamID"]
 						. "\" id=\"removePFButton\" class=\"btn "
 						. "btn-primary btn-xs btn-warning\">Drop</a></td></td>"
 						. "</tr>";
-					}
+					
 				}
+}
 				?>
 			</table>
 		</div>
