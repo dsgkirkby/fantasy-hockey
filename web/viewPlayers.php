@@ -22,6 +22,46 @@ and open the template in the editor.
 	<link rel="stylesheet" type="text/css" href="createButton.css">
 	</head>
 	<body>
+	<div class="modal fade" id="createModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Add Player</h4>
+					</div>
+					<form action="../controllers/createLeague.php">
+						<div class="modal-body">
+
+							<div class="form-group">
+							name
+							hometown
+							height
+							weight
+							dob
+								<label for="name">Name</label>
+								<input id="name" type="text" name="name" class="form-control">
+								<label for="hometown">Hometown</label>
+								<input id="hometown" type="text" name="hometown" class="form-control">
+								<label for="height">Height</label>
+								<input id="height" type="text" name="height" class="form-control">
+								<label for="weight">Wight</label>
+								<input id="weight" type="text" name="weight" class="form-control">
+								<label for="dob">dob</label>
+								<input id="dob" type="text" name="dob" class="form-control">
+
+								<label for="maxSize">Max Size</label>
+								<input id="maxSize" type="number" name="maxSize" class="form-control">
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<input type="submit" value="Create" class="btn btn-primary">
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	<div class="modal fade" id="editModal">
 	  <div class="modal-dialog">
 		<div class="modal-content">
@@ -106,7 +146,7 @@ and open the template in the editor.
 		$players = array();
 		if (!empty($_GET["username"])) {
 			$uname = filter_input(INPUT_GET, "username");
-			echo "<h3>Players:</h3>";
+			echo "<h3>Players</h3>";
 			$user = new user($uname);
 		} else {
 			if (userIsAdmin()){
