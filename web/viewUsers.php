@@ -142,14 +142,14 @@ and open the template in the editor.
 		    . "<td>" . $user["password"] . "</td>"
 		    . "<td>" . $user["email"] . "</td>"
 		    . "<td>" . ($user["is_admin"] ? "Yes" : "No") . "</td>"
-		    . "<td><a class=\"btn btn-primary btn-xs\" href=\"\" onclick='startEdit(\"" 
+		    . "<td>" . ($user["username"] != getUserName() ? "<a class=\"btn btn-primary btn-xs\" href=\"\" onclick='startEdit(\"" 
 		    . $user["username"] . "\",\""
 		    . $user["password"] . "\",\"" 
 		    . $user["email"] . "\"," 
 		    . $user["is_admin"]
 		    .  ")' data-toggle=\"modal\" data-target=\"#editModal\">Edit</a>"
 		    . " <a href='' class=\"btn btn-warning btn-xs\" onclick=deleteUser(\"" 
-		    . $user["username"] . "\")>Delete</a></td>"
+		    . $user["username"] . "\")>Delete</a>" : "<a class=\"btn btn-xs btn-danger\">None Allowed</a>") . "</td>"
 		    . "</tr>";
 		}
 		?>
