@@ -91,7 +91,7 @@ and open the template in the editor.
 			</div><!--/.container-fluid -->
 		</nav>
 		<div class="container">
-			<?php
+		<?php
 		if (!empty($_GET["error"])) {
 			$displayWarning = $_GET["error"];
 		} else {
@@ -109,6 +109,9 @@ and open the template in the editor.
 			echo "<h3>Players:</h3>";
 			$user = new user($uname);
 		} else {
+			if (userIsAdmin()){
+				echo "<a id=\"createButton\" class=\"btn btn-primary\">Add Player</a>";
+			}
 			$order="playerID";
 			if (!empty($_GET["order"])) {
 			  switch ($_GET["order"]) {
