@@ -174,6 +174,7 @@
 				<thead>
 				<th>Player</th>
 				<th>Team</th>
+				<th>Division</th>
 				<th>Season</th>
 				<th>Games</th>
 				<th>Goals</th>
@@ -195,6 +196,7 @@
 					echo "<tr>"
 					. "<td>" . $pr->player . "</td>"
 					. "<td>" . $pr->team . "</td>"
+					. "<td>" . $pr->division . "</td>"
 					. "<td>" . $pr->season . "</td>"
 					. "<td>" . $pr->gamesPlayed . "</td>"
 					. "<td>" . $pr->goals . "</td>"

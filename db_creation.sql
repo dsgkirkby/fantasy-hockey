@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS players CASCADE;
 DROP TABLE IF EXISTS manages CASCADE;
 DROP TABLE IF EXISTS f_leagues CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS nhl_divisions CASCADE;
 
 DROP VIEW IF EXISTS team_stats;
 
@@ -37,10 +38,18 @@ CREATE TABLE players (
  PRIMARY KEY (playerID)
 );
 
+CREATE TABLE nhl_divisions (
+ divisionName varchar(30),
+ divisionID int AUTO_INCREMENT,
+ PRIMARY KEY(divisionID)
+);
+
 CREATE TABLE nhl_teams (
  name varchar(30),
  city varchar(30),
- PRIMARY KEY (name)
+ divisionID int,
+ PRIMARY KEY (name),
+ FOREIGN KEY (divisionID) REFERENCES nhl_divisions(divisionID)
 );
 
 CREATE TABLE seasons (
@@ -88,12 +97,6 @@ CREATE TABLE plays_for(
  FOREIGN KEY (season) REFERENCES seasons(season) ON DELETE CASCADE
 );
 
-CREATE TABLE prospects(
- playerID int,
- teamName varchar(30),
- PRIMARY KEY (playerID)
-);
-
 CREATE TABLE manages(
  username varchar(30),
  leagueID int,
@@ -125,12 +128,18 @@ Insert into seasons (season) values
 ("2011"),
 ("2010");
 
-Insert into nhl_teams(name, city) values
-("Canucks", "Vancouver, BC"),
-("Bruins", "Boston, MA"),
-("Blackhawks", "Chicago, IL"),
-("Flyers", "Philladelphia, PA"),
-("Rangers", "New York, NY");
+Insert into nhl_divisions (divisionName) values
+("Pacific"),
+("Central"),
+("Metropolitan"),
+("Atlantic");
+
+Insert into nhl_teams(name, city, divisionID) values
+("Canucks", "Vancouver, BC", 1),
+("Bruins", "Boston, MA", 3),
+("Blackhawks", "Chicago, IL", 2),
+("Flyers", "Philladelphia, PA", 3),
+("Rangers", "New York, NY", 3);
 
 Insert into f_leagues(max_size, name, date_created) values
 (10, "Dobber Experts League", "2015-1-9"),
@@ -162,13 +171,6 @@ insert into plays_for (playerID, teamName, gamesPlayed, goals, hits, giveaways, 
 (3, "Rangers", 77, 2, 1, 78, 1799, 3, 55.5, 4, 0.5, 2.7, 76.3, "2012"),
 (4, "Flyers", 69, 40, 10, 209, 900, 4, 44.5, 90, 2.3, 1.5, 50, "2013"),
 (5, "Bruins", 73, 20, 30, 5, 1500, 5, 2.4, 5, 2.2, 0.9, 60.3, "2014");
-
-Insert into prospects(playerID,teamName) values
-(1, "Canucks"),
-(2, "Bruins"),
-(3, "Blackhawks"),
-(4, "Flyers"),
-(5, "Rangers");
 
 Insert into player_assignments(playerID, teamID) values
 (1, 1),

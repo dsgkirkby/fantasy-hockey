@@ -12,6 +12,7 @@ class playerRecord {
     public $playerID;
     public $player;
     public $team;
+	public $division;
     public $season; 
     public $gamesPlayed;
     public $goals;
@@ -29,6 +30,7 @@ class playerRecord {
         $this->playerID=$playerRecord["playerID"];
 		$this->player = $playerRecord["name"];
 		$this->team = $playerRecord["teamName"];
+		$this->division = $playerRecord["divisionName"];
 		$this->season = $playerRecord["season"];
 		$this->gamesPlayed = $playerRecord["gamesPlayed"];
 		$this->goals = $playerRecord["goals"];
@@ -45,7 +47,9 @@ class playerRecord {
 	
 	static function getAllRecords() {
 		$con = conn::getDB();
-		$query = "SELECT * FROM players NATURAL JOIN plays_for";
+		$query = "SELECT * FROM players JOIN (plays_for JOIN "
+			. "(nhl_teams NATURAL JOIN nhl_divisions) ON "
+			. "plays_for.teamName=nhl_teams.name) ON players.playerID=plays_for.playerID";
 		$playerRecords = mysqli_query($con, $query);
 		$toReturn = [];
 
