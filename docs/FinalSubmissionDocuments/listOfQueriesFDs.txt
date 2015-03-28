@@ -138,6 +138,11 @@ web/
     player_assignments pa2 natural join f_teams 
     where pa2.playerID=p.playerID AND f_teams.leagueID=" . $team["leagueID"] . ")";
 
+  viewSeasonStats.php:
+    "SELECT * FROM players p WHERE "
+    . "NOT EXISTS (SELECT * FROM f_leagues fl WHERE NOT EXISTS "
+    . "(SELECT * FROM player_assignments natural join f_teams WHERE fl.leagueid=f_teams.leagueid AND p.playerid=player_assignments.playerid))";
+
 
 Functional Dependancies:
 
