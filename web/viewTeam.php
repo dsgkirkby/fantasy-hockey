@@ -30,7 +30,6 @@
 	if ($result) {
 		$ownershipPercentage = mysqli_fetch_assoc($result);
 	}
-	//mysqli_query($con, $ownershipPercentageQuery)
 
 	?>
 	<head>
