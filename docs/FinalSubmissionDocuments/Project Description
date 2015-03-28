@@ -1,0 +1,5 @@
+For this project we have created a working fantasy hockey league management system, Dobber Fantasy. 
+Users are able to sign up/login to Dobber Fantasy, join a league, create their team, add players, drop players and see their stats and how they place within the league. 
+They can also look at information on all of the players. 
+Users can manage leagues and edit or delete the leagues that they manage. 
+Administrators can see and edit or delete all leagues, users and players. They can also see whether a player is owned in every league.
