@@ -13,3 +13,9 @@ We removed the season_records table, which was originally designed to store the 
 
 4. Manages
 Finally, we added a table to store the managers of leagues. This was once again simply an oversight in our original schema.
+
+5. Prospects
+We removed the prospects table, as we decided to focus our application onto only active NHL players for time reasons.
+
+6. nhl_divisions
+We added the nhl_divisions table (and a foreign key referencing it in nhl_teams) so that we could report not only on the team a player plays for, but also the division they are in, as this provides important context for a player's statistics.
