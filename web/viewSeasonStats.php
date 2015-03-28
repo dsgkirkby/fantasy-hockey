@@ -209,7 +209,7 @@
 					. "<td>" . $pr->qoc . "</td>"
 					. "<td>" . $pr->ozs . "</td>"
 					. "<td>" . $pr->toi . "</td>"
-					. "<td><a data-toggle=\"modal\" data-target=\"#editModal\""
+					. "<td nowrap><a data-toggle=\"modal\" data-target=\"#editModal\""
 					. " data-pid=\"" . $pr->playerID . "\""
 					. " data-gp=\"" . $pr->gamesPlayed . "\""
 					. " data-goals=\"" . $pr->goals . "\""
