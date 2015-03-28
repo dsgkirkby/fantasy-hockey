@@ -1,88 +1,145 @@
-Queries are not exactly as they are in code (for formatting and readability), PHP variables are preceded by '$'.
+Queries by filename:
+
+controllers/
+  addPlayer.php:
+    "INSERT INTO player_assignments (playerID, teamID) values "
+
+  createLeague.php:
+    "INSERT INTO f_leagues (name, max_size, date_created) values "
+    . "(\"" . $name . "\"," . $maxSize . ",\"" . date("Y-m-d") . "\")";
+    "INSERT INTO manages (username, leagueID) values "
+
+  createPlayer.php:
+    "INSERT INTO players (name, hometown, height, weight, dob) values "
+    . "(\"" . $name . "\",\"" . $hometown . "\"," . $height . "," . $weight . ",\"" . $dob . "\")";
+
+  createPlaysFor.php:
+    "INSERT INTO plays_for (playerID, teamName, season) values"
+    . "(" . $playerID . ", \"" . $teamName . "\", \"" . $season . "\")";
+
+  createTeam.php:
+    "INSERT INTO f_teams (name, username, season, leagueID) values "
+    . "(\"" . $teamName  . "\", \"" . getUsername() . "\", \"2014\", " . $leagueID . ")";
+
+  createUser.php:
+    "INSERT INTO users (username, password, email, is_admin) values "
+    . "(\"" . $username . "\",\"" . $password . "\",\"" . $email . "\"," . $is_admin . ")";
+
+  deleteLeague.php:
+    "DELETE FROM f_leagues WHERE leagueID=\"" . $leagueID . "\"");
 
 
-controllers/deleteLeague.php:
-  "DELETE FROM f_leagues WHERE leagueID=$leagueID"
-  "DELETE FROM players WHERE playerID=$playerID"
-  "INSERT INTO manages (username, leagueID) VALUES $username, $leagueID"
+  deletePlayer.php:
+    "DELETE FROM players WHERE playerID=\"" . $playerID . "\"");
 
-controllers/deleteUser.php:
-  "DELETE FROM users WHERE username=$username"
-  "DELETE FROM player_assignments WHERE teamID=$teamID"
-  "DELETE FROM f_teams WHERE teamID=$teamID"
+  deletePlaysFor.php:
+    "DELETE FROM plays_for WHERE "
+    . "playerID=" . $playerID . " "
+    . "and teamName=\"" . $teamName . "\" "
+    . "and season=" . $season;
 
-library/league.php:
-  "SELECT username FROM manages WHERE leagueID=$this->leagueID"
-  "SELECT * FROM team_stats WHERE leagueID = $this->leagueID"
+  deleteTeam.php:
+    "DELETE FROM player_assignments WHERE teamID=" . $teamID);
+    "DELETE FROM f_teams WHERE teamID=" . $teamID);
 
-library/playerRecord.php:
-  "SELECT * FROM nhl_teams"
-  "SELECT * FROM seasons"
-  "SELECT * FROM players"
+  deleteUser.php:
+    "DELETE FROM users WHERE username=\"" . $username . "\"");
 
-library/user.php:
-  "SELECT * FROM users WHERE username = $new_username"
-  "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')"
-  "SELECT * FROM users"
-  "SELECT * FROM users WHERE username=$username"
-  "SELECT leagueID FROM manages WHERE username=$this->username"
-  "SELECT l.leagueID FROM f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON
-t.username=u.username AND u.username=$this->username"
+  dropPlayer.php
+    "DELETE FROM player_assignments  where playerID=" . $playerID . " and teamID=" . $teamID ;
 
-library/userVerification.php:
-  "SELECT * FROM users WHERE username=getUsername()"
-  "SELECT * FROM manages WHERE leagueID=$leagueID"
+  editPlayer.php
+    "UPDATE players SET "
+    . "playerID=" . $playerID . ","
+    . "name=\"" . $name . "\","
+    . "hometown=\"" . $hometown . "\","
+    . "height=" . $height . ","
+    . "weight=" . $weight . ","
+    . "dob=\"" . $dob . "\""
+    . " WHERE playerID="
 
-web/verifyUser.php:
-  "SELECT * FROM users WHERE username=$username AND password=$password"
+  editPlaysFor.php
+    "UPDATE plays_for SET "
+    . "gamesPlayed=" . $gp . ","
+    . "goals=" . $goals . ","
+    . "hits=" . $hits . ","
+    . "giveaways=" . $ga . ","
+    . "takeaways=" . $ta . ","
+    . "penalties_drawn=" . $pd . ","
+    . "sacorsi=" . $sac . ","
+    . "qot=" . $qot . ","
+    . "qoc=" . $qoc . ","
+    . "ozs=" . $ozs . ","
+    . "toi=" . $toi . " "
+    . "WHERE playerID=" . $playerID . " "
+    . "and teamName=\"" . $teamName . "\" "
+    . "and season=" . $season;
 
-controllers/createPlaysFor.php:
-  "INSERT INTO plays_for (playerID, teamName, season) VALUES ($playerID, $teamName, $season)"
+  editUser.php:
+    "UPDATE users SET "
+    . "password=\"" . $password . "\","
+    . "email=\"" . $email . "\","
+    . "is_admin=" . $is_admin
+    . " WHERE username=\"" . $username . "\"";
 
-controllers/editPlaysFor.php:
-  "UPDATE plays_for SET gamesPlayed=$gp, goals=$goals, hits=$hits, giveaways=$ga,
-  takeaways=$ta, penalties_drawn=$pd, sacorsi=$sac, qot=$qot, qoc=$qoc, ozs=$ozs, toi=$toi
-  WHERE playerID=$playerID AND teamName=$teamName AND season=$season"
+library/
+  league.php:
+    "SELECT * FROM f_leagues WHERE leagueID=" . $leagueID;
+    "SELECT username FROM manages"
+    . " where leagueID=\"" . $this->leagueID . "\"";
+    "SELECT * FROM team_stats WHERE leagueID = " . $this->leagueID;
 
-controllers/deletePlaysFor.php:
-  "DELETE FROM plays_for WHERE playerID=$playerID AND teamName=$teamName AND season=$season"
+  playerRecord.php:
+    "SELECT * FROM players JOIN (plays_for JOIN "
+    . "(nhl_teams NATURAL JOIN nhl_divisions) ON "
+    . "plays_for.teamName=nhl_teams.teamName) ON players.playerID=plays_for.playerID";
 
-controllers/editUser.php:
-  "UPDATE users SET password=$password, email=$email, is_admin=$is_admin WHERE username=$username"
+    "SELECT * FROM nhl_teams";
+    "SELECT * FROM seasons";
+    "SELECT * FROM players";
 
-controllers/editPlayer.php:
-  "UPDATE players SET playerID=$playerID," name=$name, hometown=$hometown,
-height=$height," weight=$weight," dob=$dob WHERE playerID=$playerID"
+  players.php:
+    "SELECT * FROM players WHERE playerID="
 
-library/league.php:
-  "SELECT * FROM f_leagues WHERE leagueID=$leagueID"
-  "SELECT username FROM manages WHERE leagueID=$this->leagueID"
-  "SELECT * FROM team_stats WHERE leagueID = $this->leagueID"
+  user.php:
+    "SELECT * FROM users WHERE username = $new_username"
+    "INSERT INTO users (username, password, email)"
+    . " VALUES ('$username', '$password', '$email')"
+    "SELECT * FROM users"
+    "SELECT * from users WHERE username="
+    . $this->username);
+    "SELECT leagueID FROM manages"
+    . " where username=\"" . $this->username . "\"";
+    "SELECT l.leagueID FROM"
+    . " f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID INNER JOIN users u ON"
+    . " t.username=u.username and u.username=\"" . $this->username . "\"";
 
-library/playerRecord.php:
-  "SELECT * FROM players NATURAL JOIN plays_for"
-  "SELECT * FROM nhl_teams"
-  "SELECT * FROM seasons"
-  "SELECT * FROM players"
+  userVerification.php:
+    "SELECT * FROM users where username=\"" . getUsername() . "\"");
+    "SELECT * FROM manages WHERE leagueID=" . $leagueID);
 
-library/user.php:
-  "SELECT leagueID FROM manages WHERE username=$this->username"
-  "SELECT l.leagueID FROM f_leagues l INNER JOIN f_teams t ON l.leagueID=t.leagueID
-  INNER JOIN users u ON t.username=u.username AND u.username=$this->username"
+web/
+  verifyUser.php:
+    "select * from users where username=\"" . $username . "\" and password=\"" . $password . "\"");
 
-library/players.php:
-  "SELECT * FROM players WHERE playerID=$playerID"
+  viewLeagues.php:
+    "SELECT leagueID FROM f_leagues";
 
-web/viewPlayers.php:
-  "SELECT * FROM players ORDER BY $order"
+  viewPlayers.php:
+    "SELECT * FROM players ORDER BY " . $order;
 
-web/viewLeagues.php:
-  "SELECT leagueID FROM f_leagues"
-
+  viewTeam.php:
+    "SELECT *, (pf.goals*2+pf.hits+pf.gamesPlayed*0.1) as score"
+    . " from players NATURAL JOIN player_assignments pa"
+    . " NATURAL JOIN plays_for pf WHERE pa.teamID = ". $_GET["teamID"];
+    "SELECT * FROM f_teams where teamID=". $_GET["teamID"];
+    "SELECT name, playerID FROM players p "
+    . "WHERE NOT EXISTS (Select * from
+    player_assignments pa2 natural join f_teams 
+    where pa2.playerID=p.playerID AND f_teams.leagueID=" . $team["leagueID"] . ")";
 
 
 Functional Dependancies:
-
 
 users
 username -> password, email, is_admin
@@ -94,9 +151,11 @@ players
 playerID -> name, hometown, height, weight, dob
 
 nhl_teams
-name -> city
+name -> city, divisionID
+FOREIGN KEY (divisionID) REFERENCES nhl_divisions(divisionID)
 
-seasons:
+nhl_divisions
+divisionID -> divisionName
 
 f_teams
 teamID -> name, username, season, leagueID
@@ -112,10 +171,6 @@ plays_for
 FOREIGN KEY (playerID) REFERENCES players(playerID)
 FOREIGN KEY (teamName) REFERENCES nhl_teams(name)
 FOREIGN KEY (season) REFERENCES seasons(season)
-
-// Dont have
-prospects
-playerID -> teamName
 
 manages
 username leagueID
