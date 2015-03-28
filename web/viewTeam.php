@@ -149,6 +149,14 @@
 				<?php
 				if($roster != NULL){
 					$totals = array();
+					$totals["gamesPlayed"] = 0;
+					$totals["goals"] = 0;
+					$totals["hits"] = 0;
+					$totals["giveaways"] = 0;
+					$totals["takeaways"] = 0;
+					$totals["penalties_drawn"] = 0;
+					$totals["toi"] = 0;
+					$totals["score"] = 0;
 					foreach ($roster as $index => $r) {
 						if ($index == 0) {
 							$totals = $r;
