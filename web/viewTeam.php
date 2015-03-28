@@ -27,7 +27,9 @@
 
 	$ownershipPercentageQuery = "SELECT Count(l.*)/(SELECT * FROM player_assignments WHERE playerID=" . $roster["playerID"] . " AS ownPercent FROM leagues l)";
 	$result = mysqli_query($con, $ownershipPercentageQuery);
-	$ownershipPercentage= mysqli_fetch_assoc($result);
+	if ($result) {
+		$ownershipPercentage = mysqli_fetch_assoc($result);
+	}
 	//mysqli_query($con, $ownershipPercentageQuery)
 
 	?>
