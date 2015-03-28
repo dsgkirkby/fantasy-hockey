@@ -19,7 +19,7 @@
 	$rosterConstruct = "SELECT *, (pf.goals*2+pf.hits+pf.gamesPlayed*0.1) as score"
 	. " from players NATURAL JOIN player_assignments pa"
 	. " NATURAL JOIN plays_for pf WHERE pa.teamID = ". $_GET["teamID"];
-	$roster = mysqli_fetch_assoc(mysqli_query($con, $rosterConstruct));
+	$roster = mysqli_query($con, $rosterConstruct);
 
 	$teamsQuery = "SELECT * FROM f_teams where teamID=" . $_GET["teamID"];
 
