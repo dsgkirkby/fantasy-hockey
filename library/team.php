@@ -21,6 +21,9 @@ class team {
 			return $team2->getScore() - $team1->getScore();
 		}
 	}
+	function getID(){
+		 return $this->id;
+    	}
 
 	function getScore() {
 		return $this->goals * 2 + $this->games * 0.1 + $this->hits;

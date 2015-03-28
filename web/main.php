@@ -86,7 +86,7 @@ and open the template in the editor.
 					    continue;
 					}
 					echo "<tr>"
-					. "<td>" . $userTeam->teamName . "</td>"
+					. "<td><a href=viewTeam.php?teamID=".$team->getID()."&leagueID=".$league->getLeagueID().">" . $userTeam->teamName . "</a></td>"
 					. "<td>" . $userTeam->getScore() . "</td>"
 					. "<td>" . $userRank . "</td>"
 					. "<td><a href=\"viewleague.php?leagueID="
