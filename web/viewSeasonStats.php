@@ -209,6 +209,8 @@
 
 				<?php
 				foreach (playerRecord::getAllRecords() as $pr) {
+
+					$owned= $result ? (in_array($pr->playerID, $isUniversallyOwned) ? "Yes" : "No") : "No";
 					echo "<tr>"
 					. "<td>" . $pr->player . "</td>"
 					. "<td>" . $pr->team . "</td>"
@@ -225,7 +227,7 @@
 					. "<td>" . $pr->qoc . "</td>"
 					. "<td>" . $pr->ozs . "</td>"
 					. "<td>" . $pr->toi . "</td>"
-					. "<td>" . $result ? (in_array($pr->playerID, $isUniversallyOwned) ? "Yes" : "No") : "No" . "</td>"
+					. "<td>" . $owned . "</td>"
 
 					. "<td nowrap><a data-toggle=\"modal\" data-target=\"#editModal\""
 					. " data-pid=\"" . $pr->playerID . "\""
