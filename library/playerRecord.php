@@ -9,24 +9,24 @@
 require_once 'conn.php';
 
 class playerRecord {
-	public $playerID;
-	public $player;
-	public $team;
-	public $season; 
-	public $gamesPlayed;
-	public $goals;
-	public $hits;
-	public $giveaways;
-	public $takeaways;
-	public $penalties_drawn;
-	public $sacorsi;
-	public $qot;
-	public $qoc;
-	public $ozs;
-	public $toi;
-	
-	function __construct($playerRecord) {
-		$this->playerID=$playerRecord["playerID"];
+    public $playerID;
+    public $player;
+    public $team;
+    public $season; 
+    public $gamesPlayed;
+    public $goals;
+    public $hits;
+    public $giveaways;
+    public $takeaways;
+    public $penalties_drawn;
+    public $sacorsi;
+    public $qot;
+    public $qoc;
+    public $ozs;
+    public $toi;
+    
+    function __construct($playerRecord) {
+        $this->playerID=$playerRecord["playerID"];
 		$this->player = $playerRecord["name"];
 		$this->team = $playerRecord["teamName"];
 		$this->season = $playerRecord["season"];
