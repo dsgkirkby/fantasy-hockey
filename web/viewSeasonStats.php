@@ -45,7 +45,7 @@
 								<select id="teamName" type="text" name="teamName" class="form-control">
 									<?php
 									foreach (playerRecord::getNHLTeams() as $team) {
-										echo "<option>" . $team["name"] . "</option>";
+										echo "<option>" . $team["teamName"] . "</option>";
 									}
 									?>
 								</select>
