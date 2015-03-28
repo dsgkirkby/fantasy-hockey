@@ -4,12 +4,23 @@
 	session_start();
 	require_once('../library/userVerification.php');
 	require_once('../library/playerRecord.php');
+	require_once('../library/conn.php');
+
+	
+	
+
 	// Redirect to login screen if user is not logged in
 	if (!userIsAdmin()) {
 		header('Location: main.php', true, 303);
 		die();
 	}
+	$con = conn::getDB();
+	$isUniversallyOwnedQ="SELECT name, playerID FROM players p 
+		WHERE NOT EXISTS (SELECT f_leagues.* FROM f_leagues l,  plays_for pf NATURAL JOIN player_assignments pa,
+			WHERE NOT EXISTS (SELECT * WHERE l.leagueID=pa.leagueID))";
+	$isUniversallyOwned= mysqli_fetch_assoc(mysqli_query($con, $teamsQuery));
 	?>
+
 	<head>
 		<title>Dobber Player Statistics</title>
 		<meta charset="UTF-8">
@@ -187,6 +198,7 @@
 				<th>QOC</th>
 				<th>OZS%</th>
 				<th>TOI</th>
+				<th>Is Universally Owned</th>
 				<th>Action</th>
 				</thead>
 
@@ -209,6 +221,8 @@
 					. "<td>" . $pr->qoc . "</td>"
 					. "<td>" . $pr->ozs . "</td>"
 					. "<td>" . $pr->toi . "</td>"
+					. "<td>" . in_array($pr->playerID, $isUniversallyOwned) ? "Yes" : "No" . "</td>"
+
 					. "<td nowrap><a data-toggle=\"modal\" data-target=\"#editModal\""
 					. " data-pid=\"" . $pr->playerID . "\""
 					. " data-gp=\"" . $pr->gamesPlayed . "\""

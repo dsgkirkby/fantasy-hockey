@@ -26,6 +26,11 @@
 
 	$team = mysqli_fetch_assoc(mysqli_query($con, $teamsQuery));
 
+	$ownershipPercentageQuery = "SELECT Count(l.*)/(SELECT * FROM player_assignments WHERE player_assignments.playerID =" . $roster["playerID"] . "AS ownPercent FROM leagues l";
+
+	$ownershipPercentage= mysqli_fetch_assoc(mysqli_query($con, $ownershipPercentageQuery));
+
+
 	?>
 	<head>
 		<title>Dobber Team View</title>
@@ -51,7 +56,7 @@
 								<input type="hidden" name="teamID" value="<?php echo $team["teamID"]; ?>">
 								
 								<label for="playerID">Player</label>
-								<select id="playerID" type="text" name="playerID" class="form-control">
+								<select id="playetotrID" type="text" name="playerID" class="form-control">
 									<?php
 									$con2 = conn::getDB();
 									$ownedInLeagueQuery = 
@@ -143,6 +148,7 @@
 				<th>OZS%</th>
 				<th>TOI</th>
 				<th>Score</th>
+				<th>Ownership Percentage</th>
 				<th>Action</th>
 				</thead>
 				
