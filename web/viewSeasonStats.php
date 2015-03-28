@@ -6,9 +6,6 @@
 	require_once('../library/playerRecord.php');
 	require_once('../library/conn.php');
 
-	
-	
-
 	// Redirect to login screen if user is not logged in
 	if (!userIsAdmin()) {
 		header('Location: main.php', true, 303);
@@ -18,8 +15,8 @@
 	$query = "SELECT name, playerID FROM players p "
 		. "WHERE NOT EXISTS (SELECT f_leagues.* FROM f_leagues l, plays_for pf NATURAL JOIN player_assignments pa, "
 		. "WHERE NOT EXISTS (SELECT * WHERE l.leagueID=pa.leagueID))";
-	$result = mysqli_query($con, $query);
 	$isUniversallyOwned = array();
+	$result = mysqli_query($con, $query);
 	if ($result) {
 		$isUniversallyOwned= mysqli_fetch_assoc($result);
 	}
