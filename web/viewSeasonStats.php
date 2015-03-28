@@ -15,9 +15,9 @@
 		die();
 	}
 	$con = conn::getDB();
-	$query="SELECT name, playerID FROM players p 
-		WHERE NOT EXISTS (SELECT f_leagues.* FROM f_leagues l, plays_for pf NATURAL JOIN player_assignments pa,
-			WHERE NOT EXISTS (SELECT * WHERE l.leagueID=pa.leagueID))";
+	$query = "SELECT name, playerID FROM players p "
+		. "WHERE NOT EXISTS (SELECT f_leagues.* FROM f_leagues l, plays_for pf NATURAL JOIN player_assignments pa, "
+		. "WHERE NOT EXISTS (SELECT * WHERE l.leagueID=pa.leagueID))";
 	$result = mysqli_query($con, $query);
 	$isUniversallyOwned = array();
 	if ($result) {
