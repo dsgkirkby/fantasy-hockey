@@ -15,10 +15,13 @@
 		die();
 	}
 	$con = conn::getDB();
-	$isUniversallyOwnedQ="SELECT name, playerID FROM players p 
-		WHERE NOT EXISTS (SELECT f_leagues.* FROM f_leagues l,  plays_for pf NATURAL JOIN player_assignments pa,
+	$query="SELECT name, playerID FROM players p 
+		WHERE NOT EXISTS (SELECT f_leagues.* FROM f_leagues l, plays_for pf NATURAL JOIN player_assignments pa,
 			WHERE NOT EXISTS (SELECT * WHERE l.leagueID=pa.leagueID))";
-	$isUniversallyOwned= mysqli_fetch_assoc(mysqli_query($con, $teamsQuery));
+	$result = mysqli_query($con, $query);
+	if ($result) {
+		$isUniversallyOwned= mysqli_fetch_assoc($result);
+	}
 	?>
 
 	<head>
