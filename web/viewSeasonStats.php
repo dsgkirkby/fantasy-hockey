@@ -19,6 +19,7 @@
 		WHERE NOT EXISTS (SELECT f_leagues.* FROM f_leagues l, plays_for pf NATURAL JOIN player_assignments pa,
 			WHERE NOT EXISTS (SELECT * WHERE l.leagueID=pa.leagueID))";
 	$result = mysqli_query($con, $query);
+	$isUniversallyOwned = array();
 	if ($result) {
 		$isUniversallyOwned= mysqli_fetch_assoc($result);
 	}
@@ -224,7 +225,7 @@
 					. "<td>" . $pr->qoc . "</td>"
 					. "<td>" . $pr->ozs . "</td>"
 					. "<td>" . $pr->toi . "</td>"
-					. "<td>" . in_array($pr->playerID, $isUniversallyOwned) ? "Yes" : "No" . "</td>"
+					. "<td>" . $result ? (in_array($pr->playerID, $isUniversallyOwned) ? "Yes" : "No") : "No" . "</td>"
 
 					. "<td nowrap><a data-toggle=\"modal\" data-target=\"#editModal\""
 					. " data-pid=\"" . $pr->playerID . "\""
