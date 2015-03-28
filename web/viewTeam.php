@@ -5,7 +5,6 @@
 	require_once('../library/userVerification.php');
 	require_once('../library/playerRecord.php');
 	require_once('../library/team.php');
-	require_once('../library/team.php');
 	require_once('../library/conn.php');
 	// Redirect to login screen if user is not logged in
 	dieIfNoUser();
@@ -20,16 +19,16 @@
 	$rosterConstruct = "SELECT *, (pf.goals*2+pf.hits+pf.gamesPlayed*0.1) as score"
 	. " from players NATURAL JOIN player_assignments pa"
 	. " NATURAL JOIN plays_for pf WHERE pa.teamID = ". $_GET["teamID"];
-	$roster = mysqli_query($con, $rosterConstruct);
+	$roster = mysqli_fetch_assoc(mysqli_query($con, $rosterConstruct));
 
-	$teamsQuery =  "SELECT * FROM f_teams where teamID=". $_GET["teamID"];
+	$teamsQuery = "SELECT * FROM f_teams where teamID=" . $_GET["teamID"];
 
 	$team = mysqli_fetch_assoc(mysqli_query($con, $teamsQuery));
 
-	$ownershipPercentageQuery = "SELECT Count(l.*)/(SELECT * FROM player_assignments WHERE player_assignments.playerID =" . $roster["playerID"] . "AS ownPercent FROM leagues l";
-
-	$ownershipPercentage= mysqli_fetch_assoc(mysqli_query($con, $ownershipPercentageQuery));
-
+	$ownershipPercentageQuery = "SELECT Count(l.*)/(SELECT * FROM player_assignments WHERE playerID=" . $roster["playerID"] . " AS ownPercent FROM leagues l)";
+	$result = mysqli_query($con, $ownershipPercentageQuery);
+	$ownershipPercentage= mysqli_fetch_assoc($result);
+	//mysqli_query($con, $ownershipPercentageQuery)
 
 	?>
 	<head>
