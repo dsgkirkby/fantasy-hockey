@@ -12,8 +12,9 @@
 	}
 	$con = conn::getDB();
 
-$query ="Select * from players p where not exists (select * from f_leagues fl where not 
-	exists (select * from player_assignments natural join f_teams where fl.leagueid=f_teams.leagueid and p.playerid=player_assignments.playerid))";
+	$query = "SELECT * FROM players p WHERE "
+		. "NOT EXISTS (SELECT * FROM f_leagues fl WHERE NOT EXISTS "
+		. "(SELECT * FROM player_assignments natural join f_teams WHERE fl.leagueid=f_teams.leagueid AND p.playerid=player_assignments.playerid))";
 	$isUniversallyOwned = array();
 	$result = mysqli_query($con, $query);
 	if ($result) {
@@ -199,7 +200,7 @@ $query ="Select * from players p where not exists (select * from f_leagues fl wh
 				<th>QOC</th>
 				<th>OZS%</th>
 				<th>TOI</th>
-				<th>Is Universally Owned</th>
+				<th>Universally Owned</th>
 				<th>Action</th>
 				</thead>
 
