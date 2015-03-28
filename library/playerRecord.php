@@ -49,7 +49,7 @@ class playerRecord {
 		$con = conn::getDB();
 		$query = "SELECT * FROM players JOIN (plays_for JOIN "
 			. "(nhl_teams NATURAL JOIN nhl_divisions) ON "
-			. "plays_for.teamName=nhl_teams.name) ON players.playerID=plays_for.playerID";
+			. "plays_for.teamName=nhl_teams.teamName) ON players.playerID=plays_for.playerID";
 		$playerRecords = mysqli_query($con, $query);
 		$toReturn = [];
 

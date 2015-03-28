@@ -45,10 +45,10 @@ CREATE TABLE nhl_divisions (
 );
 
 CREATE TABLE nhl_teams (
- name varchar(30),
+ teamName varchar(30),
  city varchar(30),
  divisionID int,
- PRIMARY KEY (name),
+ PRIMARY KEY (teamName),
  FOREIGN KEY (divisionID) REFERENCES nhl_divisions(divisionID)
 );
 
@@ -93,7 +93,7 @@ CREATE TABLE plays_for(
  season varchar(30),
  PRIMARY KEY (playerID, teamName, season),
  FOREIGN KEY (playerID) REFERENCES players(playerID) ON DELETE CASCADE,
- FOREIGN KEY (teamName) REFERENCES nhl_teams(name) ON DELETE CASCADE,
+ FOREIGN KEY (teamName) REFERENCES nhl_teams(teamName) ON DELETE CASCADE,
  FOREIGN KEY (season) REFERENCES seasons(season) ON DELETE CASCADE
 );
 
@@ -134,7 +134,7 @@ Insert into nhl_divisions (divisionName) values
 ("Metropolitan"),
 ("Atlantic");
 
-Insert into nhl_teams(name, city, divisionID) values
+Insert into nhl_teams(teamName, city, divisionID) values
 ("Canucks", "Vancouver, BC", 1),
 ("Bruins", "Boston, MA", 3),
 ("Blackhawks", "Chicago, IL", 2),
