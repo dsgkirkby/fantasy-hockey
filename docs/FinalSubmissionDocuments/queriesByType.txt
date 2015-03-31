@@ -8,7 +8,8 @@ JOIN
     . "(nhl_teams NATURAL JOIN nhl_divisions) ON "
     . "plays_for.teamName=nhl_teams.teamName) ON players.playerID=plays_for.playerID";
 DIVISION
-AGGREGATE
+
+AGGREGATE in league.php
 	CREATE VIEW team_stats AS
 	SELECT f_teams.teamID, f_teams.name, f_teams.username, f_teams.season, f_teams.\
 	leagueID,
@@ -19,25 +20,15 @@ AGGREGATE
 	ON f_teams.teamID=player_assignments.teamID
 	GROUP BY f_teams.teamID;
 NESTED AGGREGATE
+
 DELETE
 	"DELETE FROM plays_for WHERE "
     . "playerID=" . $playerID . " "
     . "and teamName=\"" . $teamName . "\" "
     . "and season=" . $season;
 UPDATE
-	"UPDATE plays_for SET "
-    . "gamesPlayed=" . $gp . ","
-    . "goals=" . $goals . ","
-    . "hits=" . $hits . ","
-    . "giveaways=" . $ga . ","
-    . "takeaways=" . $ta . ","
-    . "penalties_drawn=" . $pd . ","
-    . "sacorsi=" . $sac . ","
-    . "qot=" . $qot . ","
-    . "qoc=" . $qoc . ","
-    . "ozs=" . $ozs . ","
-    . "toi=" . $toi . " "
-    . "WHERE playerID=" . $playerID . " "
-    . "and teamName=\"" . $teamName . "\" "
-    . "and season=" . $season;
-  
+	 "UPDATE users SET "
+    . "password=\"" . $password . "\","
+    . "email=\"" . $email . "\","
+    . "is_admin=" . $is_admin
+    . " WHERE username=\"" . $username . "\"";
