@@ -8,6 +8,7 @@ JOIN
     . "(nhl_teams NATURAL JOIN nhl_divisions) ON "
     . "plays_for.teamName=nhl_teams.teamName) ON players.playerID=plays_for.playerID";
 DIVISION
+	 $query = "SELECT * FROM players p WHERE "
 
 AGGREGATE in league.php
 	CREATE VIEW team_stats AS
