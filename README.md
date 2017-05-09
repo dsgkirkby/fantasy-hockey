@@ -1,2 +1,2 @@
-# Dobber-Fantasy
-A database to store fantasy data for DobberSports.com
+# fantasy-hockey
+A fantasy hockey web app
